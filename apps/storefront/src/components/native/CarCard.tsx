@@ -16,7 +16,7 @@ import Link from 'next/link'
 function formatPrice(price: number): string {
    return new Intl.NumberFormat('en-US', {
       style: 'currency',
-      currency: 'USD',
+      currency: 'GHS',
       maximumFractionDigits: 0,
    }).format(price)
 }
@@ -93,7 +93,7 @@ export const CarCard = ({ car }: { car: CarWithIncludes }) => {
              {car.isAvailable && (
                 <Button size="sm" className="gap-1" asChild>
                    <a
-                      href={`https://wa.me/?text=${encodeURIComponent(`Hi, I'm interested in "${car.title}" (${car.year || ''} ${car.brand.title} ${car.model || ''}).\nPrice: ${formatPrice(car.price)}${car.isNegotiable ? ' Negotiable' : ''}\nCondition: ${car.condition}\nLink: https://eaautos.com/cars/${car.slug}`)}`}
+                      href={`https://wa.me/?text=${encodeURIComponent(`Hi, I'm interested in "${car.title}" (${car.year || ''} ${car.brand.title} ${car.model || ''}).\nPrice: ₵${car.price.toLocaleString()}${car.isNegotiable ? ' Negotiable' : ''}\nCondition: ${car.condition}\nLink: https://eaautos.com/cars/${car.slug}`)}`}
                       target="_blank"
                       rel="noopener noreferrer"
                    >
