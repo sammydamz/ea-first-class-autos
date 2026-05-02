@@ -30,6 +30,7 @@ export default async function CarsPage() {
       brand: car.brand.title,
       condition: car.condition,
       isAvailable: car.isAvailable,
+      image: car.images?.[0] || null,
    }))
 
    return (
