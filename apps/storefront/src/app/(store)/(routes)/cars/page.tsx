@@ -18,6 +18,11 @@ export default async function CarsPage(props: {
    const maxPrice = typeof searchParams.maxPrice === 'string' ? Number(searchParams.maxPrice) : undefined
    const sort = typeof searchParams.sort === 'string' ? searchParams.sort : 'newest'
 
+   const [brands, categories] = await Promise.all([
+      prisma.brand.findMany({ orderBy: { title: 'asc' } }),
+      prisma.category.findMany({ orderBy: { title: 'asc' } }),
+   ])
+
    const where = {
       isDeleted: false,
       isAvailable: true,
@@ -28,10 +33,10 @@ export default async function CarsPage(props: {
    }
 
    const orderBy = sort === 'price-low'
-      ? { price: 'asc' }
+      ? { price: 'asc' as const }
       : sort === 'price-high'
-         ? { price: 'desc' }
-         : { createdAt: 'desc' }
+         ? { price: 'desc' as const }
+         : { createdAt: 'desc' as const }
 
    const [cars, total] = await Promise.all([
       prisma.car.findMany({
@@ -49,7 +54,7 @@ export default async function CarsPage(props: {
    return (
       <div className="container mx-auto px-4 py-8">
          <Heading title="All Cars" description="Browse our complete inventory." />
-         <CarsFilter />
+         <CarsFilter brands={brands} categories={categories} />
          {isVariableValid(cars) ? (
             <CarGrid cars={cars} />
          ) : (

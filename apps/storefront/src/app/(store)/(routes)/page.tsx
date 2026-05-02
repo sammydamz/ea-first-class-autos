@@ -1,5 +1,5 @@
 import prisma from '@/lib/prisma'
-import { Carousel } from '@/components/native/Carousel'
+import Carousel from '@/components/native/Carousel'
 import { CarGrid, CarSkeletonGrid } from '@/components/native/CarCard'
 import { Heading } from '@/components/native/heading'
 import { Separator } from '@/components/native/separator'
