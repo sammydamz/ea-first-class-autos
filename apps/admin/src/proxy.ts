@@ -4,6 +4,7 @@ import { NextRequest, NextResponse } from 'next/server'
 
 export async function proxy(req: NextRequest) {
    if (req.nextUrl.pathname.startsWith('/api/auth')) return NextResponse.next()
+   if (req.nextUrl.pathname.startsWith('/login')) return NextResponse.next()
 
    function isTargetingAPI() {
       return req.nextUrl.pathname.startsWith('/api')
@@ -56,13 +57,11 @@ export async function proxy(req: NextRequest) {
 export const config = {
    matcher: [
       '/',
-      '/products/:path*',
-      '/banners/:path*',
-      '/orders/:path*',
+      '/cars/:path*',
+      '/brands/:path*',
       '/categories/:path*',
-      '/payments/:path*',
-      '/codes/:path*',
-      '/users/:path*',
+      '/banners/:path*',
+      '/settings/:path*',
       '/api/:path*',
    ],
 }
