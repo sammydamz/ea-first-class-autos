@@ -24,11 +24,11 @@ export default async function AboutPage() {
                <li>WhatsApp inquiry for quick responses</li>
             </ul>
             <h2 className="text-xl font-semibold mt-8 mb-4">Contact Us</h2>
-            <p>
-               {siteConfig?.businessAddress && <div>Address: {siteConfig.businessAddress}</div>}
-               {siteConfig?.businessPhone && <div>Phone: {siteConfig.businessPhone}</div>}
-               {siteConfig?.businessEmail && <div>Email: {siteConfig.businessEmail}</div>}
-            </p>
+             <div className="space-y-1">
+                {siteConfig?.businessAddress && <p>Address: {siteConfig.businessAddress}</p>}
+                {siteConfig?.businessPhone && <p>Phone: {siteConfig.businessPhone}</p>}
+                {siteConfig?.businessEmail && <p>Email: {siteConfig.businessEmail}</p>}
+             </div>
          </div>
       </div>
    )
