@@ -1,50 +1,23 @@
 import { Separator } from '@/components/native/separator'
 import config from '@/config/site'
-import { GithubIcon, InstagramIcon, TwitterIcon } from 'lucide-react'
+import { InstagramIcon, PhoneIcon, MailIcon } from 'lucide-react'
 import Link from 'next/link'
 
 const data = [
    {
-      label: 'LEGAL',
+      label: 'QUICK LINKS',
       links: [
-         {
-            label: 'Privacy Policy',
-            url: '/privacy',
-         },
-         {
-            label: 'Terms & Conditions',
-            url: '/terms',
-         },
+         { label: 'Cars', url: '/cars' },
+         { label: 'About', url: '/about' },
+         { label: 'Contact', url: '/contact' },
       ],
    },
    {
-      label: 'RESOURCES',
+      label: 'CONTACT',
       links: [
-         {
-            label: 'Blog',
-            url: '/blog',
-         },
-         {
-            label: 'About',
-            url: '/about',
-         },
-         {
-            label: 'Contact',
-            url: '/contact',
-         },
-      ],
-   },
-   {
-      label: 'SUPPORT',
-      links: [
-         {
-            label: 'Telegram',
-            url: '/telegram',
-         },
-         {
-            label: 'FAQ',
-            url: '/faq',
-         },
+         { label: 'Phone', url: 'tel:+1234567890' },
+         { label: 'Email', url: 'mailto:info@eafirstclassautos.com' },
+         { label: 'WhatsApp', url: 'https://wa.me/1234567890' },
       ],
    },
 ]
@@ -53,7 +26,7 @@ export default function Footer() {
    return (
       <footer className="w-full">
          <Separator className="my-12" />
-         <div className="flex justify-between px-[1.4rem] md:px-[4rem] lg:px-[6rem] xl:px-[8rem] 2xl:px-[12rem]">
+         <div className="flex flex-col md:flex-row justify-between gap-8 px-[1.4rem] md:px-[4rem] lg:px-[6rem] xl:px-[8rem] 2xl:px-[12rem]">
             <Trademark />
             <Links />
          </div>
@@ -65,7 +38,7 @@ export default function Footer() {
 
 function Links() {
    return (
-      <div className="text-end justify-evenly grid grid-cols-2 gap-8 sm:grid-cols-3 sm:gap-6">
+      <div className="text-end justify-evenly grid grid-cols-2 gap-8">
          {data.map(({ label, links }) => (
             <div key={label}>
                <h2 className="mb-3 text-sm uppercase">{label}</h2>
@@ -89,13 +62,13 @@ function Links() {
 
 function Trademark() {
    return (
-      <div className="mb-6 hidden md:mb-0 md:block">
+      <div className="mb-6 md:mb-0">
          <span className="flex flex-col">
             <h2 className="whitespace-nowrap text-sm font-semibold uppercase">
                {config.name}
             </h2>
-            <span className="mt-2 text-sm text-neutral-500 dark:text-neutral-400">
-               © {new Date().getFullYear()} {config.name}™ . All Rights
+            <span className="mt-2 text-sm text-muted-foreground">
+               &copy; {new Date().getFullYear()} {config.name}. All Rights
                Reserved.
             </span>
          </span>
@@ -107,28 +80,24 @@ function Socials() {
    return (
       <div className="mb-6 flex justify-center space-x-6 text-muted-foreground">
          <a
-            href="https://instagram.com/sesto_dev"
+            href="https://wa.me/1234567890"
+            target="_blank"
+            rel="noreferrer"
+         >
+            <PhoneIcon className="h-4" />
+            <span className="sr-only">WhatsApp</span>
+         </a>
+         <a href="mailto:info@eafirstclassautos.com">
+            <MailIcon className="h-4" />
+            <span className="sr-only">Email</span>
+         </a>
+         <a
+            href="https://instagram.com/"
             target="_blank"
             rel="noreferrer"
          >
             <InstagramIcon className="h-4" />
             <span className="sr-only">Instagram page</span>
-         </a>
-         <a
-            href="https://twitter.com/sesto_dev"
-            target="_blank"
-            rel="noreferrer"
-         >
-            <TwitterIcon className="h-4" />
-            <span className="sr-only">Twitter page</span>
-         </a>
-         <a
-            href="https://github.com/sesto-dev"
-            target="_blank"
-            rel="noreferrer"
-         >
-            <GithubIcon className="h-4" />
-            <span className="sr-only">GitHub account</span>
          </a>
       </div>
    )
