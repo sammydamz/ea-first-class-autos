@@ -83,15 +83,10 @@ export const CarCard = ({ car }: { car: CarWithIncludes }) => {
             )}
          </CardContent>
          <CardFooter className="flex items-center justify-between p-4 pt-0">
-            {car.isAvailable ? (
-               <div className="text-lg font-semibold text-primary">
-                  {formatPrice(car.price)}
-                  {car.isNegotiable && (
-                     <span className="ml-2 text-sm font-normal text-muted-foreground">
-                        Negotiable
-                     </span>
-                  )}
-               </div>
+             {car.isAvailable ? (
+                <div className="text-lg font-semibold text-primary">
+                   {formatPrice(car.price)}
+                </div>
             ) : (
                <Badge variant="secondary">Sold</Badge>
             )}
