@@ -5,24 +5,12 @@ export async function GET(req: Request, props: { params: Promise<{ brandId: stri
    const params = await props.params;
    try {
       const userId = req.headers.get('X-USER-ID')
-
-      if (!userId) {
-         return new NextResponse('Unauthorized', { status: 401 })
-      }
-
-      if (!params.brandId) {
-         return new NextResponse('Brand id is required', { status: 400 })
-      }
-
-      const category = await prisma.category.findUnique({
-         where: {
-            id: params.brandId,
-         },
-      })
-
-      return NextResponse.json(category)
+      if (!userId) { return new NextResponse('Unauthorized', { status: 401 }) }
+      if (!params.brandId) { return new NextResponse('Brand id is required', { status: 400 }) }
+      const brand = await prisma.brand.findUnique({ where: { id: params.brandId } })
+      return NextResponse.json(brand)
    } catch (error) {
-      console.error('[CATEGORY_GET]', error)
+      console.error('[BRAND_GET]', error)
       return new NextResponse('Internal error', { status: 500 })
    }
 }
@@ -31,24 +19,12 @@ export async function DELETE(req: Request, props: { params: Promise<{ brandId: s
    const params = await props.params;
    try {
       const userId = req.headers.get('X-USER-ID')
-
-      if (!userId) {
-         return new NextResponse('Unauthorized', { status: 401 })
-      }
-
-      if (!params.brandId) {
-         return new NextResponse('Brand id is required', { status: 400 })
-      }
-
-      const category = await prisma.category.delete({
-         where: {
-            id: params.brandId,
-         },
-      })
-
-      return NextResponse.json(category)
+      if (!userId) { return new NextResponse('Unauthorized', { status: 401 }) }
+      if (!params.brandId) { return new NextResponse('Brand id is required', { status: 400 }) }
+      const brand = await prisma.brand.delete({ where: { id: params.brandId } })
+      return NextResponse.json(brand)
    } catch (error) {
-      console.error('[CATEGORY_DELETE]', error)
+      console.error('[BRAND_DELETE]', error)
       return new NextResponse('Internal error', { status: 500 })
    }
 }
@@ -57,37 +33,18 @@ export async function PATCH(req: Request, props: { params: Promise<{ brandId: st
    const params = await props.params;
    try {
       const userId = req.headers.get('X-USER-ID')
-
-      if (!userId) {
-         return new NextResponse('Unauthorized', { status: 401 })
-      }
-
+      if (!userId) { return new NextResponse('Unauthorized', { status: 401 }) }
       const body = await req.json()
-
-      const { title, description } = body
-      console.log('PATCH', body)
-
-      if (!title && !description) {
-         return new NextResponse(
-            'At least one field (title or description) is required',
-            { status: 400 }
-         )
-      }
-
-      if (!params.brandId) {
-         return new NextResponse('Brand id is required', { status: 400 })
-      }
-
+      const { title, description, logo } = body
+      if (!params.brandId) { return new NextResponse('Brand id is required', { status: 400 }) }
       const updatedBrand = await prisma.brand.update({
-         where: {
-            id: params.brandId,
-         },
+         where: { id: params.brandId },
          data: {
             ...(title && { title }),
-            ...(description && { description }),
+            ...(description !== undefined && { description }),
+            ...(logo !== undefined && { logo }),
          },
       })
-
       return NextResponse.json(updatedBrand)
    } catch (error) {
       console.error('[BRAND_PATCH]', error)

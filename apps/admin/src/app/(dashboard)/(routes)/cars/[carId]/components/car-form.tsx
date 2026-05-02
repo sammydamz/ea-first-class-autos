@@ -6,6 +6,8 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { Label } from '@/components/ui/label'
+import { Checkbox } from '@/components/ui/checkbox'
+import { ImageUpload } from '@/components/image-upload'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { toast } from 'react-hot-toast'
 
@@ -44,6 +46,17 @@ export function CarForm({
       isAvailable: initialData?.isAvailable ?? true,
       brandId: initialData?.brandId || '',
    })
+   const [selectedCategories, setSelectedCategories] = useState<string[]>(
+      initialData?.categories?.map((c: any) => c.id) || []
+   )
+
+   const toggleCategory = (categoryId: string) => {
+      setSelectedCategories(prev =>
+         prev.includes(categoryId)
+            ? prev.filter(id => id !== categoryId)
+            : [...prev, categoryId]
+      )
+   }
 
    const handleSubmit = async (e: React.FormEvent) => {
       e.preventDefault()
@@ -59,6 +72,7 @@ export function CarForm({
             specifications,
             images: data.images.split('\n').filter(Boolean),
             brandId: data.brandId,
+            categoryIds: selectedCategories,
          }
 
          const method = initialData ? 'PATCH' : 'POST'
@@ -135,21 +149,58 @@ export function CarForm({
                   required
                />
             </div>
-            <div className="space-y-2">
-               <Label>Condition</Label>
-               <Select
-                  value={data.condition}
-                  onValueChange={(value) => setData({ ...data, condition: value })}
-               >
-                  <SelectTrigger>
-                     <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                     <SelectItem value="New">New</SelectItem>
-                     <SelectItem value="Used">Used</SelectItem>
-                  </SelectContent>
-               </Select>
+            <div className="flex items-center gap-6">
+               <div className="space-y-2">
+                  <Label>Condition</Label>
+                  <Select
+                     value={data.condition}
+                     onValueChange={(value) => setData({ ...data, condition: value })}
+                  >
+                     <SelectTrigger>
+                        <SelectValue />
+                     </SelectTrigger>
+                     <SelectContent>
+                        <SelectItem value="New">New</SelectItem>
+                        <SelectItem value="Used">Used</SelectItem>
+                     </SelectContent>
+                  </Select>
+               </div>
+               <div className="flex items-center gap-2 pt-6">
+                  <Checkbox
+                     id="isNegotiable"
+                     checked={data.isNegotiable}
+                     onCheckedChange={(checked) => setData({ ...data, isNegotiable: !!checked })}
+                  />
+                  <Label htmlFor="isNegotiable">Negotiable</Label>
+               </div>
             </div>
+         </div>
+
+         <div className="space-y-2">
+            <Label>Categories</Label>
+            <div className="flex flex-wrap gap-2">
+               {categories.map((cat) => (
+                  <label
+                     key={cat.id}
+                     className={`flex items-center gap-2 px-3 py-1.5 rounded-md border cursor-pointer transition-colors ${
+                        selectedCategories.includes(cat.id)
+                           ? 'bg-primary text-primary-foreground border-primary'
+                           : 'bg-background border-input hover:bg-accent'
+                     }`}
+                  >
+                     <input
+                        type="checkbox"
+                        className="sr-only"
+                        checked={selectedCategories.includes(cat.id)}
+                        onChange={() => toggleCategory(cat.id)}
+                     />
+                     {cat.title}
+                  </label>
+               ))}
+            </div>
+            {categories.length === 0 && (
+               <p className="text-sm text-muted-foreground">No categories yet. Create some first.</p>
+            )}
          </div>
 
          <div className="space-y-2">
@@ -172,11 +223,16 @@ export function CarForm({
          </div>
 
          <div className="space-y-2">
-            <Label>Images (one URL per line)</Label>
+            <Label>Images</Label>
+            <ImageUpload
+               images={data.images.split('\n').filter(Boolean)}
+               onChange={(urls) => setData({ ...data, images: urls.join('\n') })}
+            />
+            <p className="text-xs text-muted-foreground">First image is the featured image. Or paste URLs below:</p>
             <Textarea
                value={data.images}
                onChange={(e) => setData({ ...data, images: e.target.value })}
-               rows={4}
+               rows={3}
                placeholder="https://example.com/image1.jpg"
             />
          </div>

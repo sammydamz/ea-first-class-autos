@@ -4,18 +4,15 @@ import { CarGrid, CarSkeletonGrid } from '@/components/native/CarCard'
 import { Heading } from '@/components/native/heading'
 import { Separator } from '@/components/native/separator'
 import { isVariableValid } from '@/lib/utils'
-import { CarsFilter } from './cars/components/filter'
 
 export default async function Index() {
-   const [cars, brands, categories, banners] = await Promise.all([
+   const [cars, banners] = await Promise.all([
       prisma.car.findMany({
          where: { isDeleted: false, isAvailable: true },
          include: { brand: true, categories: true },
          orderBy: { createdAt: 'desc' },
          take: 12,
       }),
-      prisma.brand.findMany({ orderBy: { title: 'asc' } }),
-      prisma.category.findMany({ orderBy: { title: 'asc' } }),
       prisma.banner.findMany(),
    ])
 

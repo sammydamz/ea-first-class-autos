@@ -10,7 +10,7 @@ import { useParams, useRouter } from 'next/navigation'
 export type CategoryColumn = {
    id: string
    title: string
-   products: number
+   cars: number
 }
 
 export const columns: ColumnDef<CategoryColumn>[] = [
@@ -19,8 +19,8 @@ export const columns: ColumnDef<CategoryColumn>[] = [
       header: 'Title',
    },
    {
-      accessorKey: 'products',
-      header: 'Products #',
+      accessorKey: 'cars',
+      header: 'Cars',
    },
    {
       id: 'actions',

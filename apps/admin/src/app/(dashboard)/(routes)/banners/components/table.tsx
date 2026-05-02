@@ -10,14 +10,14 @@ import { EditIcon } from 'lucide-react'
 
 export type BannersColumn = {
    id: string
-   label: string
+   title: string
    createdAt: string
 }
 
 export const columns: ColumnDef<BannersColumn>[] = [
    {
-      accessorKey: 'label',
-      header: 'Label',
+      accessorKey: 'title',
+      header: 'Title',
    },
    {
       accessorKey: 'createdAt',
@@ -43,5 +43,5 @@ export const BannersClient: React.FC<BannerClientProps> = ({ data }) => {
    const params = useParams()
    const router = useRouter()
 
-   return <DataTable searchKey="label" columns={columns} data={data} />
+   return <DataTable searchKey="title" columns={columns} data={data} />
 }

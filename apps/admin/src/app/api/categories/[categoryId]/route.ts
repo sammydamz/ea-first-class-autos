@@ -5,21 +5,9 @@ export async function GET(req: Request, props: { params: Promise<{ categoryId: s
    const params = await props.params;
    try {
       const userId = req.headers.get('X-USER-ID')
-
-      if (!userId) {
-         return new NextResponse('Unauthorized', { status: 401 })
-      }
-
-      if (!params.categoryId) {
-         return new NextResponse('Category id is required', { status: 400 })
-      }
-
-      const category = await prisma.category.findUnique({
-         where: {
-            id: params.categoryId,
-         },
-      })
-
+      if (!userId) { return new NextResponse('Unauthorized', { status: 401 }) }
+      if (!params.categoryId) { return new NextResponse('Category id is required', { status: 400 }) }
+      const category = await prisma.category.findUnique({ where: { id: params.categoryId } })
       return NextResponse.json(category)
    } catch (error) {
       console.error('[CATEGORY_GET]', error)
@@ -31,21 +19,9 @@ export async function DELETE(req: Request, props: { params: Promise<{ categoryId
    const params = await props.params;
    try {
       const userId = req.headers.get('X-USER-ID')
-
-      if (!userId) {
-         return new NextResponse('Unauthorized', { status: 401 })
-      }
-
-      if (!params.categoryId) {
-         return new NextResponse('Category id is required', { status: 400 })
-      }
-
-      const category = await prisma.category.delete({
-         where: {
-            id: params.categoryId,
-         },
-      })
-
+      if (!userId) { return new NextResponse('Unauthorized', { status: 401 }) }
+      if (!params.categoryId) { return new NextResponse('Category id is required', { status: 400 }) }
+      const category = await prisma.category.delete({ where: { id: params.categoryId } })
       return NextResponse.json(category)
    } catch (error) {
       console.error('[CATEGORY_DELETE]', error)
@@ -57,42 +33,15 @@ export async function PATCH(req: Request, props: { params: Promise<{ categoryId:
    const params = await props.params;
    try {
       const userId = req.headers.get('X-USER-ID')
-
-      if (!userId) {
-         return new NextResponse('Unauthorized', { status: 401 })
-      }
-
+      if (!userId) { return new NextResponse('Unauthorized', { status: 401 }) }
       const body = await req.json()
-
-      const { title, description, bannerId } = body
-
-      if (!bannerId) {
-         return new NextResponse('Banner ID is required', { status: 400 })
-      }
-
-      if (!title) {
-         return new NextResponse('Name is required', { status: 400 })
-      }
-
-      if (!params.categoryId) {
-         return new NextResponse('Category id is required', { status: 400 })
-      }
-
+      const { title, description } = body
+      if (!title) { return new NextResponse('Name is required', { status: 400 }) }
+      if (!params.categoryId) { return new NextResponse('Category id is required', { status: 400 }) }
       const updatedCategory = await prisma.category.update({
-         where: {
-            id: params.categoryId,
-         },
-         data: {
-            title,
-            description,
-            banners: {
-               connect: {
-                  id: bannerId,
-               },
-            },
-         },
+         where: { id: params.categoryId },
+         data: { title, description: description || null },
       })
-
       return NextResponse.json(updatedCategory)
    } catch (error) {
       console.error('[CATEGORY_PATCH]', error)
