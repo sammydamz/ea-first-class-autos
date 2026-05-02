@@ -26,17 +26,6 @@ model Brand {
   updatedAt  DateTime   @updatedAt
 }
 
-model Category {
-  id          String     @id @default(cuid())
-  title       String     @unique
-  description String?
-  logo       String?
-  cars       Car[]
-  banners    Banner[]
-  createdAt  DateTime   @default(now())
-  updatedAt  DateTime   @updatedAt
-}
-
 model Car {
   id             String     @id @default(cuid())
   title          String
@@ -45,7 +34,7 @@ model Car {
   year           Int?
   price          Float
   isNegotiable    Boolean    @default(false)
-  condition      String     @default("Used")
+  condition      String     @default("Local Used")
   description    String?    @db.Text
   specifications Json?
   images         String[]
@@ -55,8 +44,6 @@ model Car {
 
   brand      Brand      @relation(fields: [brandId], references: [id])
   brandId    String
-
-  categories Category[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -72,13 +59,8 @@ model Banner {
   description String?
   link       String?
 
-  category   Category? @relation(fields: [categoryId], references: [id])
-  categoryId String?
-
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-
-  @@index([categoryId])
 }
 
 model SiteConfig {

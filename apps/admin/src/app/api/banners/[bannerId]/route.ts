@@ -21,7 +21,7 @@ export async function PATCH(req: Request, props: { params: Promise<{ bannerId: s
       const userId = req.headers.get('X-USER-ID')
       if (!userId) { return new NextResponse('Unauthorized', { status: 401 }) }
       const body = await req.json()
-      const { title, image, description, link, categoryId } = body
+      const { title, image, description, link } = body
       if (!params.bannerId) { return new NextResponse('Banner id is required', { status: 400 }) }
       const updatedBanner = await prisma.banner.update({
          where: { id: params.bannerId },
@@ -30,7 +30,6 @@ export async function PATCH(req: Request, props: { params: Promise<{ bannerId: s
             ...(image !== undefined && { image }),
             ...(description !== undefined && { description }),
             ...(link !== undefined && { link }),
-            ...(categoryId !== undefined && { categoryId }),
          },
       })
       return NextResponse.json(updatedBanner)

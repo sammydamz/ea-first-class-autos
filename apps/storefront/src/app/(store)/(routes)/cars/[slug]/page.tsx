@@ -52,12 +52,11 @@ export async function generateMetadata(
 export default async function CarPage(props: Props) {
    const params = await props.params
    const car = await prisma.car.findUnique({
-      where: { slug: params.slug },
-      include: {
-         brand: true,
-         categories: true,
-      },
-   })
+       where: { slug: params.slug },
+       include: {
+          brand: true,
+       },
+    })
 
    if (!car) {
       notFound()

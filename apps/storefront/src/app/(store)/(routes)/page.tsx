@@ -15,14 +15,12 @@ export default async function Index(props: {
    const searchParams = await props.searchParams
    const page = typeof searchParams.page === 'string' ? parseInt(searchParams.page) : 1
    const brandId = typeof searchParams.brand === 'string' ? searchParams.brand : undefined
-   const categoryId = typeof searchParams.category === 'string' ? searchParams.category : undefined
    const minPrice = typeof searchParams.minPrice === 'string' ? Number(searchParams.minPrice) : undefined
    const maxPrice = typeof searchParams.maxPrice === 'string' ? Number(searchParams.maxPrice) : undefined
    const sort = typeof searchParams.sort === 'string' ? searchParams.sort : 'newest'
 
-   const [brands, categories, banners] = await Promise.all([
+   const [brands, banners] = await Promise.all([
       prisma.brand.findMany({ orderBy: { title: 'asc' } }),
-      prisma.category.findMany({ orderBy: { title: 'asc' } }),
       prisma.banner.findMany({ take: 5 }),
    ])
 
@@ -30,7 +28,6 @@ export default async function Index(props: {
       isDeleted: false,
       isAvailable: true,
       ...(brandId && { brandId }),
-      ...(categoryId && { categories: { some: { id: categoryId } } }),
       ...(minPrice && { price: { gte: minPrice } }),
       ...(maxPrice && { price: { lte: maxPrice } }),
    }
@@ -39,13 +36,13 @@ export default async function Index(props: {
       sort === 'price-low'
          ? { price: 'asc' as const }
          : sort === 'price-high'
-           ? { price: 'desc' as const }
-           : { createdAt: 'desc' as const }
+            ? { price: 'desc' as const }
+            : { createdAt: 'desc' as const }
 
    const [cars, total] = await Promise.all([
       prisma.car.findMany({
          where,
-         include: { brand: true, categories: true },
+         include: { brand: true },
          orderBy,
          skip: (page - 1) * PAGE_SIZE,
          take: PAGE_SIZE,
@@ -73,7 +70,7 @@ export default async function Index(props: {
             title="Our Cars"
             description="Browse our selection of quality vehicles."
          />
-         <HomepageFilter brands={brands} categories={categories} />
+         <HomepageFilter brands={brands} />
          {isVariableValid(cars) && cars.length > 0 ? (
             <CarGrid cars={cars} />
          ) : (

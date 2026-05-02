@@ -59,7 +59,6 @@ export const config = {
       '/',
       '/cars/:path*',
       '/brands/:path*',
-      '/categories/:path*',
       '/banners/:path*',
       '/settings/:path*',
       '/api/:path*',

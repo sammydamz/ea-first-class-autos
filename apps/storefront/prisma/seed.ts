@@ -22,24 +22,6 @@ async function main() {
 
   console.log(`Created admin: ${admin.email}`)
 
-  const defaultCategories = [
-    { title: 'Sedan', description: 'Sedan vehicles' },
-    { title: 'SUV', description: 'Sport Utility Vehicles' },
-    { title: 'Truck', description: 'Trucks' },
-    { title: 'Hatchback', description: 'Hatchback vehicles' },
-    { title: 'Coupe', description: 'Coupe vehicles' },
-  ]
-
-  for (const cat of defaultCategories) {
-    await prisma.category.upsert({
-      where: { title: cat.title },
-      update: {},
-      create: cat,
-    })
-  }
-
-  console.log(`Created ${defaultCategories.length} default categories`)
-
   const defaultBrands = [
     { title: 'Toyota', description: 'Toyota Motor Corporation' },
     { title: 'Honda', description: 'Honda Motor Co.' },
@@ -78,7 +60,6 @@ async function main() {
   console.log('Created default site config')
 
   const brands = await prisma.brand.findMany()
-  const categories = await prisma.category.findMany()
 
   const sampleCars = [
     {
@@ -88,11 +69,10 @@ async function main() {
       year: 2022,
       price: 25000,
       isNegotiable: true,
-      condition: 'Used',
+      condition: 'Local Used',
       description: 'Well maintained sedan with low mileage. Single owner, full service history.',
       images: ['/placeholder-car.svg'],
       brandId: brands.find((b) => b.title === 'Toyota')!.id,
-      conditionCategory: 'Sedan',
     },
     {
       title: 'BMW X5 2023',
@@ -101,11 +81,10 @@ async function main() {
       year: 2023,
       price: 55000,
       isNegotiable: false,
-      condition: 'New',
+      condition: 'Brand New',
       description: 'Luxury SUV with premium features. M Sport package, panoramic roof.',
       images: ['/placeholder-car.svg'],
       brandId: brands.find((b) => b.title === 'BMW')!.id,
-      conditionCategory: 'SUV',
     },
     {
       title: 'Honda Civic 2021',
@@ -114,11 +93,10 @@ async function main() {
       year: 2021,
       price: 18000,
       isNegotiable: true,
-      condition: 'Used',
+      condition: 'Local Used',
       description: 'Reliable and fuel-efficient compact car. Great condition.',
       images: ['/placeholder-car.svg'],
       brandId: brands.find((b) => b.title === 'Honda')!.id,
-      conditionCategory: 'Sedan',
     },
     {
       title: 'Mercedes-Benz C-Class 2023',
@@ -127,11 +105,10 @@ async function main() {
       year: 2023,
       price: 48000,
       isNegotiable: false,
-      condition: 'New',
+      condition: 'Foreign Used',
       description: 'Elegant sedan with advanced technology. AMG Line exterior.',
       images: ['/placeholder-car.svg'],
       brandId: brands.find((b) => b.title === 'Mercedes-Benz')!.id,
-      conditionCategory: 'Sedan',
     },
     {
       title: 'Ford F-150 2022',
@@ -140,11 +117,10 @@ async function main() {
       year: 2022,
       price: 35000,
       isNegotiable: true,
-      condition: 'Used',
+      condition: 'Foreign Used',
       description: 'Powerful truck ready for any job. Extended cab, 4WD.',
       images: ['/placeholder-car.svg'],
       brandId: brands.find((b) => b.title === 'Ford')!.id,
-      conditionCategory: 'Truck',
     },
     {
       title: 'Toyota RAV4 2023',
@@ -153,11 +129,10 @@ async function main() {
       year: 2023,
       price: 32000,
       isNegotiable: true,
-      condition: 'New',
+      condition: 'Brand New',
       description: 'Versatile crossover SUV. Hybrid engine available.',
       images: ['/placeholder-car.svg'],
       brandId: brands.find((b) => b.title === 'Toyota')!.id,
-      conditionCategory: 'SUV',
     },
     {
       title: 'Honda CR-V 2022',
@@ -166,11 +141,10 @@ async function main() {
       year: 2022,
       price: 28000,
       isNegotiable: true,
-      condition: 'Used',
+      condition: 'Local Used',
       description: 'Spacious and comfortable SUV. Perfect family car.',
       images: ['/placeholder-car.svg'],
       brandId: brands.find((b) => b.title === 'Honda')!.id,
-      conditionCategory: 'SUV',
     },
     {
       title: 'BMW 3 Series 2023',
@@ -179,11 +153,10 @@ async function main() {
       year: 2023,
       price: 42000,
       isNegotiable: false,
-      condition: 'New',
+      condition: 'Brand New',
       description: 'The ultimate driving machine. Sport suspension, leather interior.',
       images: ['/placeholder-car.svg'],
       brandId: brands.find((b) => b.title === 'BMW')!.id,
-      conditionCategory: 'Sedan',
     },
     {
       title: 'Mercedes-Benz GLE 2022',
@@ -192,11 +165,10 @@ async function main() {
       year: 2022,
       price: 62000,
       isNegotiable: true,
-      condition: 'Used',
+      condition: 'Foreign Used',
       description: 'Premium luxury SUV. Burmester sound system, ambient lighting.',
       images: ['/placeholder-car.svg'],
       brandId: brands.find((b) => b.title === 'Mercedes-Benz')!.id,
-      conditionCategory: 'SUV',
     },
     {
       title: 'Ford Mustang 2023',
@@ -205,11 +177,10 @@ async function main() {
       year: 2023,
       price: 38000,
       isNegotiable: false,
-      condition: 'New',
+      condition: 'Brand New',
       description: 'Iconic American muscle car. GT Performance Package.',
       images: ['/placeholder-car.svg'],
       brandId: brands.find((b) => b.title === 'Ford')!.id,
-      conditionCategory: 'Coupe',
     },
     {
       title: 'Toyota Corolla 2021',
@@ -218,11 +189,10 @@ async function main() {
       year: 2021,
       price: 16000,
       isNegotiable: true,
-      condition: 'Used',
+      condition: 'Local Used',
       description: 'Compact and efficient. Perfect for daily commuting.',
       images: ['/placeholder-car.svg'],
       brandId: brands.find((b) => b.title === 'Toyota')!.id,
-      conditionCategory: 'Sedan',
     },
     {
       title: 'Honda Accord 2022',
@@ -231,11 +201,10 @@ async function main() {
       year: 2022,
       price: 27000,
       isNegotiable: true,
-      condition: 'Used',
+      condition: 'Foreign Used',
       description: 'Midsize sedan with excellent reliability. Touring trim.',
       images: ['/placeholder-car.svg'],
       brandId: brands.find((b) => b.title === 'Honda')!.id,
-      conditionCategory: 'Sedan',
     },
     {
       title: 'BMW X3 2023',
@@ -244,11 +213,10 @@ async function main() {
       year: 2023,
       price: 46000,
       isNegotiable: false,
-      condition: 'New',
+      condition: 'Brand New',
       description: 'Compact luxury SUV. xDrive, premium package.',
       images: ['/placeholder-car.svg'],
       brandId: brands.find((b) => b.title === 'BMW')!.id,
-      conditionCategory: 'SUV',
     },
     {
       title: 'Ford Explorer 2022',
@@ -257,24 +225,18 @@ async function main() {
       year: 2022,
       price: 36000,
       isNegotiable: true,
-      condition: 'Used',
+      condition: 'Foreign Used',
       description: 'Three-row SUV with plenty of space for the whole family.',
       images: ['/placeholder-car.svg'],
       brandId: brands.find((b) => b.title === 'Ford')!.id,
-      conditionCategory: 'SUV',
     },
   ]
 
   for (const carData of sampleCars) {
-    const { conditionCategory, ...carFields } = carData
-    const category = categories.find((c) => c.title === conditionCategory)
     await prisma.car.upsert({
-      where: { slug: carFields.slug },
+      where: { slug: carData.slug },
       update: {},
-      create: {
-        ...carFields,
-        categories: category ? { connect: { id: category.id } } : undefined,
-      },
+      create: carData,
     })
   }
 
