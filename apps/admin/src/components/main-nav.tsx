@@ -12,34 +12,9 @@ export function MainNav({
 
    const routes = [
       {
-         href: `/banners`,
-         label: 'Banners',
-         active: pathname.includes(`/banners`),
-      },
-      {
-         href: `/categories`,
-         label: 'Categories',
-         active: pathname.includes(`/categories`),
-      },
-      {
-         href: `/products`,
-         label: 'Products',
-         active: pathname.includes(`/products`),
-      },
-      {
-         href: `/orders`,
-         label: 'Orders',
-         active: pathname.includes(`/orders`),
-      },
-      {
-         href: `/payments`,
-         label: 'Payments',
-         active: pathname.includes(`/payments`),
-      },
-      {
-         href: `/users`,
-         label: 'Users',
-         active: pathname.includes(`/users`),
+         href: `/cars`,
+         label: 'Cars',
+         active: pathname.includes(`/cars`),
       },
       {
          href: `/brands`,
@@ -47,9 +22,19 @@ export function MainNav({
          active: pathname.includes(`/brands`),
       },
       {
-         href: `/codes`,
-         label: 'Codes',
-         active: pathname.includes(`/codes`),
+         href: `/categories`,
+         label: 'Categories',
+         active: pathname.includes(`/categories`),
+      },
+      {
+         href: `/banners`,
+         label: 'Banners',
+         active: pathname.includes(`/banners`),
+      },
+      {
+         href: `/settings/default`,
+         label: 'Settings',
+         active: pathname.includes(`/settings`),
       },
    ]
 

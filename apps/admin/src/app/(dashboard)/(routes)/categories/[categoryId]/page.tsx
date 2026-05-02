@@ -1,29 +1,18 @@
 import prisma from '@/lib/prisma'
-
 import { CategoryForm } from './components/category-form'
 
 const CategoryPage = async (
-   props: {
-      params: Promise<{ categoryId: string; id: string }>
-   }
+   props: { params: Promise<{ categoryId: string }> }
 ) => {
    const params = await props.params;
    const category = await prisma.category.findUnique({
-      where: {
-         id: params.categoryId,
-      },
-   })
-
-   const banners = await prisma.banner.findMany({
-      where: {
-         id: params.id,
-      },
+      where: { id: params.categoryId },
    })
 
    return (
       <div className="flex-col">
          <div className="flex-1 space-y-4 p-8 pt-6">
-            <CategoryForm banners={banners} initialData={category} />
+            <CategoryForm initialData={category} />
          </div>
       </div>
    )

@@ -6,7 +6,7 @@ import useEmblaCarousel from 'embla-carousel-react'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
 
-export default function Carousel({ images }: { images: string[] }) {
+export default function Carousel({ images, className }: { images: string[]; className?: string }) {
    const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [Autoplay()])
 
    const [selectedIndex, setSelectedIndex] = useState(0)
@@ -26,7 +26,7 @@ export default function Carousel({ images }: { images: string[] }) {
 
    return (
       <>
-         <div className="overflow-hidden rounded-lg" ref={emblaRef}>
+         <div className={cn("overflow-hidden rounded-lg", className)} ref={emblaRef}>
             <div className="flex">
                {images.map((src, i) => (
                   <div className="relative h-96 flex-[0_0_100%]" key={i}>

@@ -1,81 +1,68 @@
 'use client'
 
-import * as z from 'zod'
 import { useState } from 'react'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useForm } from 'react-hook-form'
-import { toast } from 'react-hot-toast'
-import { Trash } from 'lucide-react'
-import { Banner } from '@prisma/client'
-import { useParams, useRouter } from 'next/navigation'
-
-import { Input } from '@/components/ui/input'
+import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
-import {
-   Form,
-   FormControl,
-   FormField,
-   FormItem,
-   FormLabel,
-   FormMessage,
-} from '@/components/ui/form'
+import { Input } from '@/components/ui/input'
+import { Textarea } from '@/components/ui/textarea'
+import { Label } from '@/components/ui/label'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Separator } from '@/components/ui/separator'
 import { Heading } from '@/components/ui/heading'
 import { AlertModal } from '@/components/modals/alert-modal'
-import ImageUpload from '@/components/ui/image-upload'
-
-const formSchema = z.object({
-   label: z.string().min(1),
-   image: z.string().min(1),
-})
-
-type BannerFormValues = z.infer<typeof formSchema>
+import { toast } from 'react-hot-toast'
+import { Trash } from 'lucide-react'
+import { useParams } from 'next/navigation'
 
 interface BannerFormProps {
-   initialData: Banner | null
+   initialData: any | null
+   categories: { id: string; title: string }[]
 }
 
-export const BannerForm: React.FC<BannerFormProps> = ({ initialData }) => {
-   const params = useParams()
+export function BannerForm({ initialData, categories }: BannerFormProps) {
    const router = useRouter()
-
+   const params = useParams()
    const [open, setOpen] = useState(false)
    const [loading, setLoading] = useState(false)
-
-   const title = initialData ? 'Edit banner' : 'Create banner'
-   const description = initialData ? 'Edit a banner.' : 'Add a new banner'
-   const toastMessage = initialData ? 'Banner updated.' : 'Banner created.'
-   const action = initialData ? 'Save changes' : 'Create'
-
-   const form = useForm<BannerFormValues>({
-      resolver: zodResolver(formSchema),
-      defaultValues: initialData || {
-         label: '',
-         image: '',
-      },
+   const [data, setData] = useState({
+      title: initialData?.title || '',
+      image: initialData?.image || '',
+      description: initialData?.description || '',
+      link: initialData?.link || '',
+      categoryId: initialData?.categoryId || '',
    })
 
-   const onSubmit = async (data: BannerFormValues) => {
+   const handleSubmit = async (e: React.FormEvent) => {
+      e.preventDefault()
+      setLoading(true)
+
       try {
-         setLoading(true)
-         if (initialData) {
-            await fetch(`/api/banners/${params.bannerId}`, {
-               method: 'PATCH',
-               body: JSON.stringify(data),
-               cache: 'no-store',
-            })
-         } else {
-            await fetch(`/banners`, {
-               method: 'POST',
-               body: JSON.stringify(data),
-               cache: 'no-store',
-            })
+         const payload = {
+            ...data,
+            categoryId: data.categoryId || null,
          }
+
+         if (initialData) {
+            const res = await fetch(`/api/banners/${params.bannerId}`, {
+               method: 'PATCH',
+               headers: { 'Content-Type': 'application/json' },
+               body: JSON.stringify(payload),
+            })
+            if (!res.ok) throw new Error()
+         } else {
+            const res = await fetch('/api/banners', {
+               method: 'POST',
+               headers: { 'Content-Type': 'application/json' },
+               body: JSON.stringify(payload),
+            })
+            if (!res.ok) throw new Error()
+         }
+
+         toast.success(initialData ? 'Banner updated!' : 'Banner created!')
+         router.push('/banners')
          router.refresh()
-         router.push(`/banners`)
-         toast.success(toastMessage)
-      } catch (error: any) {
-         toast.error('Something went wrong.')
+      } catch {
+         toast.error('Something went wrong')
       } finally {
          setLoading(false)
       }
@@ -84,19 +71,15 @@ export const BannerForm: React.FC<BannerFormProps> = ({ initialData }) => {
    const onDelete = async () => {
       try {
          setLoading(true)
-
-         await fetch(`/api/banners/${params.bannerId}`, {
+         const res = await fetch(`/api/banners/${params.bannerId}`, {
             method: 'DELETE',
-            cache: 'no-store',
          })
-
-         router.refresh()
-         router.push(`/banners`)
+         if (!res.ok) throw new Error()
          toast.success('Banner deleted.')
-      } catch (error: any) {
-         toast.error(
-            'Make sure you removed all categories using this banner first.'
-         )
+         router.push('/banners')
+         router.refresh()
+      } catch {
+         toast.error('Something went wrong.')
       } finally {
          setLoading(false)
          setOpen(false)
@@ -105,73 +88,57 @@ export const BannerForm: React.FC<BannerFormProps> = ({ initialData }) => {
 
    return (
       <>
-         <AlertModal
-            isOpen={open}
-            onClose={() => setOpen(false)}
-            onConfirm={onDelete}
-            loading={loading}
-         />
+         <AlertModal isOpen={open} onClose={() => setOpen(false)} onConfirm={onDelete} loading={loading} />
          <div className="flex items-center justify-between">
-            <Heading title={title} description={description} />
+            <Heading title={initialData ? 'Edit Banner' : 'Create Banner'} description={initialData ? 'Edit banner details' : 'Add a new banner'} />
             {initialData && (
-               <Button
-                  disabled={loading}
-                  variant="destructive"
-                  size="sm"
-                  onClick={() => setOpen(true)}
-               >
+               <Button disabled={loading} variant="destructive" size="sm" onClick={() => setOpen(true)}>
                   <Trash className="h-4" />
                </Button>
             )}
          </div>
          <Separator />
-         <Form {...form}>
-            <form
-               onSubmit={form.handleSubmit(onSubmit)}
-               className="space-y-8 w-full"
-            >
-               <FormField
-                  control={form.control}
-                  name="image"
-                  render={({ field }) => (
-                     <FormItem>
-                        <FormLabel>Background image</FormLabel>
-                        <FormControl>
-                           <ImageUpload
-                              value={field.value ? [field.value] : []}
-                              disabled={loading}
-                              onChange={(url) => field.onChange(url)}
-                              onRemove={() => field.onChange('')}
-                           />
-                        </FormControl>
-                        <FormMessage />
-                     </FormItem>
-                  )}
-               />
-               <div className="md:grid md:grid-cols-3 gap-8">
-                  <FormField
-                     control={form.control}
-                     name="label"
-                     render={({ field }) => (
-                        <FormItem>
-                           <FormLabel>Label</FormLabel>
-                           <FormControl>
-                              <Input
-                                 disabled={loading}
-                                 placeholder="Banner label"
-                                 {...field}
-                              />
-                           </FormControl>
-                           <FormMessage />
-                        </FormItem>
-                     )}
-                  />
+         <form onSubmit={handleSubmit} className="space-y-6 w-full mt-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+               <div className="space-y-2">
+                  <Label>Title *</Label>
+                  <Input value={data.title} onChange={(e) => setData({ ...data, title: e.target.value })} required />
                </div>
-               <Button disabled={loading} className="ml-auto" type="submit">
-                  {action}
+               <div className="space-y-2">
+                  <Label>Category</Label>
+                  <Select value={data.categoryId} onValueChange={(value) => setData({ ...data, categoryId: value })}>
+                     <SelectTrigger>
+                        <SelectValue placeholder="Select category (optional)" />
+                     </SelectTrigger>
+                     <SelectContent>
+                        {categories.map((c) => (
+                           <SelectItem key={c.id} value={c.id}>{c.title}</SelectItem>
+                        ))}
+                     </SelectContent>
+                  </Select>
+               </div>
+            </div>
+            <div className="space-y-2">
+               <Label>Image URL *</Label>
+               <Input value={data.image} onChange={(e) => setData({ ...data, image: e.target.value })} placeholder="https://example.com/banner.jpg" required />
+            </div>
+            <div className="space-y-2">
+               <Label>Description</Label>
+               <Textarea value={data.description} onChange={(e) => setData({ ...data, description: e.target.value })} rows={3} />
+            </div>
+            <div className="space-y-2">
+               <Label>Link</Label>
+               <Input value={data.link} onChange={(e) => setData({ ...data, link: e.target.value })} placeholder="https://..." />
+            </div>
+            <div className="flex gap-4">
+               <Button type="submit" disabled={loading}>
+                  {loading ? 'Saving...' : initialData ? 'Save Changes' : 'Create Banner'}
                </Button>
-            </form>
-         </Form>
+               <Button type="button" variant="outline" onClick={() => router.back()}>
+                  Cancel
+               </Button>
+            </div>
+         </form>
       </>
    )
 }

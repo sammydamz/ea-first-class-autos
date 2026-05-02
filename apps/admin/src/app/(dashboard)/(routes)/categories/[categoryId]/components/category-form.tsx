@@ -12,16 +12,9 @@ import {
 } from '@/components/ui/form'
 import { Heading } from '@/components/ui/heading'
 import { Input } from '@/components/ui/input'
-import {
-   Select,
-   SelectContent,
-   SelectItem,
-   SelectTrigger,
-   SelectValue,
-} from '@/components/ui/select'
 import { Separator } from '@/components/ui/separator'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Banner, Category } from '@prisma/client'
+import { Category } from '@prisma/client'
 import { Trash } from 'lucide-react'
 import { useParams, useRouter } from 'next/navigation'
 import { useState } from 'react'
@@ -31,19 +24,17 @@ import * as z from 'zod'
 
 const formSchema = z.object({
    title: z.string().min(2),
-   description: z.string().min(1),
+   description: z.string().optional(),
 })
 
 type CategoryFormValues = z.infer<typeof formSchema>
 
 interface CategoryFormProps {
    initialData: Category | null
-   banners: Banner[]
 }
 
 export const CategoryForm: React.FC<CategoryFormProps> = ({
    initialData,
-   banners,
 }) => {
    const params = useParams()
    const router = useRouter()
@@ -70,14 +61,14 @@ export const CategoryForm: React.FC<CategoryFormProps> = ({
          if (initialData) {
             await fetch(`/api/categories/${params.categoryId}`, {
                method: 'PATCH',
+               headers: { 'Content-Type': 'application/json' },
                body: JSON.stringify(data),
-               cache: 'no-store',
             })
          } else {
             await fetch(`/api/categories`, {
                method: 'POST',
+               headers: { 'Content-Type': 'application/json' },
                body: JSON.stringify(data),
-               cache: 'no-store',
             })
          }
          router.refresh()
@@ -96,7 +87,6 @@ export const CategoryForm: React.FC<CategoryFormProps> = ({
 
          await fetch(`/api/categories/${params.categoryId}`, {
             method: 'DELETE',
-            cache: 'no-store',
          })
 
          router.refresh()
@@ -104,7 +94,7 @@ export const CategoryForm: React.FC<CategoryFormProps> = ({
          toast.success('Category deleted.')
       } catch (error: any) {
          toast.error(
-            'Make sure you removed all products using this category first.'
+            'Make sure you removed all cars using this category first.'
          )
       } finally {
          setLoading(false)
@@ -139,17 +129,17 @@ export const CategoryForm: React.FC<CategoryFormProps> = ({
                onSubmit={form.handleSubmit(onSubmit)}
                className="space-y-8 w-full"
             >
-               <div className="md:grid md:grid-cols-3 gap-8">
+               <div className="md:grid md:grid-cols-2 gap-8">
                   <FormField
                      control={form.control}
                      name="title"
                      render={({ field }) => (
                         <FormItem>
-                           <FormLabel>Name</FormLabel>
+                           <FormLabel>Title</FormLabel>
                            <FormControl>
                               <Input
                                  disabled={loading}
-                                 placeholder="Category name"
+                                 placeholder="Category name (e.g. Sedan, SUV, Truck)"
                                  {...field}
                               />
                            </FormControl>
@@ -162,32 +152,14 @@ export const CategoryForm: React.FC<CategoryFormProps> = ({
                      name="description"
                      render={({ field }) => (
                         <FormItem>
-                           <FormLabel>Banner</FormLabel>
-                           <Select
-                              disabled={loading}
-                              onValueChange={field.onChange}
-                              value={field.value}
-                              defaultValue={field.value}
-                           >
-                              <FormControl>
-                                 <SelectTrigger>
-                                    <SelectValue
-                                       defaultValue={field.value}
-                                       placeholder="Select a banner"
-                                    />
-                                 </SelectTrigger>
-                              </FormControl>
-                              <SelectContent>
-                                 {banners.map((banner) => (
-                                    <SelectItem
-                                       key={banner.id}
-                                       value={banner.id}
-                                    >
-                                       {banner.label}
-                                    </SelectItem>
-                                 ))}
-                              </SelectContent>
-                           </Select>
+                           <FormLabel>Description</FormLabel>
+                           <FormControl>
+                              <Input
+                                 disabled={loading}
+                                 placeholder="Vehicle type description"
+                                 {...field}
+                              />
+                           </FormControl>
                            <FormMessage />
                         </FormItem>
                      )}

@@ -1,48 +1,30 @@
-import {
-   BlogPostCard,
-   BlogPostGrid,
-   BlogPostSkeletonGrid,
-} from '@/components/native/BlogCard'
+import prisma from '@/lib/prisma'
 import Carousel from '@/components/native/Carousel'
-import { ProductGrid, ProductSkeletonGrid } from '@/components/native/Product'
+import { CarGrid, CarSkeletonGrid } from '@/components/native/CarCard'
 import { Heading } from '@/components/native/heading'
 import { Separator } from '@/components/native/separator'
-import prisma from '@/lib/prisma'
 import { isVariableValid } from '@/lib/utils'
 
 export default async function Index() {
-   const products = await prisma.product.findMany({
-      include: {
-         brand: true,
-         categories: true,
-      },
-   })
-
-   const blogs = await prisma.blog.findMany({
-      include: { author: true },
-      take: 3,
-   })
-
-   const banners = await prisma.banner.findMany()
+   const [cars, banners] = await Promise.all([
+      prisma.car.findMany({
+         where: { isDeleted: false, isAvailable: true },
+         include: { brand: true, categories: true },
+         orderBy: { createdAt: 'desc' },
+         take: 12,
+      }),
+      prisma.banner.findMany(),
+   ])
 
    return (
       <div className="flex flex-col border-neutral-200 dark:border-neutral-700">
-         <Carousel images={banners.map((obj) => obj.image)} />
+         <Carousel images={banners.map((b) => b.image)} className="h-64 md:h-96" />
          <Separator className="my-8" />
-         <Heading
-            title="Products"
-            description="Below is a list of products we have available for you."
-         />
-         {isVariableValid(products) ? (
-            <ProductGrid products={products} />
+         <Heading title="Our Cars" description="Browse our selection of quality vehicles." />
+         {isVariableValid(cars) ? (
+            <CarGrid cars={cars} />
          ) : (
-            <ProductSkeletonGrid />
-         )}
-         <Separator className="my-8" />
-         {isVariableValid(blogs) ? (
-            <BlogPostGrid blogs={blogs} />
-         ) : (
-            <BlogPostSkeletonGrid />
+            <CarSkeletonGrid />
          )}
       </div>
    )

@@ -8,6 +8,9 @@ Issues live in the GitHub repo `sammydamz/ea-first-class-autos`. Use the `gh` CL
 
 Default triage label vocabulary (needs-triage, needs-info, ready-for-agent, ready-for-human, wontfix). See `docs/agents/triage-labels.md`.
 
-### Domain docs
+### Workflow
 
-Single-context repo. Read `CONTEXT.md` at repo root and `docs/adr/` for architectural decisions. See `docs/agents/domain.md`.
+Each `ready-for-agent` issue is implemented in its own branch:
+- Branch name: `<issue-number>-<slug>` (e.g., `2-foundation`, `4-car-detail-page`)
+- PR per issue → independent review → merge
+- Keeps history clean, enables parallel work
