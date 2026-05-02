@@ -1,0 +1,111 @@
+- generic [active] [ref=e1]:
+  - button "Open Next.js Dev Tools" [ref=e7] [cursor=pointer]:
+    - img [ref=e8]
+  - alert [ref=e11]
+  - banner [ref=e12]:
+    - generic [ref=e13]:
+      - generic [ref=e14]:
+        - link "EA First Class Autos" [ref=e15] [cursor=pointer]:
+          - /url: /
+          - generic [ref=e16]: EA First Class Autos
+        - navigation "Main" [ref=e17]:
+          - list [ref=e19]:
+            - listitem [ref=e20]:
+              - link "Cars" [ref=e21] [cursor=pointer]:
+                - /url: /cars
+                - generic [ref=e22]: Cars
+            - listitem [ref=e23]:
+              - link "About" [ref=e24] [cursor=pointer]:
+                - /url: /about
+                - generic [ref=e25]: About
+            - listitem [ref=e26]:
+              - link "Contact" [ref=e27] [cursor=pointer]:
+                - /url: /contact
+                - generic [ref=e28]: Contact
+      - button [ref=e30] [cursor=pointer]:
+        - img [ref=e31]
+  - generic [ref=e34]:
+    - navigation "Breadcrumb" [ref=e35]:
+      - list [ref=e36]:
+        - listitem [ref=e37]:
+          - link "Home" [ref=e38] [cursor=pointer]:
+            - /url: /
+        - listitem [ref=e39]: /
+        - listitem [ref=e40]:
+          - link "Cars" [ref=e41] [cursor=pointer]:
+            - /url: /cars
+        - listitem [ref=e42]: /
+        - listitem [ref=e43]: Ford Explorer 2022
+    - generic [ref=e44]:
+      - img "Ford Explorer 2022 - image 1" [ref=e47]
+      - generic [ref=e48]:
+        - generic [ref=e49]:
+          - generic [ref=e50]:
+            - generic [ref=e51]: Ford
+            - generic [ref=e52]: Used
+            - generic [ref=e53]: "2022"
+          - heading "Ford Explorer 2022" [level=1] [ref=e54]
+          - paragraph [ref=e55]: $36,000Negotiable
+        - link "Enquire on WhatsApp" [ref=e56] [cursor=pointer]:
+          - /url: https://wa.me/233501234567?text=Hi%2C%20I'm%20interested%20in%20%22Ford%20Explorer%202022%22%20(2022%20Ford%20Explorer).%0APrice%3A%20%2436%2C000%20Negotiable%0ACondition%3A%20Used%0A%0ALink%3A%20https%3A%2F%2Feaautos.com%2Fcars%2Fford-explorer-2022
+          - button "Enquire on WhatsApp" [ref=e57]
+        - generic [ref=e58]:
+          - heading "Specifications" [level=2] [ref=e59]
+          - generic [ref=e60]:
+            - generic [ref=e61]:
+              - generic [ref=e62]: Model
+              - generic [ref=e63]: Explorer
+            - generic [ref=e64]:
+              - generic [ref=e65]: Year
+              - generic [ref=e66]: "2022"
+    - generic [ref=e67]:
+      - heading "Description" [level=2] [ref=e68]
+      - paragraph [ref=e69]: Three-row SUV with plenty of space for the whole family.
+  - contentinfo [ref=e70]:
+    - separator [ref=e71]
+    - generic [ref=e72]:
+      - generic [ref=e74]:
+        - heading "EA First Class Autos" [level=2] [ref=e75]
+        - generic [ref=e76]: © 2026 EA First Class Autos. All Rights Reserved.
+      - generic [ref=e77]:
+        - generic [ref=e78]:
+          - heading "QUICK LINKS" [level=2] [ref=e79]
+          - list [ref=e80]:
+            - listitem [ref=e81]:
+              - link "Cars" [ref=e82] [cursor=pointer]:
+                - /url: /cars
+            - listitem [ref=e83]:
+              - link "About" [ref=e84] [cursor=pointer]:
+                - /url: /about
+            - listitem [ref=e85]:
+              - link "Contact" [ref=e86] [cursor=pointer]:
+                - /url: /contact
+        - generic [ref=e87]:
+          - heading "CONTACT" [level=2] [ref=e88]
+          - list [ref=e89]:
+            - listitem [ref=e90]:
+              - link "Phone" [ref=e91] [cursor=pointer]:
+                - /url: tel:+1234567890
+            - listitem [ref=e92]:
+              - link "Email" [ref=e93] [cursor=pointer]:
+                - /url: mailto:info@eafirstclassautos.com
+            - listitem [ref=e94]:
+              - link "WhatsApp" [ref=e95] [cursor=pointer]:
+                - /url: https://wa.me/1234567890
+    - separator [ref=e96]
+    - generic [ref=e97]:
+      - link "WhatsApp" [ref=e98] [cursor=pointer]:
+        - /url: https://wa.me/1234567890
+        - img [ref=e99]
+        - generic [ref=e101]: WhatsApp
+      - link "Email" [ref=e102] [cursor=pointer]:
+        - /url: mailto:info@eafirstclassautos.com
+        - img [ref=e103]
+        - generic [ref=e106]: Email
+      - link "Instagram page" [ref=e107] [cursor=pointer]:
+        - /url: https://instagram.com/
+        - img [ref=e108]
+        - generic [ref=e111]: Instagram page
+  - link "Message us on WhatsApp" [ref=e112] [cursor=pointer]:
+    - /url: https://wa.me/233501234567?text=Hi%2C%20I'm%20interested%20in%20your%20cars.%20What%20do%20you%20have%20available%3F
+    - img [ref=e113]
