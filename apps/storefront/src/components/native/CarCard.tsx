@@ -93,7 +93,7 @@ export const CarCard = ({ car }: { car: CarWithIncludes }) => {
              {car.isAvailable && (
                 <Button size="sm" className="gap-1" asChild>
                    <a
-                      href={`https://wa.me/?text=${encodeURIComponent(`Hi, I'm interested in "${car.title}" (${car.year || ''} ${car.brand.title} ${car.model || ''}).\nPrice: ₵${car.price.toLocaleString()}${car.isNegotiable ? ' Negotiable' : ''}\nCondition: ${car.condition}\nLink: https://eaautos.com/cars/${car.slug}`)}`}
+                      href={`https://wa.me/?text=${encodeURIComponent(`Hi, I'm interested in "${car.title}" (${car.year || ''} ${car.brand.title} ${car.model || ''}).\nPrice: GH₵${car.price.toLocaleString()}${car.isNegotiable ? ' Negotiable' : ''}\nCondition: ${car.condition}\nLink: https://eaautos.com/cars/${car.slug}`)}`}
                       target="_blank"
                       rel="noopener noreferrer"
                    >
