@@ -69,12 +69,22 @@ export default async function CarPage(props: Props) {
    const whatsappNumber = car.whatsappNumber || siteConfig?.defaultWhatsApp || ''
    const pageUrl = `https://eaautos.com/cars/${car.slug}`
 
-    let whatsappUrl = ''
-    if (whatsappNumber) {
-       const message = `Hi, I'm interested in the ${car.title} listed at $${car.price.toLocaleString()}`
+   let whatsappUrl = ''
+   if (whatsappNumber) {
+      const specsText = Object.entries(
+         (car.specifications as Record<string, string>) || {}
+      )
+         .map(([key, value]) => `${key}: ${value}`)
+         .join('\n')
 
-       whatsappUrl = `https://wa.me/${whatsappNumber.replace(/\D/g, '')}?text=${encodeURIComponent(message)}`
-    }
+      const message = `Hi, I'm interested in "${car.title}" (${car.year || ''} ${car.brand.title} ${car.model || ''}).
+Price: $${car.price.toLocaleString()}${car.isNegotiable ? ' Negotiable' : ''}
+Condition: ${car.condition}
+${specsText ? `\nSpecifications:\n${specsText}` : ''}
+Link: ${pageUrl}`
+
+      whatsappUrl = `https://wa.me/${whatsappNumber.replace(/\D/g, '')}?text=${encodeURIComponent(message)}`
+   }
 
    const hasSpecs =
       !!car.model ||
