@@ -1,5 +1,6 @@
 import Footer from '@/components/native/Footer'
 import Header from '@/components/native/nav/parent'
+import prisma from '@/lib/prisma'
 import { FloatingWhatsApp } from '@/components/native/FloatingWhatsApp'
 
 export default async function DashboardLayout({
@@ -7,6 +8,11 @@ export default async function DashboardLayout({
 }: {
    children: React.ReactNode
 }) {
+   const siteConfig = await prisma.siteConfig.findUnique({
+      where: { id: 'default' },
+   })
+   const whatsappNumber = siteConfig?.defaultWhatsApp || ''
+
    return (
       <>
          <Header />
@@ -14,7 +20,7 @@ export default async function DashboardLayout({
             {children}
          </div>
          <Footer />
-         <FloatingWhatsApp />
+         {whatsappNumber && <FloatingWhatsApp number={whatsappNumber} />}
       </>
    )
 }

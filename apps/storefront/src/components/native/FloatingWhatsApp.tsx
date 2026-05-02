@@ -3,9 +3,8 @@
 import Link from 'next/link'
 import { MessageCircle } from 'lucide-react'
 
-export function FloatingWhatsApp() {
-   const whatsappNumber = '+1234567890'
-   const cleanNumber = whatsappNumber.replace(/\D/g, '')
+export function FloatingWhatsApp({ number }: { number: string }) {
+   const cleanNumber = number.replace(/\D/g, '')
    const message = encodeURIComponent(
       "Hi, I'm interested in your cars. What do you have available?"
    )
