@@ -1,5 +1,6 @@
 import Footer from '@/components/native/Footer'
 import Header from '@/components/native/nav/parent'
+import { FloatingWhatsApp } from '@/components/native/FloatingWhatsApp'
 
 export default async function DashboardLayout({
    children,
@@ -13,6 +14,7 @@ export default async function DashboardLayout({
             {children}
          </div>
          <Footer />
+         <FloatingWhatsApp />
       </>
    )
 }

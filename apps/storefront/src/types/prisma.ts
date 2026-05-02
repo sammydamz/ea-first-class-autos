@@ -1,5 +1,12 @@
 import { Prisma } from '@prisma/client'
 
+export type CarWithIncludes = Prisma.CarGetPayload<{
+   include: {
+      brand: true
+      categories: true
+   }
+}>
+
 export type CartItemWithProduct = Prisma.CartItemGetPayload<{
    include: {
       product: {

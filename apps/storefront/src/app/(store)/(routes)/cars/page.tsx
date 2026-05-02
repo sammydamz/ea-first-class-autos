@@ -1,11 +1,9 @@
-import { Carousel } from '@/components/native/Carousel'
+import prisma from '@/lib/prisma'
 import { CarGrid, CarSkeletonGrid } from '@/components/native/CarCard'
 import { Heading } from '@/components/native/heading'
-import { Separator } from '@/components/native/separator'
-import prisma from '@/lib/prisma'
 import { isVariableValid } from '@/lib/utils'
 
-export default async function Index() {
+export default async function CarsPage() {
    const cars = await prisma.car.findMany({
       where: {
          isDeleted: false,
@@ -20,18 +18,11 @@ export default async function Index() {
       },
    })
 
-   const banners = await prisma.banner.findMany()
-
    return (
-      <div className="flex flex-col border-neutral-200 dark:border-neutral-700">
-         <Carousel
-            images={banners.map((obj) => obj.image)}
-            className="h-64 md:h-96"
-         />
-         <Separator className="my-8" />
+      <div className="container mx-auto px-4 py-8">
          <Heading
-            title="Our Cars"
-            description="Browse our selection of quality vehicles."
+            title="All Cars"
+            description="Browse our complete inventory."
          />
          {isVariableValid(cars) ? (
             <CarGrid cars={cars} />
