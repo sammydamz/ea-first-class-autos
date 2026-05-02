@@ -10,6 +10,7 @@ import { Checkbox } from '@/components/ui/checkbox'
 import { ImageUpload } from '@/components/image-upload'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { toast } from 'react-hot-toast'
+import { Plus, X, GripVertical } from 'lucide-react'
 
 interface Brand {
    id: string
@@ -19,6 +20,27 @@ interface Brand {
 interface Category {
    id: string
    title: string
+}
+
+interface SpecRow {
+   key: string
+   value: string
+}
+
+function parseSpecs(raw: Record<string, any> | null | undefined): SpecRow[] {
+   if (!raw || typeof raw !== 'object') return [{ key: '', value: '' }]
+   const entries = Object.entries(raw)
+   if (entries.length === 0) return [{ key: '', value: '' }]
+   return entries.map(([key, value]) => ({ key, value: String(value) }))
+}
+
+function specsToRecord(rows: SpecRow[]): Record<string, string> {
+   const result: Record<string, string> = {}
+   for (const row of rows) {
+      const k = row.key.trim()
+      if (k) result[k] = row.value
+   }
+   return result
 }
 
 export function CarForm({
@@ -40,12 +62,12 @@ export function CarForm({
       isNegotiable: initialData?.isNegotiable || false,
       condition: initialData?.condition || 'Used',
       description: initialData?.description || '',
-      specifications: initialData?.specifications ? JSON.stringify(initialData.specifications, null, 2) : '{"Mileage": "", "Fuel": ""}',
       images: initialData?.images?.join('\n') || '',
       whatsappNumber: initialData?.whatsappNumber || '',
       isAvailable: initialData?.isAvailable ?? true,
       brandId: initialData?.brandId || '',
    })
+   const [specs, setSpecs] = useState<SpecRow[]>(parseSpecs(initialData?.specifications))
    const [selectedCategories, setSelectedCategories] = useState<string[]>(
       initialData?.categories?.map((c: any) => c.id) || []
    )
@@ -58,18 +80,36 @@ export function CarForm({
       )
    }
 
+   const updateSpec = (index: number, field: 'key' | 'value', val: string) => {
+      setSpecs(prev => prev.map((s, i) => i === index ? { ...s, [field]: val } : s))
+   }
+
+   const addSpec = () => setSpecs(prev => [...prev, { key: '', value: '' }])
+
+   const removeSpec = (index: number) => {
+      setSpecs(prev => prev.length > 1 ? prev.filter((_, i) => i !== index) : prev)
+   }
+
+   const moveSpec = (from: number, to: number) => {
+      if (to < 0 || to >= specs.length) return
+      setSpecs(prev => {
+         const arr = [...prev]
+         const [item] = arr.splice(from, 1)
+         arr.splice(to, 0, item)
+         return arr
+      })
+   }
+
    const handleSubmit = async (e: React.FormEvent) => {
       e.preventDefault()
       setLoading(true)
 
       try {
-         const specifications = JSON.parse(data.specifications || '{}')
-
          const payload = {
             ...data,
             year: parseInt(data.year) || null,
             price: parseFloat(data.price) || 0,
-            specifications,
+            specifications: specsToRecord(specs),
             images: data.images.split('\n').filter(Boolean),
             brandId: data.brandId,
             categoryIds: selectedCategories,
@@ -144,6 +184,7 @@ export function CarForm({
                <Label>Price *</Label>
                <Input
                   type="number"
+                  step="0.01"
                   value={data.price}
                   onChange={(e) => setData({ ...data, price: e.target.value })}
                   required
@@ -212,14 +253,61 @@ export function CarForm({
             />
          </div>
 
-         <div className="space-y-2">
-            <Label>Specifications (JSON)</Label>
-            <Textarea
-               value={data.specifications}
-               onChange={(e) => setData({ ...data, specifications: e.target.value })}
-               rows={4}
-               placeholder='{"Mileage": "10000", "Fuel": "Petrol"}'
-            />
+         <div className="space-y-3">
+            <div className="flex items-center justify-between">
+               <Label>Specifications</Label>
+               <Button type="button" variant="outline" size="sm" onClick={addSpec}>
+                  <Plus className="h-3 w-3 mr-1" /> Add Spec
+               </Button>
+            </div>
+            <div className="space-y-2">
+               {specs.map((spec, index) => (
+                  <div key={index} className="flex items-center gap-2">
+                     <div className="flex gap-1 shrink-0">
+                        <button
+                           type="button"
+                           className="p-1 text-muted-foreground hover:text-foreground disabled:opacity-30"
+                           disabled={index === 0}
+                           onClick={() => moveSpec(index, index - 1)}
+                        >
+                           <GripVertical className="h-3 w-3 rotate-180" />
+                        </button>
+                        <button
+                           type="button"
+                           className="p-1 text-muted-foreground hover:text-foreground disabled:opacity-30"
+                           disabled={index === specs.length - 1}
+                           onClick={() => moveSpec(index, index + 1)}
+                        >
+                           <GripVertical className="h-3 w-3" />
+                        </button>
+                     </div>
+                     <Input
+                        placeholder="Label (e.g. Mileage)"
+                        value={spec.key}
+                        onChange={(e) => updateSpec(index, 'key', e.target.value)}
+                        className="flex-1"
+                     />
+                     <Input
+                        placeholder="Value (e.g. 10,000 km)"
+                        value={spec.value}
+                        onChange={(e) => updateSpec(index, 'value', e.target.value)}
+                        className="flex-1"
+                     />
+                     <Button
+                        type="button"
+                        variant="ghost"
+                        size="icon"
+                        onClick={() => removeSpec(index)}
+                        className="shrink-0"
+                     >
+                        <X className="h-4 w-4" />
+                     </Button>
+                  </div>
+               ))}
+            </div>
+            <p className="text-xs text-muted-foreground">
+               Add key-value pairs like Mileage, Fuel Type, Transmission, etc.
+            </p>
          </div>
 
          <div className="space-y-2">

@@ -1,8 +1,12 @@
 'use client'
 
-import { useState } from 'react'
-import { useDropzone } from 'react-dropzone'
-import { X, Upload, Loader2 } from 'lucide-react'
+import { useDropzone as useReactDropzone } from 'react-dropzone'
+import { X, Upload, Loader2, ChevronLeft, ChevronRight } from 'lucide-react'
+import { generateReactHelpers } from '@uploadthing/react'
+
+import type { UploadRouter } from '@/lib/uploadthing'
+
+const { useUploadThing } = generateReactHelpers<UploadRouter>()
 
 interface ImageUploadProps {
    images: string[]
@@ -10,43 +14,37 @@ interface ImageUploadProps {
 }
 
 export function ImageUpload({ images, onChange }: ImageUploadProps) {
-   const [uploading, setUploading] = useState(false)
+   const { startUpload, isUploading } = useUploadThing('carImage', {
+      onClientUploadComplete: () => {},
+      onUploadError: (err) => { console.error('Upload error:', err) },
+   })
 
    const onDrop = async (acceptedFiles: File[]) => {
-      setUploading(true)
-      try {
-         for (const file of acceptedFiles) {
-            const formData = new FormData()
-            formData.append('file', file)
-
-            const res = await fetch('/api/uploadthing', {
-               method: 'POST',
-               body: formData,
-            })
-
-            if (!res.ok) throw new Error('Upload failed')
-
-            const data = await res.json()
-            if (data?.url) {
-               onChange([...images, data.url])
-            }
-         }
-      } catch (error) {
-         console.error('Upload error:', error)
-      } finally {
-         setUploading(false)
+      if (acceptedFiles.length === 0) return
+      const res = await startUpload(acceptedFiles)
+      if (res) {
+         const urls = res.map((f) => f.url)
+         onChange([...images, ...urls])
       }
    }
 
-   const { getRootProps, getInputProps, isDragActive } = useDropzone({
+   const { getRootProps, getInputProps, isDragActive } = useReactDropzone({
       onDrop,
       accept: { 'image/*': ['.png', '.jpg', '.jpeg', '.webp'] },
-      disabled: uploading,
+      disabled: isUploading,
       maxFiles: 10,
    })
 
    const removeImage = (index: number) => {
       onChange(images.filter((_, i) => i !== index))
+   }
+
+   const moveImage = (from: number, to: number) => {
+      if (to < 0 || to >= images.length) return
+      const arr = [...images]
+      const [item] = arr.splice(from, 1)
+      arr.splice(to, 0, item)
+      onChange(arr)
    }
 
    return (
@@ -55,23 +53,23 @@ export function ImageUpload({ images, onChange }: ImageUploadProps) {
             {...getRootProps()}
             className={`border-2 border-dashed rounded-lg p-6 text-center cursor-pointer transition-colors ${
                isDragActive ? 'border-rose-500 bg-rose-50' : 'border-input hover:border-rose-300'
-            } ${uploading ? 'opacity-50 pointer-events-none' : ''}`}
+            } ${isUploading ? 'opacity-50 pointer-events-none' : ''}`}
          >
             <input {...getInputProps()} />
-            {uploading ? (
+            {isUploading ? (
                <Loader2 className="mx-auto h-8 w-8 animate-spin text-muted-foreground mb-2" />
             ) : (
                <Upload className="mx-auto h-8 w-8 text-muted-foreground mb-2" />
             )}
             <p className="text-sm text-muted-foreground">
-               {uploading ? 'Uploading...' : 'Drag & drop images here, or click to browse'}
+               {isUploading ? 'Uploading...' : 'Drag & drop images here, or click to browse'}
             </p>
          </div>
 
          {images.length > 0 && (
             <div className="grid grid-cols-4 gap-2">
                {images.map((url, index) => (
-                  <div key={index} className="relative group aspect-square rounded-md overflow-hidden bg-muted">
+                  <div key={url + index} className="relative group aspect-square rounded-md overflow-hidden bg-muted">
                      <img src={url} alt={`Image ${index + 1}`} className="w-full h-full object-cover" />
                      <button
                         type="button"
@@ -84,6 +82,26 @@ export function ImageUpload({ images, onChange }: ImageUploadProps) {
                         <span className="absolute bottom-1 left-1 text-[10px] bg-rose-600 text-white px-1.5 py-0.5 rounded">
                            Featured
                         </span>
+                     )}
+                     {images.length > 1 && (
+                        <div className="absolute bottom-1 right-1 flex gap-0.5 opacity-0 group-hover:opacity-100 transition-opacity">
+                           <button
+                              type="button"
+                              onClick={() => moveImage(index, index - 1)}
+                              disabled={index === 0}
+                              className="bg-black/60 text-white rounded-sm p-0.5 disabled:opacity-30"
+                           >
+                              <ChevronLeft className="h-3 w-3" />
+                           </button>
+                           <button
+                              type="button"
+                              onClick={() => moveImage(index, index + 1)}
+                              disabled={index === images.length - 1}
+                              className="bg-black/60 text-white rounded-sm p-0.5 disabled:opacity-30"
+                           >
+                              <ChevronRight className="h-3 w-3" />
+                           </button>
+                        </div>
                      )}
                   </div>
                ))}
