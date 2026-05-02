@@ -18,7 +18,7 @@ export async function POST(req: Request) {
       const userId = req.headers.get('X-USER-ID')
       if (!userId) { return new NextResponse('Unauthorized', { status: 401 }) }
       const body = await req.json()
-      const { title, image, description, link, categoryId } = body
+      const { title, image, description, link } = body
       if (!title || !image) {
          return new NextResponse('Title and image are required', { status: 400 })
       }
@@ -28,7 +28,6 @@ export async function POST(req: Request) {
             image,
             description: description || null,
             link: link || null,
-            categoryId: categoryId || null,
          },
       })
       return NextResponse.json(banner)

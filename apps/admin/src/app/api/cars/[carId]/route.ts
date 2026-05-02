@@ -5,26 +5,20 @@ export async function PATCH(req: Request, props: { params: Promise<{ carId: stri
    const params = await props.params;
    try {
       const body = await req.json()
-      const { title, model, year, price, isNegotiable, condition, description, specifications, images, whatsappNumber, isAvailable, brandId, categoryIds } = body
+      const { title, model, year, price, isNegotiable, condition, description, specifications, images, whatsappNumber, isAvailable, brandId } = body
 
       const updateData: any = {
          model,
          year: year ? parseInt(year) : null,
          price: parseFloat(price) || 0,
          isNegotiable: isNegotiable || false,
-         condition: condition || 'Used',
+         condition: condition || 'Local Used',
          description,
          specifications: specifications || {},
          images: images || [],
          whatsappNumber,
          isAvailable: isAvailable ?? true,
          brandId,
-      }
-
-      if (categoryIds) {
-         updateData.categories = {
-            set: categoryIds.map((id: string) => ({ id })),
-         }
       }
 
       if (title) {

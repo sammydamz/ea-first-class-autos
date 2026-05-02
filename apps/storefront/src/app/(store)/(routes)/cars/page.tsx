@@ -13,21 +13,16 @@ export default async function CarsPage(props: {
    const searchParams = await props.searchParams
    const page = typeof searchParams.page === 'string' ? parseInt(searchParams.page) : 1
    const brandId = typeof searchParams.brand === 'string' ? searchParams.brand : undefined
-   const categoryId = typeof searchParams.category === 'string' ? searchParams.category : undefined
    const minPrice = typeof searchParams.minPrice === 'string' ? Number(searchParams.minPrice) : undefined
    const maxPrice = typeof searchParams.maxPrice === 'string' ? Number(searchParams.maxPrice) : undefined
    const sort = typeof searchParams.sort === 'string' ? searchParams.sort : 'newest'
 
-   const [brands, categories] = await Promise.all([
-      prisma.brand.findMany({ orderBy: { title: 'asc' } }),
-      prisma.category.findMany({ orderBy: { title: 'asc' } }),
-   ])
+   const brands = await prisma.brand.findMany({ orderBy: { title: 'asc' } })
 
    const where = {
       isDeleted: false,
       isAvailable: true,
       ...(brandId && { brandId }),
-      ...(categoryId && { categories: { some: { id: categoryId } } }),
       ...(minPrice && { price: { gte: minPrice } }),
       ...(maxPrice && { price: { lte: maxPrice } }),
    }
@@ -41,7 +36,7 @@ export default async function CarsPage(props: {
    const [cars, total] = await Promise.all([
       prisma.car.findMany({
          where,
-         include: { brand: true, categories: true },
+         include: { brand: true },
          orderBy,
          skip: (page - 1) * PAGE_SIZE,
          take: PAGE_SIZE,
@@ -54,7 +49,7 @@ export default async function CarsPage(props: {
    return (
       <div className="container mx-auto px-4 py-8">
          <Heading title="All Cars" description="Browse our complete inventory." />
-         <CarsFilter brands={brands} categories={categories} />
+         <CarsFilter brands={brands} />
          {isVariableValid(cars) ? (
             <CarGrid cars={cars} />
          ) : (

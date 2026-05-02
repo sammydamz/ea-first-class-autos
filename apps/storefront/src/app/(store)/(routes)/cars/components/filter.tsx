@@ -14,15 +14,13 @@ import {
 
 interface FilterProps {
    brands: { id: string; title: string }[]
-   categories: { id: string; title: string }[]
 }
 
-export function CarsFilter({ brands, categories }: FilterProps) {
+export function CarsFilter({ brands }: FilterProps) {
    const router = useRouter()
    const searchParams = useSearchParams()
 
    const [brand, setBrand] = useState(searchParams.get('brand') || '')
-   const [category, setCategory] = useState(searchParams.get('category') || '')
    const [minPrice, setMinPrice] = useState(searchParams.get('minPrice') || '')
    const [maxPrice, setMaxPrice] = useState(searchParams.get('maxPrice') || '')
    const [sort, setSort] = useState(searchParams.get('sort') || 'newest')
@@ -39,7 +37,6 @@ export function CarsFilter({ brands, categories }: FilterProps) {
 
    const clearFilters = useCallback(() => {
       setBrand('')
-      setCategory('')
       setMinPrice('')
       setMaxPrice('')
       setSort('newest')
@@ -48,7 +45,7 @@ export function CarsFilter({ brands, categories }: FilterProps) {
 
    return (
       <div className="bg-neutral-50 p-4 rounded-lg mb-6">
-         <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div>
                <Select value={brand} onValueChange={setBrand}>
                   <SelectTrigger>
@@ -58,20 +55,6 @@ export function CarsFilter({ brands, categories }: FilterProps) {
                      {brands.map((b) => (
                         <SelectItem key={b.id} value={b.id}>
                            {b.title}
-                        </SelectItem>
-                     ))}
-                  </SelectContent>
-               </Select>
-            </div>
-            <div>
-               <Select value={category} onValueChange={setCategory}>
-                  <SelectTrigger>
-                     <SelectValue placeholder="Category" />
-                  </SelectTrigger>
-                  <SelectContent>
-                     {categories.map((c) => (
-                        <SelectItem key={c.id} value={c.id}>
-                           {c.title}
                         </SelectItem>
                      ))}
                   </SelectContent>
@@ -110,7 +93,6 @@ export function CarsFilter({ brands, categories }: FilterProps) {
             <Button
                onClick={() => {
                   if (brand) updateFilter('brand', brand)
-                  if (category) updateFilter('category', category)
                   if (minPrice) updateFilter('minPrice', minPrice)
                   if (maxPrice) updateFilter('maxPrice', maxPrice)
                   if (sort && sort !== 'newest') updateFilter('sort', sort)

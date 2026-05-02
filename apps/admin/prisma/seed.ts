@@ -22,25 +22,7 @@ async function main() {
 
   console.log(`Created admin: ${admin.email}`)
 
-  const defaultCategories = [
-    { title: 'Sedan', description: 'Sedan vehicles' },
-    { title: 'SUV', description: 'Sport Utility Vehicles' },
-    { title: 'Truck', description: 'Trucks' },
-    { title: 'Hatchback', description: 'Hatchback vehicles' },
-    { title: 'Coupe', description: 'Coupe vehicles' },
-  ]
-
-  for (const cat of defaultCategories) {
-    await prisma.category.upsert({
-      where: { title: cat.title },
-      update: {},
-      create: cat,
-    })
-  }
-
-  console.log(`Created ${defaultCategories.length} default categories`)
-
-  const defaultBrands = [
+   const defaultBrands = [
     { title: 'Toyota', description: 'Toyota Motor Corporation' },
     { title: 'Honda', description: 'Honda Motor Co.' },
     { title: 'BMW', description: 'Bayerische Motoren Werke' },

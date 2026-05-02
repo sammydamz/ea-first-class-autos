@@ -12,15 +12,14 @@ export default async function CarPage(props: Props) {
    const params = await props.params
    const carId = params.carId
 
-   const [car, brands, categories] = await Promise.all([
+   const [car, brands] = await Promise.all([
       carId === 'new'
          ? null
          : prisma.car.findUnique({
               where: { id: carId },
-              include: { brand: true, categories: true },
+              include: { brand: true },
            }),
       prisma.brand.findMany({ orderBy: { title: 'asc' } }),
-      prisma.category.findMany({ orderBy: { title: 'asc' } }),
    ])
 
    if (carId !== 'new' && !car) {
@@ -31,7 +30,7 @@ export default async function CarPage(props: Props) {
       <div className="container mx-auto py-6">
          <Heading title={car ? 'Edit Car' : 'Add Car'} description={car ? 'Edit car details' : 'Add a new car to inventory'} />
          <Separator className="my-6" />
-         <CarForm brands={brands} categories={categories} initialData={car} />
+         <CarForm brands={brands} initialData={car} />
       </div>
    )
 }
