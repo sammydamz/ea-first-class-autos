@@ -8,12 +8,9 @@ import './globals.css'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
-   title: 'Store',
-   description: 'E-Commerce Store',
-   keywords: ['E-Commerce', 'Store', 'Shop'],
-   authors: [{ name: 'Sesto', url: 'https://github.com/sesto-dev' }],
-   creator: 'Sesto',
-   publisher: 'Sesto',
+   title: 'EA First Class Autos',
+   description: 'Premium vehicles at competitive prices. Browse our selection of quality cars.',
+   keywords: ['Cars', 'Autos', 'Vehicles', 'Car Dealership'],
 }
 
 export default async function RootLayout({
@@ -22,7 +19,7 @@ export default async function RootLayout({
    children: React.ReactNode
 }) {
    return (
-      <html lang="en">
+      <html lang="en" suppressHydrationWarning>
          <body className={inter.className}>
             <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
                <ToastProvider />
