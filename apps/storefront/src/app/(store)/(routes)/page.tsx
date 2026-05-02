@@ -1,4 +1,3 @@
-import { Suspense } from 'react'
 import prisma from '@/lib/prisma'
 import { Carousel } from '@/components/native/Carousel'
 import { CarGrid, CarSkeletonGrid } from '@/components/native/CarCard'
@@ -25,7 +24,6 @@ export default async function Index() {
          <Carousel images={banners.map((b) => b.image)} className="h-64 md:h-96" />
          <Separator className="my-8" />
          <Heading title="Our Cars" description="Browse our selection of quality vehicles." />
-         <CarsFilter brands={brands} categories={categories} />
          {isVariableValid(cars) ? (
             <CarGrid cars={cars} />
          ) : (

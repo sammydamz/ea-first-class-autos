@@ -31,6 +31,11 @@ export function MainNav({
          label: 'Banners',
          active: pathname.includes(`/banners`),
       },
+      {
+         href: `/settings/default`,
+         label: 'Settings',
+         active: pathname.includes(`/settings`),
+      },
    ]
 
    return (

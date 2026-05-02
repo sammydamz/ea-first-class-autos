@@ -15,13 +15,25 @@ export async function generateMetadata(props: Props, parent: ResolvingMetadata):
    const params = await props.params
    const car = await prisma.car.findUnique({
       where: { slug: params.slug },
+      include: { brand: true },
    })
 
    if (!car) return {}
 
+   const title = `${car.title} - ${car.year || ''} ${car.brand.title} | EA First Class Autos`
+   const description = car.description 
+      ? car.description.slice(0, 160) 
+      : `${car.title} - ${car.condition} vehicle priced at $${car.price.toLocaleString()}. Contact us on WhatsApp for more information.`
+
    return {
-      title: car.title,
-      description: car.description || undefined,
+      title,
+      description,
+      openGraph: {
+         title: car.title,
+         description,
+         images: car.images[0] ? [car.images[0]] : [],
+         type: 'website',
+      },
    }
 }
 
