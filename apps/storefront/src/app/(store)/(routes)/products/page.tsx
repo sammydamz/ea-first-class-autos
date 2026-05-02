@@ -11,7 +11,8 @@ import {
    SortBy,
 } from './components/options'
 
-export default async function Products({ searchParams }) {
+export default async function Products(props) {
+   const searchParams = await props.searchParams;
    const { sort, isAvailable, brand, category, page = 1 } = searchParams ?? null
 
    const orderBy = getOrderBy(sort)
