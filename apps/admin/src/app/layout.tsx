@@ -11,7 +11,7 @@ export const metadata = {
    title: 'EA First Class Autos — Admin',
    description: 'Admin dashboard for EA First Class Autos inventory management',
    icons: {
-      icon: '/favicon.ico',
+      icon: '/icon.jpg',
    },
 }
 
