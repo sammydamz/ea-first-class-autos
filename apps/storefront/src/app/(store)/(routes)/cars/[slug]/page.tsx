@@ -95,7 +95,7 @@ Link: ${pageUrl}`
       )
 
    return (
-      <div className="container mx-auto py-8">
+       <div className="mx-auto max-w-7xl py-8">
          <Breadcrumbs car={car} />
          <Separator className="my-6" />
          <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
@@ -123,21 +123,21 @@ Link: ${pageUrl}`
 
 function Breadcrumbs({ car }: { car: CarWithIncludes }) {
    return (
-      <nav className="flex text-sm text-muted-foreground" aria-label="Breadcrumb">
-         <ol className="inline-flex items-center gap-2">
-            <li>
-               <Link href="/" className="hover:text-foreground">
-                  Home
-               </Link>
-            </li>
-            <li>/</li>
-            <li>
-               <Link href="/cars" className="hover:text-foreground">
-                  Cars
-               </Link>
-            </li>
-            <li>/</li>
-            <li className="font-medium text-foreground">{car.title}</li>
+       <nav className="flex text-sm text-muted-foreground overflow-x-auto" aria-label="Breadcrumb">
+          <ol className="inline-flex items-center gap-2 whitespace-nowrap">
+             <li>
+                <Link href="/" className="hover:text-foreground">
+                   Home
+                </Link>
+             </li>
+             <li>/</li>
+             <li>
+                <Link href="/cars" className="hover:text-foreground">
+                   Cars
+                </Link>
+             </li>
+             <li>/</li>
+             <li className="font-medium text-foreground truncate max-w-[160px]">{car.title}</li>
          </ol>
       </nav>
    )
@@ -172,9 +172,9 @@ function CarDetails({
          </div>
 
          {whatsappUrl && (
-            <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
-               <Button className="w-full">Enquire on WhatsApp</Button>
-            </a>
+             <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
+                <Button className="w-full sm:w-auto min-h-[44px]">Enquire on WhatsApp</Button>
+             </a>
          )}
 
          {hasSpecs && (

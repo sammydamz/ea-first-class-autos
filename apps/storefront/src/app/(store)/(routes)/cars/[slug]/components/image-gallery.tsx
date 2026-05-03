@@ -84,7 +84,7 @@ export function ImageGallery({ images, title }: ImageGalleryProps) {
    return (
       <div className="lg:col-span-2">
          <div
-            className="relative aspect-video overflow-hidden rounded-lg bg-muted cursor-pointer group"
+            className="relative aspect-[4/3] sm:aspect-video overflow-hidden rounded-lg bg-muted cursor-pointer group"
             onClick={() => openLightbox(selectedIndex)}
          >
             <Image
