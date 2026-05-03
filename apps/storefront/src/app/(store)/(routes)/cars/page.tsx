@@ -1,6 +1,6 @@
 import prisma from '@/lib/prisma'
 import { CarGrid, CarSkeletonGrid } from '@/components/native/CarCard'
-import { Heading } from '@/components/native/heading'
+import { Separator } from '@/components/native/separator'
 import { isVariableValid } from '@/lib/utils'
 import { CarsFilter } from './components/filter'
 import { Pagination } from '@/components/native/pagination'
@@ -47,17 +47,34 @@ export default async function CarsPage(props: {
    const totalPages = Math.ceil(total / PAGE_SIZE)
 
    return (
-      <div className="py-8">
-         <Heading title="All Cars" description="Browse our complete inventory." />
-         <CarsFilter brands={brands} />
-         {isVariableValid(cars) ? (
-            <CarGrid cars={cars} />
-         ) : (
-            <CarSkeletonGrid />
-         )}
-         {totalPages > 1 && (
-            <Pagination page={page} totalPages={totalPages} />
-         )}
+      <div className="flex flex-col">
+         {/* Hero Section */}
+         <section className="px-4 md:px-8 lg:px-16 pt-24 pb-16 text-center">
+            <p className="text-sm font-semibold uppercase tracking-widest text-muted-foreground mb-4">
+               Inventory
+            </p>
+            <h1 className="text-5xl md:text-6xl font-bold tracking-tight leading-[1.1]">
+               All Cars
+            </h1>
+            <p className="mt-6 text-xl text-muted-foreground max-w-2xl mx-auto">
+               Browse our complete inventory of quality vehicles.
+            </p>
+         </section>
+
+         {/* Filter + Cars */}
+         <section className="px-4 md:px-8 lg:px-16 pb-24">
+            <div className="max-w-7xl mx-auto">
+               <CarsFilter brands={brands} />
+               {isVariableValid(cars) ? (
+                  <CarGrid cars={cars} />
+               ) : (
+                  <CarSkeletonGrid />
+               )}
+               {totalPages > 1 && (
+                  <Pagination page={page} totalPages={totalPages} />
+               )}
+            </div>
+         </section>
       </div>
    )
 }
