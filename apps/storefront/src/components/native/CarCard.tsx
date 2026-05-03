@@ -19,17 +19,17 @@ function formatPrice(price: number): string {
 
 export const CarGrid = ({ cars }: { cars: CarWithIncludes[] }) => {
    return (
-      <div className="mb-4 grid grid-cols-1 sm:grid-cols-2 gap-3 md:grid-cols-3 xl:grid-cols-4">
-         {cars.map((car) => (
-            <CarCard car={car} key={car.id} />
-         ))}
-      </div>
-   )
+      <div className="mb-4 grid grid-cols-2 gap-3 md:grid-cols-3 xl:grid-cols-4">
+          {cars.map((car) => (
+             <CarCard car={car} key={car.id} />
+          ))}
+       </div>
+    )
 }
 
 export const CarSkeletonGrid = () => {
-   return (
-      <div className="mb-4 grid grid-cols-1 sm:grid-cols-2 gap-3 md:grid-cols-3 xl:grid-cols-4">
+    return (
+       <div className="mb-4 grid grid-cols-2 gap-3 md:grid-cols-3 xl:grid-cols-4">
          {[...Array(12)].map(() => (
             <CarSkeleton key={Math.random()} />
          ))}
