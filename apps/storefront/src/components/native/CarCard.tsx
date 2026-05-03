@@ -1,15 +1,15 @@
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import {
-   Card,
-   CardContent,
-   CardDescription,
-   CardFooter,
-   CardHeader,
-   CardTitle,
+    Card,
+    CardContent,
+    CardDescription,
+    CardFooter,
+    CardHeader,
+    CardTitle,
 } from '@/components/ui/card'
+import { WhatsAppCardButton } from '@/components/native/WhatsAppCardButton'
 import { CarWithIncludes } from '@/types/prisma'
-import { MessageCircle } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -95,18 +95,12 @@ export const CarCard = ({ car }: { car: CarWithIncludes }) => {
             ) : (
                <Badge variant="secondary">Sold</Badge>
             )}
-            {car.isAvailable && (
-               <Button size="sm" className="gap-1" asChild>
-                  <a
-                     href={`https://wa.me/?text=${encodeURIComponent(`Hi, I'm interested in the ${car.title} listed at ${formatPrice(car.price)}`)}`}
-                     target="_blank"
-                     rel="noopener noreferrer"
-                  >
-                     <MessageCircle className="h-4 w-4" />
-                     Contact
-                  </a>
-               </Button>
-            )}
+              {car.isAvailable && (
+                  <WhatsAppCardButton
+                     carId={car.id}
+                     href={`https://wa.me/?text=${encodeURIComponent(`Hi, I'm interested in "${car.title}" (${car.year || ''} ${car.brand.title} ${car.model || ''}).\nPrice: GH₵${car.price.toLocaleString()}${car.isNegotiable ? ' Negotiable' : ''}\nCondition: ${car.condition}\nLink: https://eaautos.com/cars/${car.slug}`)}`}
+                  />
+              )}
          </CardFooter>
       </Card>
    )

@@ -61,6 +61,8 @@ model Car {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  whatsappClicks WhatsappClick[]
+
   @@index([brandId])
   @@index([slug])
 }
@@ -88,4 +90,16 @@ model SiteConfig {
   businessAddress String?
   businessPhone  String?
   businessEmail   String?
+}
+
+model WhatsappClick {
+  id        String   @id @default(cuid())
+  carId     String
+  source    String
+  createdAt DateTime @default(now())
+
+  car Car @relation(fields: [carId], references: [id])
+
+  @@index([carId])
+  @@index([createdAt])
 }
