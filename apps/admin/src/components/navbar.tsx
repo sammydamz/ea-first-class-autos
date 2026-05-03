@@ -1,22 +1,46 @@
 import { MainNav } from '@/components/main-nav'
 import { ThemeToggle } from '@/components/theme-toggle'
+import Image from 'next/image'
 import Link from 'next/link'
 
 import { LogoutButton } from './logout-button'
 
 export default async function Navbar() {
    return (
-      <div className="border-b flex justify-between h-16 items-center px-[1.4rem] md:px-[4rem] lg:px-[6rem] xl:px-[8rem] 2xl:px-[12rem]">
-         <div className="flex gap-6">
-            <Link href="/" className="font-bold tracking-wider">
-               ADMIN
-            </Link>
-            <MainNav />
+      <header>
+         <div className="bg-primary text-primary-foreground">
+            <div className="flex justify-between items-center h-9 px-6 md:px-12 lg:px-16 xl:px-24">
+               <span className="text-[11px] font-bold uppercase tracking-wider">
+                  EA First Class Autos
+               </span>
+               <div className="flex items-center gap-2">
+                  <ThemeToggle />
+                  <LogoutButton />
+               </div>
+            </div>
          </div>
-         <div className="flex items-center gap-2">
-            <ThemeToggle />
-            <LogoutButton />
+         <div className="border-b-2 border-primary">
+            <div className="flex justify-between items-center h-14 px-6 md:px-12 lg:px-16 xl:px-24">
+               <div className="flex items-center gap-8">
+                  <Link href="/" className="flex items-center">
+                     <Image
+                        src="/ea.jpg"
+                        alt="EA First Class Autos"
+                        width={46}
+                        height={40}
+                        className="h-8 w-auto object-contain"
+                        style={{ width: 'auto', height: 'auto' }}
+                        priority
+                     />
+                  </Link>
+                  <div className="hidden md:block h-6 w-px bg-border" />
+                  <MainNav />
+               </div>
+               <span className="text-[10px] uppercase tracking-wider text-muted-foreground hidden lg:inline">
+                  Admin Panel
+               </span>
+            </div>
          </div>
-      </div>
+      </header>
    )
 }

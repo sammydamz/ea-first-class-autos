@@ -10,14 +10,15 @@ export function ThemeToggle() {
 
    return (
       <Button
-         variant="outline"
+         variant="ghost"
          size="icon"
          onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
+         className="h-7 w-7 rounded-none border border-primary-foreground/30 hover:bg-primary-foreground/10 hover:text-primary-foreground"
       >
          {resolvedTheme === 'dark' ? (
-            <SunIcon className="h-4" />
+            <SunIcon className="h-3.5 w-3.5" />
          ) : (
-            <MoonIcon className="h-4" />
+            <MoonIcon className="h-3.5 w-3.5" />
          )}
       </Button>
    )
