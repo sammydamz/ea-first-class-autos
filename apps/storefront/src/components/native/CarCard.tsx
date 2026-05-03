@@ -87,17 +87,15 @@ export const CarCard = ({ car }: { car: CarWithIncludes }) => {
                <Badge variant="secondary">Sold</Badge>
             )}
              {car.isAvailable && (
-                <Button size="sm" className="gap-1" asChild>
-                   <a
-                      href={`https://wa.me/?text=${encodeURIComponent(`Hi, I'm interested in "${car.title}" (${car.year || ''} ${car.brand.title} ${car.model || ''}).\nPrice: GH₵${car.price.toLocaleString()}${car.isNegotiable ? ' Negotiable' : ''}\nCondition: ${car.condition}\nLink: https://eaautos.com/cars/${car.slug}`)}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                   >
-                     <MessageCircle className="h-4 w-4" />
-                     Contact
-                  </a>
-               </Button>
-            )}
+                <a
+                   href={`https://wa.me/?text=${encodeURIComponent(`Hi, I'm interested in "${car.title}" (${car.year || ''} ${car.brand.title} ${car.model || ''}).\nPrice: GH₵${car.price.toLocaleString()}${car.isNegotiable ? ' Negotiable' : ''}\nCondition: ${car.condition}\nLink: https://eaautos.com/cars/${car.slug}`)}`}
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   className="p-2 rounded-full hover:bg-green-50 transition-colors"
+                >
+                  <MessageCircle className="h-4 w-4 text-green-600" />
+                </a>
+             )}
          </CardFooter>
       </Card>
    )
