@@ -181,30 +181,30 @@ function CarDetails({
             <>
                <Separator />
                <div>
-                   <h2 className="font-semibold mb-3 text-sm">Specifications</h2>
-                  <div className="space-y-2">
-                     {car.model && (
-                        <div className="grid grid-cols-2 gap-2 text-sm">
-                           <span className="text-muted-foreground">Model</span>
-                           <span>{car.model}</span>
-                        </div>
-                     )}
-                     {car.year && (
-                        <div className="grid grid-cols-2 gap-2 text-sm">
-                           <span className="text-muted-foreground">Year</span>
-                           <span>{car.year}</span>
-                        </div>
-                     )}
-                     {car.specifications &&
-                        Object.entries(car.specifications as Record<string, string>).map(
-                           ([key, value]) => (
-                              <div key={key} className="grid grid-cols-2 gap-2 text-sm">
-                                 <span className="text-muted-foreground">{key}</span>
-                                 <span>{value}</span>
-                              </div>
-                           )
-                        )}
-                  </div>
+                   <h2 className="text-subheading font-semibold mb-3">Specifications</h2>
+                   <div className="space-y-2">
+                      {car.model && (
+                         <div className="grid grid-cols-2 gap-2 text-base">
+                            <span className="text-muted-foreground">Model</span>
+                            <span>{car.model}</span>
+                         </div>
+                      )}
+                      {car.year && (
+                         <div className="grid grid-cols-2 gap-2 text-base">
+                            <span className="text-muted-foreground">Year</span>
+                            <span>{car.year}</span>
+                         </div>
+                      )}
+                      {car.specifications &&
+                         Object.entries(car.specifications as Record<string, string>).map(
+                            ([key, value]) => (
+                               <div key={key} className="grid grid-cols-2 gap-2 text-base">
+                                  <span className="text-muted-foreground">{key}</span>
+                                  <span>{value}</span>
+                               </div>
+                            )
+                         )}
+                   </div>
                </div>
             </>
          )}

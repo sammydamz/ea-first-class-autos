@@ -61,11 +61,11 @@ export const CarCard = ({ car }: { car: CarWithIncludes }) => {
           </Link>
           <CardContent className="grid gap-1 p-3 sm:p-4 flex-1">
              <div className="flex gap-1 flex-wrap">
-                 <Badge variant="outline" className="text-xs text-muted-foreground px-1.5 sm:px-2">
+                 <Badge variant="outline" className="text-muted-foreground">
                     {car.brand.title}
                  </Badge>
                  {car.condition && (
-                    <Badge variant="secondary" className="text-xs px-1.5 sm:px-2">{car.condition}</Badge>
+                    <Badge variant="secondary">{car.condition}</Badge>
                 )}
              </div>
 
