@@ -41,9 +41,10 @@ export function MobileNav() {
                <Image
                   src="/ea.jpg"
                   alt={Config.name}
-                  width={100}
+                  width={39}
                   height={34}
                   className="object-contain"
+                  priority
                />
             </MobileLink>
             <ScrollArea className="my-4 h-[calc(100vh-8rem)] pb-10 pl-6">

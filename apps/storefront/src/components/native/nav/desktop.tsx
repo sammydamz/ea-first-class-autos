@@ -18,9 +18,10 @@ export function MainNav() {
             <Image
                src="/ea.jpg"
                alt={config.name}
-               width={120}
+               width={46}
                height={40}
                className="object-contain"
+               priority
             />
          </Link>
          <NavMenu />
