@@ -55,7 +55,7 @@ export default async function Index(props: {
       <div className="flex flex-col">
          {/* Hero Section */}
          {bannerImages.length > 0 ? (
-            <section className="relative h-[60vh] md:h-[75vh] w-full overflow-hidden">
+             <section className="relative h-[50vh] sm:h-[60vh] md:h-[75vh] w-full overflow-hidden">
                 <img
                    src={bannerImages[0]}
                    alt="Featured vehicles"
@@ -73,7 +73,7 @@ export default async function Index(props: {
                 </div>
              </section>
           ) : (
-             <section className="relative h-[60vh] md:h-[75vh] w-full bg-primary flex items-center justify-center">
+              <section className="relative h-[50vh] sm:h-[60vh] md:h-[75vh] w-full bg-primary flex items-center justify-center">
                 <div className="text-center text-white px-4">
                    <h1 className="text-[clamp(1.75rem,6vw,4.5rem)] font-bold tracking-tight leading-[1.1]">
                       EA First Class Autos
