@@ -70,7 +70,7 @@ export const CarCard = ({ car }: { car: CarWithIncludes }) => {
              </div>
 
              <Link href={`/cars/${car.slug}`}>
-                 <CardTitle className="line-clamp-2 mt-1 text-small sm:text-base hover:text-primary transition-colors">
+                 <CardTitle className="line-clamp-2 mt-1 text-sm hover:text-primary transition-colors">
                     {car.title}
                  </CardTitle>
              </Link>
@@ -80,7 +80,7 @@ export const CarCard = ({ car }: { car: CarWithIncludes }) => {
           </CardContent>
           <CardFooter className="flex items-center justify-between p-3 sm:p-4 pt-0">
               {car.isAvailable ? (
-                  <div className="text-small sm:text-base font-semibold text-primary">
+                  <div className="text-sm font-semibold text-primary">
                     {formatPrice(car.price)}
                  </div>
              ) : (

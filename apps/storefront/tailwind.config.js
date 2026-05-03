@@ -71,6 +71,7 @@ module.exports = {
     			subtitle: ['var(--font-subtitle)', { lineHeight: '1.5' }],
     			decorative: ['var(--font-decorative)', { lineHeight: '1.1' }],
     			'body-lg': ['1.125rem', { lineHeight: '1.75' }],
+    			small: ['0.8125rem', { lineHeight: '1.5' }],
     		},
    		keyframes: {
    			'accordion-down': {

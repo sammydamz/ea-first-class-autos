@@ -50,7 +50,7 @@ export default async function CarsPage(props: {
       <div className="flex flex-col">
          {/* Hero Section */}
          <section className="pt-24 pb-16 text-center">
-            <p className="text-sm font-semibold uppercase tracking-widest text-muted-foreground mb-4">
+             <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-4">
                Inventory
             </p>
              <h1 className="text-display font-bold">

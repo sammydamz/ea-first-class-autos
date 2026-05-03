@@ -10,7 +10,7 @@ export default async function AboutPage() {
       <div className="flex flex-col">
          {/* Hero Section */}
          <section className="flex flex-col items-center justify-center min-h-[60vh] text-center py-24">
-            <p className="text-small font-semibold uppercase tracking-widest text-muted-foreground mb-4">
+            <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-4">
                About Us
             </p>
             <h1 className="text-display font-bold max-w-4xl">
