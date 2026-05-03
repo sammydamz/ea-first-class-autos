@@ -102,12 +102,13 @@ export function ImageGallery({ images, title }: ImageGalleryProps) {
          </div>
 
          {images.length > 1 && (
-            <div className="mt-4 flex gap-2 overflow-x-auto pb-2">
+            <div className="mt-4 flex gap-2 overflow-x-auto pb-2 snap-x snap-mandatory">
                {images.map((img, i) => (
                   <button
                      key={i}
+                     type="button"
                      onClick={() => setSelectedIndex(i)}
-                     className={`relative h-16 w-24 flex-shrink-0 overflow-hidden rounded-md border-2 transition-colors ${
+                     className={`relative h-16 w-24 flex-shrink-0 snap-start overflow-hidden rounded-md border-2 transition-colors ${
                         i === selectedIndex
                            ? 'border-primary'
                            : 'border-transparent hover:border-muted-foreground/30'
