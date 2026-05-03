@@ -2,7 +2,7 @@
 
 import { cn } from '@/lib/utils'
 import Link from 'next/link'
-import { useParams, usePathname } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 
 export function MainNav({
    className,
@@ -35,7 +35,7 @@ export function MainNav({
 
    return (
       <nav
-         className={cn('flex items-center space-x-4 lg:space-x-6', className)}
+         className={cn('flex items-center gap-1', className)}
          {...props}
       >
          {routes.map((route) => (
@@ -43,10 +43,10 @@ export function MainNav({
                key={route.href}
                href={route.href}
                className={cn(
-                  'text-sm transition-colors hover:text-primary',
+                  'px-3 py-2 text-sm transition-colors border-b-2 hover:text-primary',
                   route.active
-                     ? 'font-semibold'
-                     : 'font-light text-muted-foreground'
+                     ? 'border-primary font-semibold text-foreground'
+                     : 'border-transparent font-normal text-muted-foreground'
                )}
             >
                {route.label}
