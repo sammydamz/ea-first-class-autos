@@ -49,14 +49,7 @@ export default async function AboutPage() {
                <h2 className="text-3xl md:text-4xl font-semibold tracking-tight text-center mb-16">
                   What Sets Us Apart
                </h2>
-               <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-                  <div className="text-center">
-                     <div className="text-5xl font-bold mb-4">100%</div>
-                     <h3 className="text-xl font-semibold mb-2">Inspected</h3>
-                     <p className="text-muted-foreground leading-relaxed">
-                        Every vehicle undergoes thorough quality inspection before it reaches our lot.
-                     </p>
-                  </div>
+               <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
                   <div className="text-center">
                      <div className="text-5xl font-bold mb-4">Fair</div>
                      <h3 className="text-xl font-semibold mb-2">Pricing</h3>
@@ -81,7 +74,7 @@ export default async function AboutPage() {
                Our Promise
             </h2>
             <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed max-w-3xl mx-auto">
-               We believe in doing right by our customers. No pressure, no shortcuts, just honest deals and vehicles that stand the test of time.
+               We believe in doing right by our customers. No pressure, no shortcuts, just great deals and vehicles that stand the test of time.
             </p>
          </section>
 

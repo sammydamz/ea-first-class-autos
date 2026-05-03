@@ -109,35 +109,6 @@ export default async function Index(props: {
                )}
             </div>
          </section>
-
-         {/* Trust Section */}
-         <section className="bg-neutral-50 py-24">
-            <div className="max-w-5xl mx-auto px-4 md:px-8 lg:px-16">
-               <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
-                  <div>
-                     <div className="text-5xl font-bold mb-4">Quality</div>
-                     <h3 className="text-xl font-semibold mb-2">Inspected</h3>
-                     <p className="text-muted-foreground leading-relaxed">
-                        Thorough checks on every vehicle before it reaches our lot.
-                     </p>
-                  </div>
-                  <div>
-                     <div className="text-5xl font-bold mb-4">Fair</div>
-                     <h3 className="text-xl font-semibold mb-2">Pricing</h3>
-                     <p className="text-muted-foreground leading-relaxed">
-                        Transparent, competitive prices with no hidden fees.
-                     </p>
-                  </div>
-                  <div>
-                     <div className="text-5xl font-bold mb-4">Quick</div>
-                     <h3 className="text-xl font-semibold mb-2">Response</h3>
-                     <p className="text-muted-foreground leading-relaxed">
-                        Fast replies via WhatsApp. Your questions answered promptly.
-                     </p>
-                  </div>
-               </div>
-            </div>
-         </section>
       </div>
    )
 }
