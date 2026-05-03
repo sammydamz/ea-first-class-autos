@@ -1,7 +1,5 @@
 import prisma from '@/lib/prisma'
-import Carousel from '@/components/native/Carousel'
 import { CarGrid, CarSkeletonGrid } from '@/components/native/CarCard'
-import { Heading } from '@/components/native/heading'
 import { Separator } from '@/components/native/separator'
 import { isVariableValid } from '@/lib/utils'
 import { HomepageFilter } from './components/homepage-filter'
@@ -55,30 +53,62 @@ export default async function Index(props: {
 
    return (
       <div className="flex flex-col">
+         {/* Hero Section */}
          {bannerImages.length > 0 ? (
-            <Carousel images={bannerImages} className="h-64 md:h-96" />
-         ) : (
-            <div className="relative h-64 md:h-96 w-full overflow-hidden rounded-lg bg-gradient-to-r from-primary to-primary/80 flex items-center justify-center">
-               <div className="text-center text-white px-4">
-                  <h1 className="text-4xl md:text-5xl font-bold mb-4">EA First Class Autos</h1>
-                  <p className="text-lg md:text-xl opacity-90">Premium vehicles at competitive prices</p>
+            <section className="relative h-[60vh] md:h-[75vh] w-full overflow-hidden">
+               <img
+                  src={bannerImages[0]}
+                  alt="Featured vehicles"
+                  className="absolute inset-0 w-full h-full object-cover"
+               />
+               <div className="absolute inset-0 bg-black/40" />
+               <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white px-4">
+                  <h1 className="text-5xl md:text-7xl font-bold tracking-tight leading-[1.1]">
+                     EA First Class Autos
+                  </h1>
+                  <p className="mt-6 text-xl md:text-2xl opacity-90 max-w-2xl">
+                     Quality you can trust. Service you can feel.
+                  </p>
                </div>
-            </div>
-         )}
-         <Separator className="my-8" />
-         <Heading
-            title="Our Cars"
-            description="Browse our selection of quality vehicles."
-         />
-         <HomepageFilter brands={brands} />
-         {isVariableValid(cars) && cars.length > 0 ? (
-            <CarGrid cars={cars} />
+            </section>
          ) : (
-            <CarSkeletonGrid />
+            <section className="relative h-[60vh] md:h-[75vh] w-full bg-primary flex items-center justify-center">
+               <div className="text-center text-white px-4">
+                  <h1 className="text-5xl md:text-7xl font-bold tracking-tight leading-[1.1]">
+                     EA First Class Autos
+                  </h1>
+                  <p className="mt-6 text-xl md:text-2xl opacity-90 max-w-2xl">
+                     Quality you can trust. Service you can feel.
+                  </p>
+               </div>
+            </section>
          )}
-         {totalPages > 1 && (
-            <HomepagePagination page={page} totalPages={totalPages} />
-         )}
+
+         {/* Cars Section */}
+         <section className="px-4 md:px-8 lg:px-16 py-24">
+            <div className="max-w-7xl mx-auto">
+               <div className="text-center mb-16">
+                  <p className="text-sm font-semibold uppercase tracking-widest text-muted-foreground mb-4">
+                     Our Collection
+                  </p>
+                  <h2 className="text-4xl md:text-5xl font-bold tracking-tight">
+                     Browse Our Selection
+                  </h2>
+                  <p className="mt-4 text-xl text-muted-foreground max-w-2xl mx-auto">
+                     Every vehicle handpicked for quality, reliability, and value.
+                  </p>
+               </div>
+               <HomepageFilter brands={brands} />
+               {isVariableValid(cars) && cars.length > 0 ? (
+                  <CarGrid cars={cars} />
+               ) : (
+                  <CarSkeletonGrid />
+               )}
+               {totalPages > 1 && (
+                  <HomepagePagination page={page} totalPages={totalPages} />
+               )}
+            </div>
+         </section>
       </div>
    )
 }

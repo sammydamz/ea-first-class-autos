@@ -8,15 +8,21 @@ import {
    navigationMenuTriggerStyle,
 } from '@/components/ui/navigation-menu'
 import config from '@/config/site'
+import Image from 'next/image'
 import Link from 'next/link'
 
 export function MainNav() {
    return (
-      <div className="hidden md:flex gap-4">
+      <div className="hidden md:flex gap-2 items-center">
          <Link href="/" className="flex items-center">
-            <span className="hidden font-semibold sm:inline-block">
-               {config.name}
-            </span>
+            <Image
+               src="/ea.jpg"
+               alt={config.name}
+               width={46}
+               height={40}
+               className="object-contain"
+               priority
+            />
          </Link>
          <NavMenu />
       </div>
@@ -45,16 +51,7 @@ export function NavMenu() {
                   </Link>
                </NavigationMenuLink>
             </NavigationMenuItem>
-            <NavigationMenuItem>
-               <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-                  <Link href="/contact">
-                     <div className="font-normal text-foreground/70">
-                        Contact
-                     </div>
-                  </Link>
-               </NavigationMenuLink>
-            </NavigationMenuItem>
-         </NavigationMenuList>
-      </NavigationMenu>
-   )
+          </NavigationMenuList>
+       </NavigationMenu>
+    )
 }
