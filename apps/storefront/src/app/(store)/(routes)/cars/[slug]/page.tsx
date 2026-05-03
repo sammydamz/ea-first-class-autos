@@ -172,8 +172,8 @@ function CarDetails({
          </div>
 
          {whatsappUrl && (
-             <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
-                <Button className="w-full sm:w-auto min-h-[44px]">Enquire on WhatsApp</Button>
+              <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="flex justify-center">
+                 <Button className="w-auto min-h-[44px] gap-2"><img src="https://img.icons8.com/?size=100&id=Funux8t3F8Ig&format=png&color=FFFFFF" alt="" className="h-5 w-5" />Enquire on WhatsApp</Button>
              </a>
          )}
 

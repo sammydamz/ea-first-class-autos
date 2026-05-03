@@ -9,8 +9,9 @@ import { Sheet, SheetContent, SheetTrigger, SheetTitle, SheetDescription } from 
 import { Button } from '@/components/ui/button'
 
 const navLinks = [
-   { href: '/cars', kicker: 'Browse', label: 'Inventory' },
-   { href: '/about', kicker: 'Company', label: 'About Us' },
+   { href: '/', label: 'Home' },
+   { href: '/cars', label: 'Inventory' },
+   { href: '/about', label: 'About Us' },
 ]
 
 export function MobileNav() {
@@ -48,16 +49,13 @@ export function MobileNav() {
                   <div className="h-px bg-black" />
 
                   <nav className="flex-1">
-                     {navLinks.map((link, i) => (
+                     {navLinks.map((link) => (
                         <div key={link.href}>
                            <Link
                               href={link.href}
                               onClick={() => setOpen(false)}
                               className="block px-6 py-4 transition-colors hover:bg-black/[0.03]"
                            >
-                              <span className="block text-[10px] font-bold uppercase tracking-[0.12em] text-black/40 mb-1">
-                                 0{i + 1} &mdash; {link.kicker}
-                              </span>
                               <span className="block text-base font-semibold text-black">
                                  {link.label}
                               </span>

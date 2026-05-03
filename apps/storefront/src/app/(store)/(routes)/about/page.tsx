@@ -50,7 +50,7 @@ export default async function AboutPage() {
                       <span className="block text-[11px] font-bold uppercase tracking-[0.12em] text-black/40 mb-3">01</span>
                       <span className="block text-[clamp(1.5rem,4vw,2.25rem)] font-bold leading-none tracking-tight">Fair</span>
                       <span className="block text-sm font-semibold mt-1 mb-2">Pricing</span>
-                      <p className="text-xs text-black/60 leading-relaxed">
+                      <p className="text-sm text-black/60 leading-relaxed">
                          Transparent, competitive prices with no hidden fees or surprises.
                       </p>
                    </div>
@@ -58,8 +58,8 @@ export default async function AboutPage() {
                       <span className="block text-[11px] font-bold uppercase tracking-[0.12em] text-black/40 mb-3">02</span>
                       <span className="block text-[clamp(1.5rem,4vw,2.25rem)] font-bold leading-none tracking-tight">Quick</span>
                       <span className="block text-sm font-semibold mt-1 mb-2">Response</span>
-                      <p className="text-xs text-black/60 leading-relaxed">
-                         Fast replies via WhatsApp. Your questions answered, fast.
+                      <p className="text-sm text-black/60 leading-relaxed">
+                         All your needs sorted ASAP.
                       </p>
                    </div>
                 </div>

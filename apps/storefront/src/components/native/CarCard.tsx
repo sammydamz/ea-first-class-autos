@@ -9,7 +9,6 @@ import {
    CardTitle,
 } from '@/components/ui/card'
 import { CarWithIncludes } from '@/types/prisma'
-import { MessageCircle } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -93,7 +92,7 @@ export const CarCard = ({ car }: { car: CarWithIncludes }) => {
                     rel="noopener noreferrer"
                     className="p-1.5 sm:p-2 rounded-full hover:bg-green-50 transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center"
                  >
-                  <MessageCircle className="h-4 w-4 text-green-600" />
+                   <img src="https://img.icons8.com/?size=100&id=16713&format=png&color=000000" alt="WhatsApp" className="h-6 w-6" />
                  </a>
               )}
           </CardFooter>
