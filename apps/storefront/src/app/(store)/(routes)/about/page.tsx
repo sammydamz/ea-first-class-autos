@@ -1,4 +1,5 @@
 import prisma from '@/lib/prisma'
+import Image from 'next/image'
 
 export default async function AboutPage() {
    const siteConfig = await prisma.siteConfig.findUnique({
@@ -6,30 +7,106 @@ export default async function AboutPage() {
    })
 
    return (
-      <div className="container mx-auto px-4 py-8">
-         <h1 className="text-3xl font-bold mb-6">About Us</h1>
-         <div className="prose max-w-none">
-            <p className="text-lg mb-4">
-               Welcome to {siteConfig?.businessName || 'EA First Class Autos'} - your premier destination for quality pre-owned vehicles.
+      <div className="flex flex-col">
+         {/* Hero Section */}
+         <section className="flex flex-col items-center justify-center min-h-[60vh] text-center px-4 py-24">
+            <p className="text-sm font-semibold uppercase tracking-widest text-muted-foreground mb-4">
+               About Us
             </p>
-            <p className="mb-4">
-               We pride ourselves on offering exceptional customer service and a curated selection of reliable vehicles.
-               Our team is dedicated to helping you find the perfect car that fits your needs and budget.
+            <h1 className="text-5xl md:text-7xl font-bold tracking-tight max-w-4xl leading-[1.1]">
+               Quality you can trust.{' '}
+               <span className="text-muted-foreground">
+                  Service you can feel.
+               </span>
+            </h1>
+            <p className="mt-8 text-xl md:text-2xl text-muted-foreground max-w-2xl leading-relaxed">
+               Ghana's trusted destination for premium pre-owned vehicles, delivering confidence with every purchase since day one.
             </p>
-            <h2 className="text-xl font-semibold mt-8 mb-4">Why Choose Us?</h2>
-            <ul className="list-disc pl-6 space-y-2">
-               <li>Quality inspected vehicles</li>
-               <li>Competitive pricing</li>
-               <li>Friendly, knowledgeable staff</li>
-               <li>WhatsApp inquiry for quick responses</li>
-            </ul>
-            <h2 className="text-xl font-semibold mt-8 mb-4">Contact Us</h2>
-            <p>
-               {siteConfig?.businessAddress && <div>Address: {siteConfig.businessAddress}</div>}
-               {siteConfig?.businessPhone && <div>Phone: {siteConfig.businessPhone}</div>}
-               {siteConfig?.businessEmail && <div>Email: {siteConfig.businessEmail}</div>}
+         </section>
+
+         {/* Story Section */}
+         <section className="px-4 md:px-8 lg:px-16 py-24 max-w-5xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
+               <div>
+                  <h2 className="text-3xl md:text-4xl font-semibold tracking-tight mb-6">
+                     Our Story
+                  </h2>
+                  <p className="text-lg text-muted-foreground leading-relaxed">
+                     EA First Class Autos was founded on a simple belief: buying a used car should feel just as exciting as buying a new one. We handpick every vehicle in our inventory, ensuring each one meets our rigorous standards for quality, reliability, and value.
+                  </p>
+               </div>
+               <div>
+                     <p className="text-lg text-muted-foreground leading-relaxed">
+                        Our team combines deep automotive knowledge with genuine care for our customers. We don't just sell cars. We help you find the right one, walk you through every detail, and make sure you drive away with complete confidence.
+                     </p>
+               </div>
+            </div>
+         </section>
+
+         {/* Values Section */}
+         <section className="px-4 md:px-8 lg:px-16 py-24 bg-neutral-50">
+            <div className="max-w-5xl mx-auto">
+               <h2 className="text-3xl md:text-4xl font-semibold tracking-tight text-center mb-16">
+                  What Sets Us Apart
+               </h2>
+               <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+                  <div className="text-center">
+                     <div className="text-5xl font-bold mb-4">100%</div>
+                     <h3 className="text-xl font-semibold mb-2">Inspected</h3>
+                     <p className="text-muted-foreground leading-relaxed">
+                        Every vehicle undergoes thorough quality inspection before it reaches our lot.
+                     </p>
+                  </div>
+                  <div className="text-center">
+                     <div className="text-5xl font-bold mb-4">Fair</div>
+                     <h3 className="text-xl font-semibold mb-2">Pricing</h3>
+                     <p className="text-muted-foreground leading-relaxed">
+                        Transparent, competitive prices with no hidden fees or surprises.
+                     </p>
+                  </div>
+                  <div className="text-center">
+                     <div className="text-5xl font-bold mb-4">Quick</div>
+                     <h3 className="text-xl font-semibold mb-2">Response</h3>
+                     <p className="text-muted-foreground leading-relaxed">
+                        Quick replies via WhatsApp. Your questions answered, fast.
+                     </p>
+                  </div>
+               </div>
+            </div>
+         </section>
+
+         {/* Mission Section */}
+         <section className="px-4 md:px-8 lg:px-16 py-24 max-w-5xl mx-auto text-center">
+            <h2 className="text-3xl md:text-4xl font-semibold tracking-tight mb-8">
+               Our Promise
+            </h2>
+            <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed max-w-3xl mx-auto">
+               We believe in doing right by our customers. No pressure, no shortcuts, just honest deals and vehicles that stand the test of time.
             </p>
-         </div>
+         </section>
+
+         {/* Contact CTA */}
+         <section className="px-4 md:px-8 lg:px-16 py-24 bg-neutral-900 text-white text-center">
+            <div className="max-w-3xl mx-auto">
+               <h2 className="text-3xl md:text-4xl font-semibold tracking-tight mb-6">
+                  Get in Touch
+               </h2>
+               <p className="text-lg text-white/70 mb-10 leading-relaxed">
+                  Have a question or looking for something specific? We'd love to hear from you.
+               </p>
+               <div className="space-y-3 text-base text-white/70">
+                  {siteConfig?.businessAddress && (
+                     <p>{siteConfig.businessAddress}</p>
+                  )}
+                  {siteConfig?.businessPhone && (
+                     <p>{siteConfig.businessPhone}</p>
+                  )}
+                  {siteConfig?.businessEmail && (
+                     <p>{siteConfig.businessEmail}</p>
+                  )}
+               </div>
+            </div>
+         </section>
       </div>
    )
 }
