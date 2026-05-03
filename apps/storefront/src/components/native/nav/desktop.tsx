@@ -13,7 +13,7 @@ import Link from 'next/link'
 
 export function MainNav() {
    return (
-      <div className="hidden md:flex gap-4 items-center">
+      <div className="hidden md:flex gap-2 items-center">
          <Link href="/" className="flex items-center">
             <Image
                src="/ea.jpg"
@@ -51,16 +51,7 @@ export function NavMenu() {
                   </Link>
                </NavigationMenuLink>
             </NavigationMenuItem>
-            <NavigationMenuItem>
-               <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-                  <Link href="/contact">
-                     <div className="font-normal text-foreground/70">
-                        Contact
-                     </div>
-                  </Link>
-               </NavigationMenuLink>
-            </NavigationMenuItem>
-         </NavigationMenuList>
-      </NavigationMenu>
-   )
+          </NavigationMenuList>
+       </NavigationMenu>
+    )
 }
