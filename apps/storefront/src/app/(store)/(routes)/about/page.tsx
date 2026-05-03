@@ -9,7 +9,7 @@ export default async function AboutPage() {
    return (
       <div className="flex flex-col">
          {/* Hero Section */}
-         <section className="flex flex-col items-center justify-center min-h-[60vh] text-center px-4 py-24">
+         <section className="flex flex-col items-center justify-center min-h-[60vh] text-center py-24">
             <p className="text-sm font-semibold uppercase tracking-widest text-muted-foreground mb-4">
                About Us
             </p>
@@ -25,7 +25,7 @@ export default async function AboutPage() {
          </section>
 
          {/* Story Section */}
-         <section className="px-4 md:px-8 lg:px-16 py-24 max-w-5xl mx-auto">
+         <section className="py-24 max-w-5xl mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
                <div>
                    <h2 className="text-[clamp(1.5rem,5vw,3rem)] font-semibold tracking-tight mb-6">
@@ -44,7 +44,7 @@ export default async function AboutPage() {
          </section>
 
          {/* Values Section */}
-         <section className="px-4 md:px-8 lg:px-16 py-24 bg-neutral-50">
+         <section className="py-24 bg-neutral-50">
             <div className="max-w-5xl mx-auto">
                 <h2 className="text-[clamp(1.5rem,5vw,3rem)] font-semibold tracking-tight text-center mb-16">
                    What Sets Us Apart
@@ -69,7 +69,7 @@ export default async function AboutPage() {
          </section>
 
          {/* Mission Section */}
-         <section className="px-4 md:px-8 lg:px-16 py-24 max-w-5xl mx-auto text-center">
+         <section className="py-24 max-w-5xl mx-auto text-center">
                 <h2 className="text-[clamp(1.5rem,5vw,3rem)] font-semibold tracking-tight mb-8">
                 Our Promise
              </h2>
@@ -79,7 +79,7 @@ export default async function AboutPage() {
          </section>
 
          {/* Contact CTA */}
-         <section className="px-4 md:px-8 lg:px-16 py-24 bg-neutral-900 text-white text-center">
+         <section className="py-24 bg-neutral-900 text-white text-center">
             <div className="max-w-3xl mx-auto">
                 <h2 className="text-[clamp(1.5rem,5vw,3rem)] font-semibold tracking-tight mb-6">
                    Get in Touch

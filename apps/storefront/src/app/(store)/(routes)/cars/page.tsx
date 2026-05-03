@@ -49,7 +49,7 @@ export default async function CarsPage(props: {
    return (
       <div className="flex flex-col">
          {/* Hero Section */}
-         <section className="px-4 md:px-8 lg:px-16 pt-24 pb-16 text-center">
+         <section className="pt-24 pb-16 text-center">
             <p className="text-sm font-semibold uppercase tracking-widest text-muted-foreground mb-4">
                Inventory
             </p>
@@ -62,7 +62,7 @@ export default async function CarsPage(props: {
          </section>
 
          {/* Filter + Cars */}
-         <section className="px-4 md:px-8 lg:px-16 pb-24">
+         <section className="pb-24">
             <div className="max-w-7xl mx-auto">
                <CarsFilter brands={brands} />
                {isVariableValid(cars) ? (

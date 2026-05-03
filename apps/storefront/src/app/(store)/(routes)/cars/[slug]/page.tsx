@@ -95,7 +95,7 @@ Link: ${pageUrl}`
       )
 
    return (
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto py-8">
          <Breadcrumbs car={car} />
          <Separator className="my-6" />
          <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
