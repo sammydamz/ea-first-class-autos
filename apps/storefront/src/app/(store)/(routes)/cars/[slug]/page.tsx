@@ -152,12 +152,7 @@ function CarDetails({
    whatsappUrl: string
    hasSpecs: boolean
 }) {
-   const formatPrice = (price: number) =>
-      new Intl.NumberFormat('en-US', {
-         style: 'currency',
-         currency: 'GHS',
-         maximumFractionDigits: 0,
-      }).format(price)
+   const formatPrice = (price: number) => `GH₵${price.toLocaleString()}`
 
    return (
       <div className="space-y-6">

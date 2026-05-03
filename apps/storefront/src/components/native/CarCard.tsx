@@ -14,11 +14,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 function formatPrice(price: number): string {
-   return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'GHS',
-      maximumFractionDigits: 0,
-   }).format(price)
+   return `GH₵${price.toLocaleString()}`
 }
 
 export const CarGrid = ({ cars }: { cars: CarWithIncludes[] }) => {

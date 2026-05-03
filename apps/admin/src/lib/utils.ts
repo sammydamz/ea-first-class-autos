@@ -7,11 +7,9 @@ export function cn(...inputs: ClassValue[]) {
    return twMerge(clsx(inputs))
 }
 
-export const formatter = new Intl.NumberFormat('en-US', {
-   style: 'currency',
-   currency: 'GHS',
-   maximumFractionDigits: 2,
-})
+export function formatter(price: number): string {
+   return `GH₵${price.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
+}
 
 export function getErrorResponse(
    status: number = 500,
