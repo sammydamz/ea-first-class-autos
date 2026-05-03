@@ -25,7 +25,7 @@ export default async function CarsPage() {
    const formattedCars: CarColumn[] = cars.map((car) => ({
       id: car.id,
       title: car.title,
-      price: formatter.format(car.price),
+      price: formatter(car.price),
       brand: car.brand.title,
       condition: car.condition,
       isAvailable: car.isAvailable,

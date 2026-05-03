@@ -14,11 +14,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 function formatPrice(price: number): string {
-   return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-      maximumFractionDigits: 0,
-   }).format(price)
+   return `GH₵${price.toLocaleString()}`
 }
 
 export const CarGrid = ({ cars }: { cars: CarWithIncludes[] }) => {
@@ -83,25 +79,20 @@ export const CarCard = ({ car }: { car: CarWithIncludes }) => {
             )}
          </CardContent>
          <CardFooter className="flex items-center justify-between p-4 pt-0">
-            {car.isAvailable ? (
-               <div className="text-lg font-semibold text-primary">
-                  {formatPrice(car.price)}
-                  {car.isNegotiable && (
-                     <span className="ml-2 text-sm font-normal text-muted-foreground">
-                        Negotiable
-                     </span>
-                  )}
-               </div>
+             {car.isAvailable ? (
+                <div className="text-lg font-semibold text-primary">
+                   {formatPrice(car.price)}
+                </div>
             ) : (
                <Badge variant="secondary">Sold</Badge>
             )}
-            {car.isAvailable && (
-               <Button size="sm" className="gap-1" asChild>
-                  <a
-                     href={`https://wa.me/?text=${encodeURIComponent(`Hi, I'm interested in the ${car.title} listed at ${formatPrice(car.price)}`)}`}
-                     target="_blank"
-                     rel="noopener noreferrer"
-                  >
+             {car.isAvailable && (
+                <Button size="sm" className="gap-1" asChild>
+                   <a
+                      href={`https://wa.me/?text=${encodeURIComponent(`Hi, I'm interested in "${car.title}" (${car.year || ''} ${car.brand.title} ${car.model || ''}).\nPrice: GH₵${car.price.toLocaleString()}${car.isNegotiable ? ' Negotiable' : ''}\nCondition: ${car.condition}\nLink: https://eaautos.com/cars/${car.slug}`)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                   >
                      <MessageCircle className="h-4 w-4" />
                      Contact
                   </a>

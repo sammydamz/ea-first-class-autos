@@ -35,7 +35,7 @@ export async function generateMetadata(
    const title = `${car.title} - ${car.year || ''} ${car.brand.title} | EA First Class Autos`
    const description = car.description
       ? car.description.slice(0, 160)
-      : `${car.title} - ${car.condition} vehicle priced at $${car.price.toLocaleString()}. Contact us on WhatsApp for more information.`
+      : `${car.title} - ${car.condition} vehicle priced at GH₵${car.price.toLocaleString()}. Contact us on WhatsApp for more information.`
 
    return {
       title,
@@ -78,7 +78,7 @@ export default async function CarPage(props: Props) {
          .join('\n')
 
       const message = `Hi, I'm interested in "${car.title}" (${car.year || ''} ${car.brand.title} ${car.model || ''}).
-Price: $${car.price.toLocaleString()}${car.isNegotiable ? ' Negotiable' : ''}
+Price: GH₵${car.price.toLocaleString()}${car.isNegotiable ? ' Negotiable' : ''}
 Condition: ${car.condition}
 ${specsText ? `\nSpecifications:\n${specsText}` : ''}
 Link: ${pageUrl}`
@@ -152,12 +152,7 @@ function CarDetails({
    whatsappUrl: string
    hasSpecs: boolean
 }) {
-   const formatPrice = (price: number) =>
-      new Intl.NumberFormat('en-US', {
-         style: 'currency',
-         currency: 'USD',
-         maximumFractionDigits: 0,
-      }).format(price)
+   const formatPrice = (price: number) => `GH₵${price.toLocaleString()}`
 
    return (
       <div className="space-y-6">
