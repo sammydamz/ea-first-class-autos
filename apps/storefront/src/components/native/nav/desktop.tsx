@@ -18,9 +18,9 @@ export function MainNav() {
             <Image
                src="/ea.jpg"
                alt={config.name}
-               width={46}
-               height={40}
-               className="object-contain"
+                width={46}
+                height={40}
+                className="h-10 w-auto object-contain"
                priority
             />
          </Link>

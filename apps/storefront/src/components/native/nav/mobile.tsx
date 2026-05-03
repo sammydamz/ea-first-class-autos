@@ -25,9 +25,9 @@ export function MobileNav() {
             <Image
                src="/ea.jpg"
                alt={Config.name}
-               width={70}
-               height={60}
-               className="object-contain"
+                width={70}
+                height={60}
+                className="h-14 w-auto object-contain"
                priority
             />
          </Link>
