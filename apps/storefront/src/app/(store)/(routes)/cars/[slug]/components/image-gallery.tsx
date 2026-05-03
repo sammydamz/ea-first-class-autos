@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image'
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useRef, useEffect } from 'react'
 import { X, ChevronLeft, ChevronRight } from 'lucide-react'
 
 type ImageGalleryProps = {
@@ -12,6 +12,11 @@ type ImageGalleryProps = {
 export function ImageGallery({ images, title }: ImageGalleryProps) {
    const [selectedIndex, setSelectedIndex] = useState(0)
    const [lightboxOpen, setLightboxOpen] = useState(false)
+   const [dragOffset, setDragOffset] = useState(0)
+   const [isDragging, setIsDragging] = useState(false)
+   const lightboxRef = useRef<HTMLDivElement>(null)
+   const touchStartX = useRef(0)
+   const lastTouchX = useRef(0)
 
    const openLightbox = (index: number) => {
       setSelectedIndex(index)
@@ -28,6 +33,44 @@ export function ImageGallery({ images, title }: ImageGalleryProps) {
       setSelectedIndex((prev) => (prev - 1 + images.length) % images.length)
    }, [images.length])
 
+   const handleTouchStart = useCallback((e: React.TouchEvent) => {
+      touchStartX.current = e.changedTouches[0].clientX
+      lastTouchX.current = e.changedTouches[0].clientX
+      setIsDragging(true)
+      setDragOffset(0)
+   }, [])
+
+   const handleTouchMove = useCallback((e: React.TouchEvent) => {
+      if (!isDragging) return
+      const currentX = e.changedTouches[0].clientX
+      const diff = currentX - touchStartX.current
+      lastTouchX.current = currentX
+      setDragOffset(diff)
+   }, [isDragging])
+
+   const handleTouchEnd = useCallback(() => {
+      setIsDragging(false)
+      const threshold = 60
+      if (dragOffset < -threshold) goNext()
+      else if (dragOffset > threshold) goPrev()
+      setDragOffset(0)
+   }, [dragOffset, goNext, goPrev])
+
+   useEffect(() => {
+      if (!lightboxOpen) return
+      const handleKey = (e: KeyboardEvent) => {
+         if (e.key === 'Escape') closeLightbox()
+         if (e.key === 'ArrowRight') goNext()
+         if (e.key === 'ArrowLeft') goPrev()
+      }
+      window.addEventListener('keydown', handleKey)
+      document.body.style.overflow = 'hidden'
+      return () => {
+         window.removeEventListener('keydown', handleKey)
+         document.body.style.overflow = ''
+      }
+   }, [lightboxOpen, closeLightbox, goNext, goPrev])
+
    if (!images || images.length === 0) {
       return (
          <div className="lg:col-span-2">
@@ -41,7 +84,7 @@ export function ImageGallery({ images, title }: ImageGalleryProps) {
    return (
       <div className="lg:col-span-2">
          <div
-            className="relative aspect-video overflow-hidden rounded-lg bg-muted cursor-pointer"
+            className="relative aspect-video overflow-hidden rounded-lg bg-muted cursor-pointer group"
             onClick={() => openLightbox(selectedIndex)}
          >
             <Image
@@ -52,7 +95,12 @@ export function ImageGallery({ images, title }: ImageGalleryProps) {
                className="object-cover"
                priority
             />
+            <div className="absolute bottom-3 right-3 rounded-full bg-black/60 px-2.5 py-1 text-xs font-medium text-white backdrop-blur-sm">
+               {selectedIndex + 1}/{images.length}
+            </div>
+            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors" />
          </div>
+
          {images.length > 1 && (
             <div className="mt-4 flex gap-2 overflow-x-auto pb-2">
                {images.map((img, i) => (
@@ -79,7 +127,8 @@ export function ImageGallery({ images, title }: ImageGalleryProps) {
 
          {lightboxOpen && (
             <div
-               className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90"
+               ref={lightboxRef}
+               className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95"
                onClick={closeLightbox}
             >
                <button
@@ -109,6 +158,13 @@ export function ImageGallery({ images, title }: ImageGalleryProps) {
                <div
                   className="relative h-[85vh] w-[90vw] max-w-5xl"
                   onClick={(e) => e.stopPropagation()}
+                  onTouchStart={(e) => { e.stopPropagation(); handleTouchStart(e) }}
+                  onTouchMove={(e) => { e.stopPropagation(); handleTouchMove(e) }}
+                  onTouchEnd={(e) => { e.stopPropagation(); handleTouchEnd() }}
+                  style={{
+                     transform: `translateX(${dragOffset}px)`,
+                     transition: isDragging ? 'none' : 'transform 0.3s ease-out',
+                  }}
                >
                   <Image
                      src={images[selectedIndex]}
@@ -116,11 +172,14 @@ export function ImageGallery({ images, title }: ImageGalleryProps) {
                      fill
                      sizes="90vw"
                      className="object-contain"
+                     draggable={false}
                   />
                </div>
 
-               <div className="absolute bottom-6 text-white/70 text-sm">
-                  {selectedIndex + 1} / {images.length}
+               <div className="absolute bottom-6 flex items-center gap-2 rounded-full bg-black/60 px-4 py-2 text-sm text-white backdrop-blur-sm">
+                  <span className="font-medium">{selectedIndex + 1}</span>
+                  <span className="text-white/50">/</span>
+                  <span>{images.length}</span>
                </div>
             </div>
          )}

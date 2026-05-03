@@ -56,11 +56,12 @@ export default async function Index(props: {
          {/* Hero Section */}
          {bannerImages.length > 0 ? (
             <section className="relative h-[60vh] md:h-[75vh] w-full overflow-hidden">
-               <img
-                  src={bannerImages[0]}
-                  alt="Featured vehicles"
-                  className="absolute inset-0 w-full h-full object-cover"
-               />
+                <img
+                   src={bannerImages[0]}
+                   alt="Featured vehicles"
+                   className="absolute inset-0 w-full h-full object-cover"
+                   fetchPriority="high"
+                />
                <div className="absolute inset-0 bg-black/40" />
                <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white px-4">
                   <h1 className="text-5xl md:text-7xl font-bold tracking-tight leading-[1.1]">
