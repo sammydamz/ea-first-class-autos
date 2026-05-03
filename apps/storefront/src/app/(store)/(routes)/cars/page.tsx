@@ -47,7 +47,7 @@ export default async function CarsPage(props: {
    const totalPages = Math.ceil(total / PAGE_SIZE)
 
    return (
-      <div className="container mx-auto px-4 py-8">
+      <div className="py-8">
          <Heading title="All Cars" description="Browse our complete inventory." />
          <CarsFilter brands={brands} />
          {isVariableValid(cars) ? (

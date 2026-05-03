@@ -54,7 +54,7 @@ export default async function Index(props: {
    const bannerImages = banners.length > 0 ? banners.map((b) => b.image) : []
 
    return (
-      <div className="flex flex-col">
+      <div className="flex flex-col pb-8">
          {bannerImages.length > 0 ? (
             <Carousel images={bannerImages} className="h-64 md:h-96" />
          ) : (
