@@ -1,13 +1,14 @@
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import {
-   Card,
-   CardContent,
-   CardDescription,
-   CardFooter,
-   CardHeader,
-   CardTitle,
+    Card,
+    CardContent,
+    CardDescription,
+    CardFooter,
+    CardHeader,
+    CardTitle,
 } from '@/components/ui/card'
+import { WhatsAppCardButton } from '@/components/native/WhatsAppCardButton'
 import { CarWithIncludes } from '@/types/prisma'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -69,36 +70,37 @@ export const CarCard = ({ car }: { car: CarWithIncludes }) => {
              </div>
 
              <Link href={`/cars/${car.slug}`}>
-                 <CardTitle className="line-clamp-2 mt-1 text-sm hover:text-primary transition-colors">
-                    {car.title}
-                 </CardTitle>
+                <CardTitle className="line-clamp-2 mt-2 text-lg hover:text-primary transition-colors">
+                   {car.title}
+                </CardTitle>
              </Link>
              {car.year && (
-                <CardDescription className="text-xs">{car.year}</CardDescription>
+                <CardDescription>{car.year}</CardDescription>
              )}
           </CardContent>
-          <CardFooter className="flex items-center justify-between p-3 sm:p-4 pt-0">
-              {car.isAvailable ? (
-                  <div className="text-sm font-semibold text-primary">
-                    {formatPrice(car.price)}
-                 </div>
+          <CardFooter className="flex items-center justify-between p-4 pt-0">
+             {car.isAvailable ? (
+                <div className="text-lg font-semibold text-primary">
+                   {formatPrice(car.price)}
+                   {car.isNegotiable && (
+                      <span className="ml-2 text-sm font-normal text-muted-foreground">
+                         Negotiable
+                      </span>
+                   )}
+                </div>
              ) : (
                 <Badge variant="secondary">Sold</Badge>
              )}
-              {car.isAvailable && (
-                 <a
-                    href={`https://wa.me/?text=${encodeURIComponent(`Hi, I'm interested in "${car.title}" (${car.year || ''} ${car.brand.title} ${car.model || ''}).\nPrice: GH₵${car.price.toLocaleString()}${car.isNegotiable ? ' Negotiable' : ''}\nCondition: ${car.condition}\nLink: https://eaautos.com/cars/${car.slug}`)}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-1.5 sm:p-2 rounded-full hover:bg-green-50 transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center"
-                 >
-                   <img src="https://img.icons8.com/?size=100&id=16713&format=png&color=000000" alt="WhatsApp" className="h-6 w-6" />
-                 </a>
-              )}
+               {car.isAvailable && (
+                   <WhatsAppCardButton
+                      carId={car.id}
+                      href={`https://wa.me/?text=${encodeURIComponent(`Hi, I'm interested in "${car.title}" (${car.year || ''} ${car.brand.title} ${car.model || ''}).\nPrice: GH₵${car.price.toLocaleString()}${car.isNegotiable ? ' Negotiable' : ''}\nCondition: ${car.condition}\nLink: https://eaautos.com/cars/${car.slug}`)}`}
+                   />
+               )}
           </CardFooter>
        </Card>
     )
- }
+}
 
 export function CarSkeleton() {
     return (

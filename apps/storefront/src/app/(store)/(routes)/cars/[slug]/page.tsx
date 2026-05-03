@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
+import { WhatsAppDetailButton } from '@/components/native/WhatsAppDetailButton'
 import { CarWithIncludes } from '@/types/prisma'
 import { ImageGallery } from './components/image-gallery'
 
@@ -100,11 +101,11 @@ Link: ${pageUrl}`
          <Separator className="my-6" />
          <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
             <ImageGallery images={car.images} title={car.title} />
-            <CarDetails
-               car={car}
-               whatsappUrl={whatsappUrl}
-               hasSpecs={hasSpecs}
-            />
+             <CarDetails
+                car={car}
+                whatsappUrl={whatsappUrl}
+                hasSpecs={hasSpecs}
+             />
          </div>
          {car.description && (
             <>
@@ -171,11 +172,9 @@ function CarDetails({
              </p>
          </div>
 
-         {whatsappUrl && (
-              <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="flex justify-center">
-                 <Button className="w-auto min-h-[44px] gap-2"><img src="https://img.icons8.com/?size=100&id=Funux8t3F8Ig&format=png&color=FFFFFF" alt="" className="h-5 w-5" />Enquire on WhatsApp</Button>
-             </a>
-         )}
+          {whatsappUrl && (
+               <WhatsAppDetailButton carId={car.id} href={whatsappUrl} />
+          )}
 
          {hasSpecs && (
             <>
