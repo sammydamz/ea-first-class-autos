@@ -1,14 +1,10 @@
 'use client'
 
 import Link from 'next/link'
-import { MessageCircle } from 'lucide-react'
 
 export function FloatingWhatsApp({ number }: { number: string }) {
    const cleanNumber = number.replace(/\D/g, '')
-   const message = encodeURIComponent(
-      "Hi, I'm interested in your cars. What do you have available?"
-   )
-   const waUrl = `https://wa.me/${cleanNumber}?text=${message}`
+   const waUrl = `https://wa.me/${cleanNumber}`
 
    return (
       <Link
@@ -18,7 +14,7 @@ export function FloatingWhatsApp({ number }: { number: string }) {
          className="fixed bottom-4 right-4 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg transition-transform hover:scale-110 hover:bg-primary/90"
          aria-label="Message us on WhatsApp"
       >
-         <MessageCircle className="h-7 w-7" />
+          <img src="https://img.icons8.com/?size=100&id=Funux8t3F8Ig&format=png&color=FFFFFF" alt="WhatsApp" className="h-7 w-7" />
       </Link>
    )
 }

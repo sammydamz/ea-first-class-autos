@@ -17,11 +17,6 @@ interface Brand {
    title: string
 }
 
-interface Category {
-   id: string
-   title: string
-}
-
 interface SpecRow {
    key: string
    value: string
@@ -45,11 +40,9 @@ function specsToRecord(rows: SpecRow[]): Record<string, string> {
 
 export function CarForm({
    brands,
-   categories,
    initialData,
 }: {
    brands: Brand[]
-   categories: Category[]
    initialData?: any
 }) {
    const router = useRouter()
@@ -60,7 +53,7 @@ export function CarForm({
       year: initialData?.year?.toString() || '',
       price: initialData?.price?.toString() || '',
       isNegotiable: initialData?.isNegotiable || false,
-      condition: initialData?.condition || 'Used',
+      condition: initialData?.condition || 'Local Used',
       description: initialData?.description || '',
       images: initialData?.images?.join('\n') || '',
       whatsappNumber: initialData?.whatsappNumber || '',
@@ -68,17 +61,6 @@ export function CarForm({
       brandId: initialData?.brandId || '',
    })
    const [specs, setSpecs] = useState<SpecRow[]>(parseSpecs(initialData?.specifications))
-   const [selectedCategories, setSelectedCategories] = useState<string[]>(
-      initialData?.categories?.map((c: any) => c.id) || []
-   )
-
-   const toggleCategory = (categoryId: string) => {
-      setSelectedCategories(prev =>
-         prev.includes(categoryId)
-            ? prev.filter(id => id !== categoryId)
-            : [...prev, categoryId]
-      )
-   }
 
    const updateSpec = (index: number, field: 'key' | 'value', val: string) => {
       setSpecs(prev => prev.map((s, i) => i === index ? { ...s, [field]: val } : s))
@@ -112,7 +94,6 @@ export function CarForm({
             specifications: specsToRecord(specs),
             images: data.images.split('\n').filter(Boolean),
             brandId: data.brandId,
-            categoryIds: selectedCategories,
          }
 
          const method = initialData ? 'PATCH' : 'POST'
@@ -201,8 +182,9 @@ export function CarForm({
                         <SelectValue />
                      </SelectTrigger>
                      <SelectContent>
-                        <SelectItem value="New">New</SelectItem>
-                        <SelectItem value="Used">Used</SelectItem>
+                        <SelectItem value="Brand New">Brand New</SelectItem>
+                        <SelectItem value="Local Used">Local Used</SelectItem>
+                        <SelectItem value="Foreign Used">Foreign Used</SelectItem>
                      </SelectContent>
                   </Select>
                </div>
@@ -217,32 +199,23 @@ export function CarForm({
             </div>
          </div>
 
-         <div className="space-y-2">
-            <Label>Categories</Label>
-            <div className="flex flex-wrap gap-2">
-               {categories.map((cat) => (
-                  <label
-                     key={cat.id}
-                     className={`flex items-center gap-2 px-3 py-1.5 rounded-md border cursor-pointer transition-colors ${
-                        selectedCategories.includes(cat.id)
-                           ? 'bg-primary text-primary-foreground border-primary'
-                           : 'bg-background border-input hover:bg-accent'
-                     }`}
-                  >
-                     <input
-                        type="checkbox"
-                        className="sr-only"
-                        checked={selectedCategories.includes(cat.id)}
-                        onChange={() => toggleCategory(cat.id)}
-                     />
-                     {cat.title}
-                  </label>
-               ))}
+         {initialData && (
+            <div className="space-y-2">
+               <Label>Status</Label>
+               <Select
+                  value={data.isAvailable ? 'available' : 'sold'}
+                  onValueChange={(value) => setData({ ...data, isAvailable: value === 'available' })}
+               >
+                  <SelectTrigger>
+                     <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                     <SelectItem value="available">Available</SelectItem>
+                     <SelectItem value="sold">Sold</SelectItem>
+                  </SelectContent>
+               </Select>
             </div>
-            {categories.length === 0 && (
-               <p className="text-sm text-muted-foreground">No categories yet. Create some first.</p>
-            )}
-         </div>
+         )}
 
          <div className="space-y-2">
             <Label>Description</Label>
@@ -325,30 +298,13 @@ export function CarForm({
             />
          </div>
 
-         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="space-y-2">
-               <Label>WhatsApp Number</Label>
-               <Input
-                  value={data.whatsappNumber}
-                  onChange={(e) => setData({ ...data, whatsappNumber: e.target.value })}
-                  placeholder="1234567890"
-               />
-            </div>
-            <div className="space-y-2">
-               <Label>Status</Label>
-               <Select
-                  value={data.isAvailable ? 'available' : 'sold'}
-                  onValueChange={(value) => setData({ ...data, isAvailable: value === 'available' })}
-               >
-                  <SelectTrigger>
-                     <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                     <SelectItem value="available">Available</SelectItem>
-                     <SelectItem value="sold">Sold</SelectItem>
-                  </SelectContent>
-               </Select>
-            </div>
+         <div className="space-y-2">
+            <Label>WhatsApp Number</Label>
+            <Input
+               value={data.whatsappNumber}
+               onChange={(e) => setData({ ...data, whatsappNumber: e.target.value })}
+               placeholder="1234567890"
+            />
          </div>
 
          <div className="flex gap-4">

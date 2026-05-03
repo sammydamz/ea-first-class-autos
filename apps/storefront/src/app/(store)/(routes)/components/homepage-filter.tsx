@@ -14,16 +14,14 @@ import {
 
 interface FilterProps {
    brands: { id: string; title: string }[]
-   categories: { id: string; title: string }[]
 }
 
-export function HomepageFilter({ brands, categories }: FilterProps) {
+export function HomepageFilter({ brands }: FilterProps) {
    const router = useRouter()
    const pathname = usePathname()
    const searchParams = useSearchParams()
 
    const [brand, setBrand] = useState(searchParams.get('brand') || '')
-   const [category, setCategory] = useState(searchParams.get('category') || '')
    const [minPrice, setMinPrice] = useState(searchParams.get('minPrice') || '')
    const [maxPrice, setMaxPrice] = useState(searchParams.get('maxPrice') || '')
    const [sort, setSort] = useState(searchParams.get('sort') || 'newest')
@@ -31,17 +29,15 @@ export function HomepageFilter({ brands, categories }: FilterProps) {
    const applyFilters = useCallback(() => {
       const params = new URLSearchParams()
       if (brand) params.set('brand', brand)
-      if (category) params.set('category', category)
       if (minPrice) params.set('minPrice', minPrice)
       if (maxPrice) params.set('maxPrice', maxPrice)
       if (sort && sort !== 'newest') params.set('sort', sort)
       const qs = params.toString()
       router.push(qs ? `${pathname}?${qs}` : pathname)
-   }, [router, pathname, brand, category, minPrice, maxPrice, sort])
+   }, [router, pathname, brand, minPrice, maxPrice, sort])
 
    const clearFilters = useCallback(() => {
       setBrand('')
-      setCategory('')
       setMinPrice('')
       setMaxPrice('')
       setSort('newest')
@@ -50,7 +46,7 @@ export function HomepageFilter({ brands, categories }: FilterProps) {
 
    return (
       <div className="bg-neutral-50 p-4 rounded-lg mb-6">
-         <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div>
                <Select value={brand} onValueChange={setBrand}>
                   <SelectTrigger>
@@ -60,20 +56,6 @@ export function HomepageFilter({ brands, categories }: FilterProps) {
                      {brands.map((b) => (
                         <SelectItem key={b.id} value={b.id}>
                            {b.title}
-                        </SelectItem>
-                     ))}
-                  </SelectContent>
-               </Select>
-            </div>
-            <div>
-               <Select value={category} onValueChange={setCategory}>
-                  <SelectTrigger>
-                     <SelectValue placeholder="Category" />
-                  </SelectTrigger>
-                  <SelectContent>
-                     {categories.map((c) => (
-                        <SelectItem key={c.id} value={c.id}>
-                           {c.title}
                         </SelectItem>
                      ))}
                   </SelectContent>

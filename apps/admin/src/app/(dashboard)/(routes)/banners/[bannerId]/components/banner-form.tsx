@@ -6,7 +6,6 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { Label } from '@/components/ui/label'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Separator } from '@/components/ui/separator'
 import { Heading } from '@/components/ui/heading'
 import { AlertModal } from '@/components/modals/alert-modal'
@@ -16,10 +15,9 @@ import { useParams } from 'next/navigation'
 
 interface BannerFormProps {
    initialData: any | null
-   categories: { id: string; title: string }[]
 }
 
-export function BannerForm({ initialData, categories }: BannerFormProps) {
+export function BannerForm({ initialData }: BannerFormProps) {
    const router = useRouter()
    const params = useParams()
    const [open, setOpen] = useState(false)
@@ -29,7 +27,6 @@ export function BannerForm({ initialData, categories }: BannerFormProps) {
       image: initialData?.image || '',
       description: initialData?.description || '',
       link: initialData?.link || '',
-      categoryId: initialData?.categoryId || '',
    })
 
    const handleSubmit = async (e: React.FormEvent) => {
@@ -37,23 +34,18 @@ export function BannerForm({ initialData, categories }: BannerFormProps) {
       setLoading(true)
 
       try {
-         const payload = {
-            ...data,
-            categoryId: data.categoryId || null,
-         }
-
          if (initialData) {
             const res = await fetch(`/api/banners/${params.bannerId}`, {
                method: 'PATCH',
                headers: { 'Content-Type': 'application/json' },
-               body: JSON.stringify(payload),
+               body: JSON.stringify(data),
             })
             if (!res.ok) throw new Error()
          } else {
             const res = await fetch('/api/banners', {
                method: 'POST',
                headers: { 'Content-Type': 'application/json' },
-               body: JSON.stringify(payload),
+               body: JSON.stringify(data),
             })
             if (!res.ok) throw new Error()
          }
@@ -99,24 +91,9 @@ export function BannerForm({ initialData, categories }: BannerFormProps) {
          </div>
          <Separator />
          <form onSubmit={handleSubmit} className="space-y-6 w-full mt-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-               <div className="space-y-2">
-                  <Label>Title *</Label>
-                  <Input value={data.title} onChange={(e) => setData({ ...data, title: e.target.value })} required />
-               </div>
-               <div className="space-y-2">
-                  <Label>Category</Label>
-                  <Select value={data.categoryId} onValueChange={(value) => setData({ ...data, categoryId: value })}>
-                     <SelectTrigger>
-                        <SelectValue placeholder="Select category (optional)" />
-                     </SelectTrigger>
-                     <SelectContent>
-                        {categories.map((c) => (
-                           <SelectItem key={c.id} value={c.id}>{c.title}</SelectItem>
-                        ))}
-                     </SelectContent>
-                  </Select>
-               </div>
+            <div className="space-y-2">
+               <Label>Title *</Label>
+               <Input value={data.title} onChange={(e) => setData({ ...data, title: e.target.value })} required />
             </div>
             <div className="space-y-2">
                <Label>Image URL *</Label>

@@ -1,11 +1,10 @@
 import prisma from '@/lib/prisma'
-import Carousel from '@/components/native/Carousel'
 import { CarGrid, CarSkeletonGrid } from '@/components/native/CarCard'
-import { Heading } from '@/components/native/heading'
 import { Separator } from '@/components/native/separator'
 import { isVariableValid } from '@/lib/utils'
 import { HomepageFilter } from './components/homepage-filter'
 import { HomepagePagination } from './components/homepage-pagination'
+import Image from 'next/image'
 
 const PAGE_SIZE = 12
 
@@ -15,14 +14,12 @@ export default async function Index(props: {
    const searchParams = await props.searchParams
    const page = typeof searchParams.page === 'string' ? parseInt(searchParams.page) : 1
    const brandId = typeof searchParams.brand === 'string' ? searchParams.brand : undefined
-   const categoryId = typeof searchParams.category === 'string' ? searchParams.category : undefined
    const minPrice = typeof searchParams.minPrice === 'string' ? Number(searchParams.minPrice) : undefined
    const maxPrice = typeof searchParams.maxPrice === 'string' ? Number(searchParams.maxPrice) : undefined
    const sort = typeof searchParams.sort === 'string' ? searchParams.sort : 'newest'
 
-   const [brands, categories, banners] = await Promise.all([
+   const [brands, banners] = await Promise.all([
       prisma.brand.findMany({ orderBy: { title: 'asc' } }),
-      prisma.category.findMany({ orderBy: { title: 'asc' } }),
       prisma.banner.findMany({ take: 5 }),
    ])
 
@@ -30,7 +27,6 @@ export default async function Index(props: {
       isDeleted: false,
       isAvailable: true,
       ...(brandId && { brandId }),
-      ...(categoryId && { categories: { some: { id: categoryId } } }),
       ...(minPrice && { price: { gte: minPrice } }),
       ...(maxPrice && { price: { lte: maxPrice } }),
    }
@@ -39,13 +35,13 @@ export default async function Index(props: {
       sort === 'price-low'
          ? { price: 'asc' as const }
          : sort === 'price-high'
-           ? { price: 'desc' as const }
-           : { createdAt: 'desc' as const }
+            ? { price: 'desc' as const }
+            : { createdAt: 'desc' as const }
 
    const [cars, total] = await Promise.all([
       prisma.car.findMany({
          where,
-         include: { brand: true, categories: true },
+         include: { brand: true },
          orderBy,
          skip: (page - 1) * PAGE_SIZE,
          take: PAGE_SIZE,
@@ -58,30 +54,54 @@ export default async function Index(props: {
 
    return (
       <div className="flex flex-col">
-         {bannerImages.length > 0 ? (
-            <Carousel images={bannerImages} className="h-64 md:h-96" />
-         ) : (
-            <div className="relative h-64 md:h-96 w-full overflow-hidden rounded-lg bg-gradient-to-r from-primary to-primary/80 flex items-center justify-center">
-               <div className="text-center text-white px-4">
-                  <h1 className="text-4xl md:text-5xl font-bold mb-4">EA First Class Autos</h1>
-                  <p className="text-lg md:text-xl opacity-90">Premium vehicles at competitive prices</p>
+           <section className="md:hidden relative h-[50vh] w-screen -mx-[clamp(0.75rem,3vw,2rem)] overflow-hidden">
+               <Image
+                  src="https://jf8vtp06y9.ufs.sh/f/EXKUfm9UzRWTiYQLJAcIe9lv7BfFdjYhW8gVyswQGXJ1ME6A"
+                  alt="EA First Class Autos"
+                  fill
+                  sizes="100vw"
+                  className="object-cover"
+                  priority
+               />
+               <div className="absolute inset-0 bg-black/40" />
+            </section>
+            <section className="hidden md:block relative h-[50vh] sm:h-[60vh] md:h-[75vh] w-screen -mx-[clamp(0.75rem,3vw,2rem)] md:-mx-[4rem] lg:-mx-[6rem] xl:-mx-[8rem] 2xl:-mx-[12rem] overflow-hidden">
+               <Image
+                  src="https://jf8vtp06y9.ufs.sh/f/EXKUfm9UzRWTyMHTIHGhuSUdMZINDJCEPso9gznXBQHm4OGA"
+                  alt="EA First Class Autos"
+                  fill
+                  sizes="100vw"
+                  className="object-cover"
+                  priority
+               />
+               <div className="absolute inset-0 bg-black/40" />
+            </section>
+
+         {/* Cars Section */}
+         <section className="py-24">
+             <div className="max-w-7xl mx-auto">
+               <div className="text-center mb-16">
+                  <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-4">
+                     Our Collection
+                  </p>
+                   <h2 className="text-heading font-bold">
+                      Browse Our Selection
+                   </h2>
+                   <p className="mt-4 text-subtitle text-muted-foreground max-w-2xl mx-auto">
+                     Every vehicle handpicked for quality, reliability, and value.
+                  </p>
                </div>
+               <HomepageFilter brands={brands} />
+               {isVariableValid(cars) && cars.length > 0 ? (
+                  <CarGrid cars={cars} />
+               ) : (
+                  <CarSkeletonGrid />
+               )}
+               {totalPages > 1 && (
+                  <HomepagePagination page={page} totalPages={totalPages} />
+               )}
             </div>
-         )}
-         <Separator className="my-8" />
-         <Heading
-            title="Our Cars"
-            description="Browse our selection of quality vehicles."
-         />
-         <HomepageFilter brands={brands} categories={categories} />
-         {isVariableValid(cars) && cars.length > 0 ? (
-            <CarGrid cars={cars} />
-         ) : (
-            <CarSkeletonGrid />
-         )}
-         {totalPages > 1 && (
-            <HomepagePagination page={page} totalPages={totalPages} />
-         )}
+         </section>
       </div>
    )
 }

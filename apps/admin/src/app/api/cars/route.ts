@@ -4,7 +4,7 @@ import { NextResponse } from 'next/server'
 export async function GET() {
    try {
       const cars = await prisma.car.findMany({
-         include: { brand: true, categories: true },
+         include: { brand: true },
          orderBy: { createdAt: 'desc' },
       })
       return NextResponse.json(cars)
@@ -17,7 +17,7 @@ export async function GET() {
 export async function POST(req: Request) {
    try {
       const body = await req.json()
-      const { title, model, year, price, isNegotiable, condition, description, specifications, images, whatsappNumber, isAvailable, brandId, categoryIds } = body
+      const { title, model, year, price, isNegotiable, condition, description, specifications, images, whatsappNumber, isAvailable, brandId } = body
 
       const baseSlug = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
       let slug = baseSlug
@@ -31,12 +31,9 @@ export async function POST(req: Request) {
          data: {
             title, slug, model, year: year ? parseInt(year) : null,
             price: parseFloat(price) || 0, isNegotiable: isNegotiable || false,
-            condition: condition || 'Used', description,
+            condition: condition || 'Local Used', description,
             specifications: specifications || {}, images: images || [],
             whatsappNumber, isAvailable: isAvailable ?? true, brandId,
-            ...(categoryIds?.length && {
-               categories: { connect: categoryIds.map((id: string) => ({ id })) },
-            }),
          },
       })
       return NextResponse.json(car)

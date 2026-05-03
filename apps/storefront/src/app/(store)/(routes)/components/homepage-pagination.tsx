@@ -20,19 +20,21 @@ export function HomepagePagination({ page, totalPages }: PaginationProps) {
    }
 
    return (
-      <div className="flex justify-center gap-2 mt-8">
+      <div className="flex justify-center items-center gap-2 mt-8">
          <Button
             variant="outline"
+            size="sm"
             disabled={page <= 1}
             onClick={() => goTo(page - 1)}
          >
             Previous
          </Button>
-         <span className="flex items-center px-4">
+         <span className="flex items-center px-3 text-sm text-muted-foreground">
             {page} / {totalPages}
          </span>
          <Button
             variant="outline"
+            size="sm"
             disabled={page >= totalPages}
             onClick={() => goTo(page + 1)}
          >

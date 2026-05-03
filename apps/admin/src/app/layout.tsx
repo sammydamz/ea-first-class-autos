@@ -8,8 +8,11 @@ import './globals.css'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
-   title: 'Admin Dashboard',
-   description: 'E-Commerce Store Admin Dashboard',
+   title: 'EA First Class Autos — Admin',
+   description: 'Admin dashboard for EA First Class Autos inventory management',
+   icons: {
+      icon: '/favicon.ico',
+   },
 }
 
 export default async function RootLayout({
@@ -20,7 +23,7 @@ export default async function RootLayout({
    return (
       <html lang="en" suppressHydrationWarning>
          <body className={inter.className}>
-            <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+            <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
                <ToastProvider />
                <ModalProvider />
                {children}

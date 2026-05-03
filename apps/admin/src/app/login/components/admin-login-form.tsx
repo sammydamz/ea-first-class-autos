@@ -6,7 +6,6 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { toast } from 'react-hot-toast'
-import Link from 'next/link'
 
 export function AdminLoginForm() {
    const router = useRouter()
@@ -39,9 +38,11 @@ export function AdminLoginForm() {
    }
 
    return (
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <form onSubmit={handleSubmit} className="space-y-5">
          <div className="space-y-2">
-            <Label>Email</Label>
+            <Label className="font-mono text-[11px] uppercase tracking-[1.2px] text-caption">
+               Email
+            </Label>
             <Input
                type="email"
                value={data.email}
@@ -50,7 +51,9 @@ export function AdminLoginForm() {
             />
          </div>
          <div className="space-y-2">
-            <Label>Password</Label>
+            <Label className="font-mono text-[11px] uppercase tracking-[1.2px] text-caption">
+               Password
+            </Label>
             <Input
                type="password"
                value={data.password}
@@ -58,7 +61,7 @@ export function AdminLoginForm() {
                required
             />
          </div>
-         <Button type="submit" className="w-full" disabled={loading}>
+         <Button type="submit" className="w-full mt-2" disabled={loading}>
             {loading ? 'Logging in...' : 'Login'}
          </Button>
       </form>

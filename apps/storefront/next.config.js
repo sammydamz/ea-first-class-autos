@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 
 module.exports = {
+    allowedDevOrigins: ['192.168.100.19'],
     turbopack: {
         root: '../..',
     },

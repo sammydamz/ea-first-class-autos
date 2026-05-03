@@ -14,13 +14,13 @@ export default async function DashboardLayout({
    const whatsappNumber = siteConfig?.defaultWhatsApp || ''
 
    return (
-      <>
+      <div className="min-h-screen flex flex-col">
          <Header />
-         <div className="px-[1.4rem] md:px-[4rem] lg:px-[6rem] xl:px-[8rem] 2xl:px-[12rem]">
+         <main className="flex-1 px-[clamp(0.75rem,3vw,2rem)] md:px-[4rem] lg:px-[6rem] xl:px-[8rem] 2xl:px-[12rem]">
             {children}
-         </div>
+         </main>
          <Footer />
          {whatsappNumber && <FloatingWhatsApp number={whatsappNumber} />}
-      </>
+      </div>
    )
 }
