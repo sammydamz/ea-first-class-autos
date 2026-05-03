@@ -60,17 +60,17 @@ export function MobileNav() {
             </SheetContent>
          </Sheet>
 
-         <Link href="/" className="flex items-center justify-center shrink-0 outline-none">
+          <Link href="/" className="flex items-center justify-center shrink-0 outline-none">
              <Image
                 src="/ea.jpg"
                 alt={Config.name}
-                 width={70}
-                 height={60}
-                 className="h-[clamp(2.5rem,10vw,3.5rem)] w-auto object-contain"
-                style={{ width: 'auto', height: 'auto' }}
+                width={56}
+                height={48}
+                className="w-auto object-contain"
+                style={{ height: 'clamp(2rem, 8vw, 2.75rem)', width: 'auto' }}
                 priority
              />
-         </Link>
+          </Link>
 
          <div className="w-[44px]" />
       </div>
