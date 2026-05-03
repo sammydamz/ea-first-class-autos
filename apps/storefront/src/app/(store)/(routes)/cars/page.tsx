@@ -49,20 +49,20 @@ export default async function CarsPage(props: {
    return (
       <div className="flex flex-col">
          {/* Hero Section */}
-         <section className="px-4 md:px-8 lg:px-16 pt-24 pb-16 text-center">
-            <p className="text-sm font-semibold uppercase tracking-widest text-muted-foreground mb-4">
+         <section className="pt-24 pb-16 text-center">
+             <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-4">
                Inventory
             </p>
-            <h1 className="text-5xl md:text-6xl font-bold tracking-tight leading-[1.1]">
-               All Cars
-            </h1>
-            <p className="mt-6 text-xl text-muted-foreground max-w-2xl mx-auto">
+             <h1 className="text-display font-bold">
+                All Cars
+             </h1>
+             <p className="mt-6 text-subtitle text-muted-foreground max-w-2xl mx-auto">
                Browse our complete inventory of quality vehicles.
             </p>
          </section>
 
          {/* Filter + Cars */}
-         <section className="px-4 md:px-8 lg:px-16 pb-24">
+         <section className="pb-24">
             <div className="max-w-7xl mx-auto">
                <CarsFilter brands={brands} />
                {isVariableValid(cars) ? (

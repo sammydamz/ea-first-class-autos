@@ -4,6 +4,7 @@ import { Separator } from '@/components/native/separator'
 import { isVariableValid } from '@/lib/utils'
 import { HomepageFilter } from './components/homepage-filter'
 import { HomepagePagination } from './components/homepage-pagination'
+import Image from 'next/image'
 
 const PAGE_SIZE = 12
 
@@ -53,48 +54,40 @@ export default async function Index(props: {
 
    return (
       <div className="flex flex-col">
-         {/* Hero Section */}
-         {bannerImages.length > 0 ? (
-            <section className="relative h-[60vh] md:h-[75vh] w-full overflow-hidden">
-               <img
-                  src={bannerImages[0]}
-                  alt="Featured vehicles"
-                  className="absolute inset-0 w-full h-full object-cover"
+           <section className="md:hidden relative h-[50vh] w-screen -mx-[clamp(0.75rem,3vw,2rem)] overflow-hidden">
+               <Image
+                  src="https://jf8vtp06y9.ufs.sh/f/EXKUfm9UzRWTiYQLJAcIe9lv7BfFdjYhW8gVyswQGXJ1ME6A"
+                  alt="EA First Class Autos"
+                  fill
+                  sizes="100vw"
+                  className="object-cover"
+                  priority
                />
                <div className="absolute inset-0 bg-black/40" />
-               <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white px-4">
-                  <h1 className="text-5xl md:text-7xl font-bold tracking-tight leading-[1.1]">
-                     EA First Class Autos
-                  </h1>
-                  <p className="mt-6 text-xl md:text-2xl opacity-90 max-w-2xl">
-                     Quality you can trust. Service you can feel.
-                  </p>
-               </div>
             </section>
-         ) : (
-            <section className="relative h-[60vh] md:h-[75vh] w-full bg-primary flex items-center justify-center">
-               <div className="text-center text-white px-4">
-                  <h1 className="text-5xl md:text-7xl font-bold tracking-tight leading-[1.1]">
-                     EA First Class Autos
-                  </h1>
-                  <p className="mt-6 text-xl md:text-2xl opacity-90 max-w-2xl">
-                     Quality you can trust. Service you can feel.
-                  </p>
-               </div>
+            <section className="hidden md:block relative h-[50vh] sm:h-[60vh] md:h-[75vh] w-screen -mx-[clamp(0.75rem,3vw,2rem)] md:-mx-[4rem] lg:-mx-[6rem] xl:-mx-[8rem] 2xl:-mx-[12rem] overflow-hidden">
+               <Image
+                  src="https://jf8vtp06y9.ufs.sh/f/EXKUfm9UzRWTyMHTIHGhuSUdMZINDJCEPso9gznXBQHm4OGA"
+                  alt="EA First Class Autos"
+                  fill
+                  sizes="100vw"
+                  className="object-cover"
+                  priority
+               />
+               <div className="absolute inset-0 bg-black/40" />
             </section>
-         )}
 
          {/* Cars Section */}
-         <section className="px-4 md:px-8 lg:px-16 py-24">
-            <div className="max-w-7xl mx-auto">
+         <section className="py-24">
+             <div className="max-w-7xl mx-auto">
                <div className="text-center mb-16">
-                  <p className="text-sm font-semibold uppercase tracking-widest text-muted-foreground mb-4">
+                  <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-4">
                      Our Collection
                   </p>
-                  <h2 className="text-4xl md:text-5xl font-bold tracking-tight">
-                     Browse Our Selection
-                  </h2>
-                  <p className="mt-4 text-xl text-muted-foreground max-w-2xl mx-auto">
+                   <h2 className="text-heading font-bold">
+                      Browse Our Selection
+                   </h2>
+                   <p className="mt-4 text-subtitle text-muted-foreground max-w-2xl mx-auto">
                      Every vehicle handpicked for quality, reliability, and value.
                   </p>
                </div>

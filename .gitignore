@@ -34,3 +34,13 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# graphify
+graphify-out/
+
+# AI / dev tools
+.adal/
+.agents/
+.claude/
+.playwright/
+.qwen/

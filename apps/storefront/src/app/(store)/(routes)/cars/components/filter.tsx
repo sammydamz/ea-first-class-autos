@@ -44,8 +44,8 @@ export function CarsFilter({ brands }: FilterProps) {
    }, [router])
 
    return (
-      <div className="bg-neutral-50 p-4 rounded-lg mb-6">
-         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div className="bg-neutral-50 p-3 sm:p-4 rounded-lg mb-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-4">
             <div>
                <Select value={brand} onValueChange={setBrand}>
                   <SelectTrigger>
@@ -89,18 +89,19 @@ export function CarsFilter({ brands }: FilterProps) {
                </Select>
             </div>
          </div>
-         <div className="flex gap-2 mt-4">
-            <Button
-               onClick={() => {
-                  if (brand) updateFilter('brand', brand)
-                  if (minPrice) updateFilter('minPrice', minPrice)
-                  if (maxPrice) updateFilter('maxPrice', maxPrice)
-                  if (sort && sort !== 'newest') updateFilter('sort', sort)
-               }}
-            >
-               Apply Filters
-            </Button>
-            <Button variant="outline" onClick={clearFilters}>
+          <div className="flex gap-2 mt-3 sm:mt-4">
+             <Button
+                onClick={() => {
+                   if (brand) updateFilter('brand', brand)
+                   if (minPrice) updateFilter('minPrice', minPrice)
+                   if (maxPrice) updateFilter('maxPrice', maxPrice)
+                   if (sort && sort !== 'newest') updateFilter('sort', sort)
+                }}
+                className="min-h-[44px]"
+             >
+                Apply Filters
+             </Button>
+             <Button variant="outline" onClick={clearFilters} className="min-h-[44px]">
                Clear
             </Button>
          </div>

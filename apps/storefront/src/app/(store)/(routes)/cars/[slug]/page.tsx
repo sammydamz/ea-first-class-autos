@@ -95,7 +95,7 @@ Link: ${pageUrl}`
       )
 
    return (
-      <div className="container mx-auto px-4 py-8">
+       <div className="mx-auto max-w-7xl py-8">
          <Breadcrumbs car={car} />
          <Separator className="my-6" />
          <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
@@ -110,7 +110,7 @@ Link: ${pageUrl}`
             <>
                <Separator className="my-8" />
                <div>
-                  <h2 className="text-xl font-semibold mb-4">Description</h2>
+                   <h2 className="text-subheading font-semibold mb-4">Description</h2>
                   <p className="whitespace-pre-wrap text-muted-foreground leading-relaxed">
                      {car.description}
                   </p>
@@ -123,21 +123,21 @@ Link: ${pageUrl}`
 
 function Breadcrumbs({ car }: { car: CarWithIncludes }) {
    return (
-      <nav className="flex text-sm text-muted-foreground" aria-label="Breadcrumb">
-         <ol className="inline-flex items-center gap-2">
-            <li>
-               <Link href="/" className="hover:text-foreground">
-                  Home
-               </Link>
-            </li>
-            <li>/</li>
-            <li>
-               <Link href="/cars" className="hover:text-foreground">
-                  Cars
-               </Link>
-            </li>
-            <li>/</li>
-            <li className="font-medium text-foreground">{car.title}</li>
+       <nav className="flex text-sm text-muted-foreground overflow-x-auto" aria-label="Breadcrumb">
+          <ol className="inline-flex items-center gap-2 whitespace-nowrap">
+             <li>
+                <Link href="/" className="hover:text-foreground">
+                   Home
+                </Link>
+             </li>
+             <li>/</li>
+             <li>
+                <Link href="/cars" className="hover:text-foreground">
+                   Cars
+                </Link>
+             </li>
+             <li>/</li>
+             <li className="font-medium text-foreground truncate max-w-[160px]">{car.title}</li>
          </ol>
       </nav>
    )
@@ -165,46 +165,46 @@ function CarDetails({
                    <Badge className="bg-green-600 text-white hover:bg-green-700">Negotiable</Badge>
                 )}
              </div>
-             <h1 className="text-2xl font-bold">{car.title}</h1>
-             <p className="text-lg font-semibold text-primary mt-2">
+              <h1 className="text-subheading font-bold">{car.title}</h1>
+              <p className="text-body-lg font-semibold text-primary mt-2">
                 {formatPrice(car.price)}
              </p>
          </div>
 
          {whatsappUrl && (
-            <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
-               <Button className="w-full">Enquire on WhatsApp</Button>
-            </a>
+              <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="flex justify-center">
+                 <Button className="w-auto min-h-[44px] gap-2"><img src="https://img.icons8.com/?size=100&id=Funux8t3F8Ig&format=png&color=FFFFFF" alt="" className="h-5 w-5" />Enquire on WhatsApp</Button>
+             </a>
          )}
 
          {hasSpecs && (
             <>
                <Separator />
                <div>
-                  <h2 className="font-semibold mb-3">Specifications</h2>
-                  <div className="space-y-2">
-                     {car.model && (
-                        <div className="grid grid-cols-2 gap-2 text-sm">
-                           <span className="text-muted-foreground">Model</span>
-                           <span>{car.model}</span>
-                        </div>
-                     )}
-                     {car.year && (
-                        <div className="grid grid-cols-2 gap-2 text-sm">
-                           <span className="text-muted-foreground">Year</span>
-                           <span>{car.year}</span>
-                        </div>
-                     )}
-                     {car.specifications &&
-                        Object.entries(car.specifications as Record<string, string>).map(
-                           ([key, value]) => (
-                              <div key={key} className="grid grid-cols-2 gap-2 text-sm">
-                                 <span className="text-muted-foreground">{key}</span>
-                                 <span>{value}</span>
-                              </div>
-                           )
-                        )}
-                  </div>
+                   <h2 className="text-subheading font-semibold mb-3">Specifications</h2>
+                   <div className="space-y-2">
+                      {car.model && (
+                         <div className="grid grid-cols-2 gap-2 text-base">
+                            <span className="text-muted-foreground">Model</span>
+                            <span>{car.model}</span>
+                         </div>
+                      )}
+                      {car.year && (
+                         <div className="grid grid-cols-2 gap-2 text-base">
+                            <span className="text-muted-foreground">Year</span>
+                            <span>{car.year}</span>
+                         </div>
+                      )}
+                      {car.specifications &&
+                         Object.entries(car.specifications as Record<string, string>).map(
+                            ([key, value]) => (
+                               <div key={key} className="grid grid-cols-2 gap-2 text-base">
+                                  <span className="text-muted-foreground">{key}</span>
+                                  <span>{value}</span>
+                               </div>
+                            )
+                         )}
+                   </div>
                </div>
             </>
          )}
