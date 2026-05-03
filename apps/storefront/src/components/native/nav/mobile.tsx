@@ -31,7 +31,7 @@ export function MobileNav() {
             </SheetTrigger>
             <SheetContent
                side="left"
-               className="w-[280px] border-0 bg-background/80 backdrop-blur-xl p-0"
+               className="w-[280px] border-0 bg-white p-0"
             >
                <SheetTitle className="sr-only">Navigation</SheetTitle>
                <SheetDescription className="sr-only">Site navigation menu</SheetDescription>
