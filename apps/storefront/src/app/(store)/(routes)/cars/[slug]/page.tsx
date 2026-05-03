@@ -110,7 +110,7 @@ Link: ${pageUrl}`
             <>
                <Separator className="my-8" />
                <div>
-                  <h2 className="text-xl font-semibold mb-4">Description</h2>
+                   <h2 className="text-subheading font-semibold mb-4">Description</h2>
                   <p className="whitespace-pre-wrap text-muted-foreground leading-relaxed">
                      {car.description}
                   </p>
@@ -165,8 +165,8 @@ function CarDetails({
                    <Badge className="bg-green-600 text-white hover:bg-green-700">Negotiable</Badge>
                 )}
              </div>
-              <h1 className="text-[clamp(1.25rem,3vw,1.5rem)] font-bold">{car.title}</h1>
-             <p className="text-lg font-semibold text-primary mt-2">
+              <h1 className="text-subheading font-bold">{car.title}</h1>
+              <p className="text-body-lg font-semibold text-primary mt-2">
                 {formatPrice(car.price)}
              </p>
          </div>
@@ -181,7 +181,7 @@ function CarDetails({
             <>
                <Separator />
                <div>
-                  <h2 className="font-semibold mb-3">Specifications</h2>
+                   <h2 className="font-semibold mb-3 text-sm">Specifications</h2>
                   <div className="space-y-2">
                      {car.model && (
                         <div className="grid grid-cols-2 gap-2 text-sm">

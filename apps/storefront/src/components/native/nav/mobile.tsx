@@ -10,13 +10,13 @@ export function MobileNav() {
          <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
             <Link
                href="/cars"
-               className="px-2 py-1 sm:px-3 sm:py-1.5 text-xs sm:text-sm font-medium rounded-full text-white bg-red-600 hover:bg-red-700 transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
+               className="px-2 py-1 sm:px-3 sm:py-1.5 text-small font-medium rounded-full text-white bg-red-600 hover:bg-red-700 transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
             >
                Cars
             </Link>
             <Link
                href="/about"
-               className="px-2 py-1 sm:px-3 sm:py-1.5 text-xs sm:text-sm font-medium rounded-full text-white bg-red-600 hover:bg-red-700 transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
+               className="px-2 py-1 sm:px-3 sm:py-1.5 text-small font-medium rounded-full text-white bg-red-600 hover:bg-red-700 transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
             >
                About
             </Link>

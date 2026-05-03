@@ -1,4 +1,4 @@
-const { fontFamily } = require('tailwindcss/defaultTheme')
+const { fontFamily, fontSize } = require('tailwindcss/defaultTheme')
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -61,9 +61,17 @@ module.exports = {
    			md: 'calc(var(--radius) - 2px)',
    			sm: 'calc(var(--radius) - 4px)'
    		},
-   		fontFamily: {
-   			sans: ['Inter', ...fontFamily.sans]
-   		},
+    		fontFamily: {
+    			sans: ['Inter', ...fontFamily.sans]
+    		},
+    		fontSize: {
+    			display: ['var(--font-display)', { lineHeight: '1.1', letterSpacing: '-0.02em' }],
+    			heading: ['var(--font-heading)', { lineHeight: '1.2', letterSpacing: '-0.01em' }],
+    			subheading: ['var(--font-subheading)', { lineHeight: '1.3' }],
+    			subtitle: ['var(--font-subtitle)', { lineHeight: '1.5' }],
+    			decorative: ['var(--font-decorative)', { lineHeight: '1.1' }],
+    			'body-lg': ['1.125rem', { lineHeight: '1.75' }],
+    		},
    		keyframes: {
    			'accordion-down': {
    				from: {

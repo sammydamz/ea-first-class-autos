@@ -61,26 +61,26 @@ export const CarCard = ({ car }: { car: CarWithIncludes }) => {
           </Link>
           <CardContent className="grid gap-1 p-3 sm:p-4 flex-1">
              <div className="flex gap-1 flex-wrap">
-                <Badge variant="outline" className="text-[10px] sm:text-xs text-muted-foreground px-1.5 sm:px-2">
-                   {car.brand.title}
-                </Badge>
-                {car.condition && (
-                   <Badge variant="secondary" className="text-[10px] sm:text-xs px-1.5 sm:px-2">{car.condition}</Badge>
+                 <Badge variant="outline" className="text-xs text-muted-foreground px-1.5 sm:px-2">
+                    {car.brand.title}
+                 </Badge>
+                 {car.condition && (
+                    <Badge variant="secondary" className="text-xs px-1.5 sm:px-2">{car.condition}</Badge>
                 )}
              </div>
 
              <Link href={`/cars/${car.slug}`}>
-                <CardTitle className="line-clamp-2 mt-1 text-sm sm:text-base hover:text-primary transition-colors">
-                   {car.title}
-                </CardTitle>
+                 <CardTitle className="line-clamp-2 mt-1 text-small sm:text-base hover:text-primary transition-colors">
+                    {car.title}
+                 </CardTitle>
              </Link>
              {car.year && (
-                <CardDescription className="text-xs sm:text-sm">{car.year}</CardDescription>
+                <CardDescription className="text-xs">{car.year}</CardDescription>
              )}
           </CardContent>
           <CardFooter className="flex items-center justify-between p-3 sm:p-4 pt-0">
               {car.isAvailable ? (
-                 <div className="text-sm sm:text-base font-semibold text-primary">
+                  <div className="text-small sm:text-base font-semibold text-primary">
                     {formatPrice(car.price)}
                  </div>
              ) : (

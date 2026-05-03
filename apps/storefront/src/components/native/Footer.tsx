@@ -26,20 +26,20 @@ export default function Footer() {
 function Links() {
    return (
       <div className="text-center md:text-end">
-         <h2 className="mb-3 text-sm uppercase">Quick Links</h2>
+          <h2 className="mb-3 text-small uppercase">Quick Links</h2>
          <ul className="flex flex-row md:flex-col gap-4 md:gap-1 justify-center md:block">
             <li>
                <Link
                   href="/cars"
-                  className="text-sm transition duration-300 text-white/70 hover:text-white"
-               >
-                  Cars
-               </Link>
-            </li>
-            <li>
-               <Link
-                  href="/about"
-                  className="text-sm transition duration-300 text-white/70 hover:text-white"
+                   className="text-small transition duration-300 text-white/70 hover:text-white"
+                >
+                   Cars
+                </Link>
+             </li>
+             <li>
+                <Link
+                   href="/about"
+                   className="text-small transition duration-300 text-white/70 hover:text-white"
                >
                   About
                </Link>
@@ -53,10 +53,10 @@ function Trademark() {
    return (
       <div className="mb-6 md:mb-0">
          <span className="flex flex-col">
-            <h2 className="whitespace-nowrap text-sm font-semibold uppercase">
-               {config.name}
-            </h2>
-            <span className="mt-2 text-sm text-white/70">
+             <h2 className="whitespace-nowrap text-small font-semibold uppercase">
+                {config.name}
+             </h2>
+             <span className="mt-2 text-small text-white/70">
                &copy; {new Date().getFullYear()} {config.name}. All Rights
                Reserved.
             </span>
