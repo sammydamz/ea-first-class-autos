@@ -157,20 +157,18 @@ function CarDetails({
    return (
       <div className="space-y-6">
          <div>
-            <div className="flex gap-2 flex-wrap mb-2">
-               <Badge variant="outline">{car.brand.title}</Badge>
-               <Badge variant="secondary">{car.condition}</Badge>
-               {car.year && <Badge variant="secondary">{car.year}</Badge>}
-            </div>
-            <h1 className="text-2xl font-bold">{car.title}</h1>
-            <p className="text-lg font-semibold text-primary mt-2">
-               {formatPrice(car.price)}
-               {car.isNegotiable && (
-                  <span className="ml-2 text-sm font-normal text-muted-foreground">
-                     Negotiable
-                  </span>
-               )}
-            </p>
+             <div className="flex gap-2 flex-wrap mb-2">
+                <Badge variant="outline">{car.brand.title}</Badge>
+                <Badge variant="secondary">{car.condition}</Badge>
+                {car.year && <Badge variant="secondary">{car.year}</Badge>}
+                {car.isNegotiable && (
+                   <Badge className="bg-green-600 text-white hover:bg-green-700">Negotiable</Badge>
+                )}
+             </div>
+             <h1 className="text-2xl font-bold">{car.title}</h1>
+             <p className="text-lg font-semibold text-primary mt-2">
+                {formatPrice(car.price)}
+             </p>
          </div>
 
          {whatsappUrl && (
