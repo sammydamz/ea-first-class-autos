@@ -15,12 +15,12 @@ export function MainNav() {
    return (
       <div className="hidden md:flex gap-2 items-center">
          <Link href="/" className="flex items-center">
-            <Image
-               src="/ea.jpg"
-               alt={config.name}
-                width={46}
-                height={40}
-                className="h-10 w-auto object-contain"
+             <Image
+                src="/ea.jpg"
+                alt={config.name}
+                 width={46}
+                 height={40}
+                 className="h-8 md:h-10 w-auto object-contain"
                priority
             />
          </Link>
