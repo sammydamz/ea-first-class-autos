@@ -5,7 +5,7 @@ import Config from '@/config/site'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Menu, X } from 'lucide-react'
-import { Sheet, SheetContent, SheetTrigger, SheetTitle } from '@/components/ui/sheet'
+import { Sheet, SheetContent, SheetTrigger, SheetTitle, SheetDescription } from '@/components/ui/sheet'
 import { Button } from '@/components/ui/button'
 
 const navLinks = [
@@ -29,18 +29,20 @@ export function MobileNav() {
                   <span className="sr-only">Menu</span>
                </Button>
             </SheetTrigger>
-            <SheetContent side="left" className="w-64">
-               <SheetTitle className="sr-only">Navigation</SheetTitle>
+             <SheetContent side="left" className="w-64">
+                <SheetTitle className="sr-only">Navigation</SheetTitle>
+                <SheetDescription className="sr-only">Site navigation menu</SheetDescription>
                <div className="flex flex-col gap-6 pt-6">
                   <Link href="/" onClick={() => setOpen(false)} className="flex items-center gap-2">
-                     <Image
-                        src="/ea.jpg"
-                        alt={Config.name}
-                        width={46}
-                        height={40}
-                        className="h-10 w-auto object-contain"
-                        priority
-                     />
+                      <Image
+                         src="/ea.jpg"
+                         alt={Config.name}
+                         width={46}
+                         height={40}
+                         className="h-10 w-auto object-contain"
+                         style={{ width: 'auto', height: 'auto' }}
+                         priority
+                      />
                   </Link>
                   <nav className="flex flex-col gap-1">
                      {navLinks.map((link) => (
@@ -59,14 +61,15 @@ export function MobileNav() {
          </Sheet>
 
          <Link href="/" className="flex items-center justify-center shrink-0 outline-none">
-            <Image
-               src="/ea.jpg"
-               alt={Config.name}
-                width={70}
-                height={60}
-                className="h-[clamp(2.5rem,10vw,3.5rem)] w-auto object-contain"
-               priority
-            />
+             <Image
+                src="/ea.jpg"
+                alt={Config.name}
+                 width={70}
+                 height={60}
+                 className="h-[clamp(2.5rem,10vw,3.5rem)] w-auto object-contain"
+                style={{ width: 'auto', height: 'auto' }}
+                priority
+             />
          </Link>
 
          <div className="w-[44px]" />

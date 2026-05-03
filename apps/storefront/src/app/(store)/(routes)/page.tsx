@@ -4,6 +4,7 @@ import { Separator } from '@/components/native/separator'
 import { isVariableValid } from '@/lib/utils'
 import { HomepageFilter } from './components/homepage-filter'
 import { HomepagePagination } from './components/homepage-pagination'
+import Image from 'next/image'
 
 const PAGE_SIZE = 12
 
@@ -56,12 +57,14 @@ export default async function Index(props: {
          {/* Hero Section */}
          {bannerImages.length > 0 ? (
              <section className="relative h-[50vh] sm:h-[60vh] md:h-[75vh] w-full overflow-hidden">
-                <img
-                   src={bannerImages[0]}
-                   alt="Featured vehicles"
-                   className="absolute inset-0 w-full h-full object-cover"
-                   fetchPriority="high"
-                />
+                 <Image
+                    src={bannerImages[0]}
+                    alt="Featured vehicles"
+                    fill
+                    sizes="100vw"
+                    className="object-cover"
+                    priority
+                 />
                <div className="absolute inset-0 bg-black/40" />
                <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white px-4">
                    <h1 className="text-display font-bold">

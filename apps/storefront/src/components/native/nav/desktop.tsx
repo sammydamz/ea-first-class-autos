@@ -21,8 +21,9 @@ export function MainNav() {
                  width={46}
                  height={40}
                  className="h-8 md:h-10 w-auto object-contain"
-               priority
-            />
+                style={{ width: 'auto', height: 'auto' }}
+                priority
+             />
          </Link>
          <NavMenu />
       </div>
