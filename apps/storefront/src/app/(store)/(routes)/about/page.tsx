@@ -22,12 +22,12 @@ export default async function AboutPage() {
             </p>
          </section>
 
-         <section className="py-10 sm:py-16 max-w-5xl mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 sm:gap-16 items-start">
-               <div>
-                   <h2 className="text-heading font-semibold mb-6">
-                      Our Story
-                   </h2>
+          <section className="pt-0 pb-10 sm:pb-16 max-w-5xl mx-auto">
+             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 sm:gap-16 items-start">
+                <div>
+                    <h2 className="text-heading font-semibold mb-6">
+                       Our Story
+                    </h2>
                   <p className="text-base text-muted-foreground leading-relaxed">
                      EA First Class Autos was founded on a simple belief: buying a used car should feel just as exciting as buying a new one. We handpick every vehicle in our inventory, ensuring each one meets our rigorous standards for quality, reliability, and value.
                   </p>
@@ -40,29 +40,31 @@ export default async function AboutPage() {
             </div>
          </section>
 
-         <section className="py-10 sm:py-16 bg-neutral-50">
-            <div className="max-w-5xl mx-auto">
-                <h2 className="text-heading font-semibold text-center mb-12 sm:mb-16">
-                   What Sets Us Apart
-                </h2>
-               <div className="grid grid-cols-1 md:grid-cols-2 gap-10 sm:gap-12">
-                  <div className="text-center">
-                      <div className="text-decorative font-bold mb-3">Fair</div>
-                      <h3 className="text-sm font-semibold mb-1.5">Pricing</h3>
-                      <p className="text-sm text-muted-foreground leading-relaxed">
+         <section className="py-10 sm:py-16">
+             <div className="max-w-5xl mx-auto">
+                <div className="bg-black text-white px-4 py-2.5">
+                   <span className="text-[11px] font-bold uppercase tracking-[0.12em]">What Sets Us Apart</span>
+                </div>
+                <div className="grid grid-cols-2 border-2 border-black">
+                   <div className="p-5 sm:p-6 border-r-2 border-black">
+                      <span className="block text-[11px] font-bold uppercase tracking-[0.12em] text-black/40 mb-3">01</span>
+                      <span className="block text-[clamp(1.5rem,4vw,2.25rem)] font-bold leading-none tracking-tight">Fair</span>
+                      <span className="block text-sm font-semibold mt-1 mb-2">Pricing</span>
+                      <p className="text-xs text-black/60 leading-relaxed">
                          Transparent, competitive prices with no hidden fees or surprises.
                       </p>
                    </div>
-                   <div className="text-center">
-                      <div className="text-decorative font-bold mb-3">Quick</div>
-                     <h3 className="text-sm font-semibold mb-1.5">Response</h3>
-                     <p className="text-sm text-muted-foreground leading-relaxed">
-                        Quick replies via WhatsApp. Your questions answered, fast.
-                     </p>
-                  </div>
-               </div>
-            </div>
-         </section>
+                   <div className="p-5 sm:p-6">
+                      <span className="block text-[11px] font-bold uppercase tracking-[0.12em] text-black/40 mb-3">02</span>
+                      <span className="block text-[clamp(1.5rem,4vw,2.25rem)] font-bold leading-none tracking-tight">Quick</span>
+                      <span className="block text-sm font-semibold mt-1 mb-2">Response</span>
+                      <p className="text-xs text-black/60 leading-relaxed">
+                         Fast replies via WhatsApp. Your questions answered, fast.
+                      </p>
+                   </div>
+                </div>
+             </div>
+          </section>
 
          <section className="py-10 sm:py-16 max-w-5xl mx-auto text-center">
                 <h2 className="text-heading font-semibold mb-6">

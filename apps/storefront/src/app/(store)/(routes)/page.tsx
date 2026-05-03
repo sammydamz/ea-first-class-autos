@@ -54,39 +54,28 @@ export default async function Index(props: {
 
    return (
       <div className="flex flex-col">
-         {/* Hero Section */}
-         {bannerImages.length > 0 ? (
-             <section className="relative h-[50vh] sm:h-[60vh] md:h-[75vh] w-full overflow-hidden">
-                 <Image
-                    src={bannerImages[0]}
-                    alt="Featured vehicles"
-                    fill
-                    sizes="100vw"
-                    className="object-cover"
-                    priority
-                 />
+           <section className="md:hidden relative h-[50vh] w-screen -mx-[clamp(0.75rem,3vw,2rem)] overflow-hidden">
+               <Image
+                  src="https://jf8vtp06y9.ufs.sh/f/EXKUfm9UzRWT9EyBnfJEwga9h8lNq2kFrbBWDtjGzmeouQSf"
+                  alt="EA First Class Autos"
+                  fill
+                  sizes="100vw"
+                  className="object-cover"
+                  priority
+               />
                <div className="absolute inset-0 bg-black/40" />
-               <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white px-4">
-                   <h1 className="text-display font-bold">
-                      EA First Class Autos
-                   </h1>
-                   <p className="mt-6 text-subtitle opacity-90 max-w-2xl">
-                      Quality you can trust. Service you can feel.
-                   </p>
-                </div>
-             </section>
-          ) : (
-              <section className="relative h-[50vh] sm:h-[60vh] md:h-[75vh] w-full bg-primary flex items-center justify-center">
-                <div className="text-center text-white px-4">
-                   <h1 className="text-display font-bold">
-                      EA First Class Autos
-                   </h1>
-                   <p className="mt-6 text-subtitle opacity-90 max-w-2xl">
-                      Quality you can trust. Service you can feel.
-                   </p>
-               </div>
             </section>
-         )}
+            <section className="hidden md:block relative h-[50vh] sm:h-[60vh] md:h-[75vh] w-screen -mx-[clamp(0.75rem,3vw,2rem)] md:-mx-[4rem] lg:-mx-[6rem] xl:-mx-[8rem] 2xl:-mx-[12rem] overflow-hidden">
+               <Image
+                  src="https://jf8vtp06y9.ufs.sh/f/EXKUfm9UzRWTf6qWSHqTT83MErAouBLVItY76yGicP9dQlWU"
+                  alt="EA First Class Autos"
+                  fill
+                  sizes="100vw"
+                  className="object-cover"
+                  priority
+               />
+               <div className="absolute inset-0 bg-black/40" />
+            </section>
 
          {/* Cars Section */}
          <section className="py-24">
