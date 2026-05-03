@@ -14,7 +14,7 @@ const socialLinks = [
 export default function Footer() {
    return (
       <footer className="w-full bg-neutral-900 text-white pb-8">
-         <div className="flex flex-col md:flex-row justify-between gap-8 px-[1.4rem] md:px-[4rem] lg:px-[6rem] xl:px-[8rem] 2xl:px-[12rem] py-10">
+         <div className="flex flex-col md:flex-row justify-between gap-8 px-[clamp(0.75rem,3vw,2rem)] md:px-[4rem] lg:px-[6rem] xl:px-[8rem] 2xl:px-[12rem] py-10">
             <Trademark />
             <Links />
          </div>
