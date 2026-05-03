@@ -6,6 +6,7 @@ import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 import Config from '@/config/site'
 import { cn } from '@/lib/utils'
 import { Menu } from 'lucide-react'
+import Image from 'next/image'
 import Link, { LinkProps } from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
@@ -37,9 +38,13 @@ export function MobileNav() {
                className="flex items-center"
                onOpenChange={setOpen}
             >
-               <div className="relative z-20 flex items-center text-lg font-semibold">
-                  {Config.name}
-               </div>
+               <Image
+                  src="/ea.jpg"
+                  alt={Config.name}
+                  width={100}
+                  height={34}
+                  className="object-contain"
+               />
             </MobileLink>
             <ScrollArea className="my-4 h-[calc(100vh-8rem)] pb-10 pl-6">
                <div className="flex flex-col space-y-3">

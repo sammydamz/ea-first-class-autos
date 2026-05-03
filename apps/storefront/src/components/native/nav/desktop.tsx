@@ -8,15 +8,20 @@ import {
    navigationMenuTriggerStyle,
 } from '@/components/ui/navigation-menu'
 import config from '@/config/site'
+import Image from 'next/image'
 import Link from 'next/link'
 
 export function MainNav() {
    return (
-      <div className="hidden md:flex gap-4">
+      <div className="hidden md:flex gap-4 items-center">
          <Link href="/" className="flex items-center">
-            <span className="hidden font-semibold sm:inline-block">
-               {config.name}
-            </span>
+            <Image
+               src="/ea.jpg"
+               alt={config.name}
+               width={120}
+               height={40}
+               className="object-contain"
+            />
          </Link>
          <NavMenu />
       </div>
