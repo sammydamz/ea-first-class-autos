@@ -165,7 +165,7 @@ function CarDetails({
                    <Badge className="bg-green-600 text-white hover:bg-green-700">Negotiable</Badge>
                 )}
              </div>
-             <h1 className="text-2xl font-bold">{car.title}</h1>
+              <h1 className="text-[clamp(1.25rem,3vw,1.5rem)] font-bold">{car.title}</h1>
              <p className="text-lg font-semibold text-primary mt-2">
                 {formatPrice(car.price)}
              </p>

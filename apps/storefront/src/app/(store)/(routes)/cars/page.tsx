@@ -53,10 +53,10 @@ export default async function CarsPage(props: {
             <p className="text-sm font-semibold uppercase tracking-widest text-muted-foreground mb-4">
                Inventory
             </p>
-            <h1 className="text-5xl md:text-6xl font-bold tracking-tight leading-[1.1]">
-               All Cars
-            </h1>
-            <p className="mt-6 text-xl text-muted-foreground max-w-2xl mx-auto">
+             <h1 className="text-[clamp(1.75rem,6vw,4.5rem)] font-bold tracking-tight leading-[1.1]">
+                All Cars
+             </h1>
+             <p className="mt-6 text-[clamp(1rem,2.5vw,1.5rem)] text-muted-foreground max-w-2xl mx-auto">
                Browse our complete inventory of quality vehicles.
             </p>
          </section>

@@ -64,23 +64,23 @@ export default async function Index(props: {
                 />
                <div className="absolute inset-0 bg-black/40" />
                <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white px-4">
-                  <h1 className="text-5xl md:text-7xl font-bold tracking-tight leading-[1.1]">
-                     EA First Class Autos
-                  </h1>
-                  <p className="mt-6 text-xl md:text-2xl opacity-90 max-w-2xl">
-                     Quality you can trust. Service you can feel.
-                  </p>
-               </div>
-            </section>
-         ) : (
-            <section className="relative h-[60vh] md:h-[75vh] w-full bg-primary flex items-center justify-center">
-               <div className="text-center text-white px-4">
-                  <h1 className="text-5xl md:text-7xl font-bold tracking-tight leading-[1.1]">
-                     EA First Class Autos
-                  </h1>
-                  <p className="mt-6 text-xl md:text-2xl opacity-90 max-w-2xl">
-                     Quality you can trust. Service you can feel.
-                  </p>
+                   <h1 className="text-[clamp(1.75rem,6vw,4.5rem)] font-bold tracking-tight leading-[1.1]">
+                      EA First Class Autos
+                   </h1>
+                   <p className="mt-6 text-[clamp(1rem,2.5vw,1.5rem)] opacity-90 max-w-2xl">
+                      Quality you can trust. Service you can feel.
+                   </p>
+                </div>
+             </section>
+          ) : (
+             <section className="relative h-[60vh] md:h-[75vh] w-full bg-primary flex items-center justify-center">
+                <div className="text-center text-white px-4">
+                   <h1 className="text-[clamp(1.75rem,6vw,4.5rem)] font-bold tracking-tight leading-[1.1]">
+                      EA First Class Autos
+                   </h1>
+                   <p className="mt-6 text-[clamp(1rem,2.5vw,1.5rem)] opacity-90 max-w-2xl">
+                      Quality you can trust. Service you can feel.
+                   </p>
                </div>
             </section>
          )}
@@ -92,10 +92,10 @@ export default async function Index(props: {
                   <p className="text-sm font-semibold uppercase tracking-widest text-muted-foreground mb-4">
                      Our Collection
                   </p>
-                  <h2 className="text-4xl md:text-5xl font-bold tracking-tight">
-                     Browse Our Selection
-                  </h2>
-                  <p className="mt-4 text-xl text-muted-foreground max-w-2xl mx-auto">
+                   <h2 className="text-[clamp(1.5rem,5vw,3rem)] font-bold tracking-tight">
+                      Browse Our Selection
+                   </h2>
+                   <p className="mt-4 text-[clamp(1rem,2.5vw,1.5rem)] text-muted-foreground max-w-2xl mx-auto">
                      Every vehicle handpicked for quality, reliability, and value.
                   </p>
                </div>
