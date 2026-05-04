@@ -4,7 +4,8 @@
       "name": "Sesto",
       "url": "https://github.com/sesto-dev"
    },
-   "license": "MIT",
+    "packageManager": "pnpm@10.32.1",
+    "license": "MIT",
    "scripts": {
       "dev": "next dev -p 7777",
       "build": "next build",
