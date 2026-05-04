@@ -5,6 +5,7 @@ import { X, Upload, Loader2, ChevronLeft, ChevronRight } from 'lucide-react'
 import { generateReactHelpers } from '@uploadthing/react'
 
 import type { UploadRouter } from '@/lib/uploadthing'
+import { compressImage } from '@/lib/compress'
 
 const { useUploadThing } = generateReactHelpers<UploadRouter>()
 
@@ -21,7 +22,8 @@ export function ImageUpload({ images, onChange }: ImageUploadProps) {
 
    const onDrop = async (acceptedFiles: File[]) => {
       if (acceptedFiles.length === 0) return
-      const res = await startUpload(acceptedFiles)
+      const compressed = await Promise.all(acceptedFiles.map(compressImage))
+      const res = await startUpload(compressed)
       if (res) {
          const urls = res.map((f) => f.url)
          onChange([...images, ...urls])
