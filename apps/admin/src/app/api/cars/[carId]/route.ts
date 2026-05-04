@@ -1,5 +1,6 @@
 import prisma from '@/lib/prisma'
 import { NextResponse } from 'next/server'
+import { revalidatePath } from 'next/cache'
 import { UTApi } from 'uploadthing/server'
 
 const utapi = new UTApi()
@@ -36,7 +37,9 @@ export async function PATCH(req: Request, props: { params: Promise<{ carId: stri
          updateData.title = title
       }
       const car = await prisma.car.update({ where: { id: params.carId }, data: updateData })
-      return NextResponse.json(car)
+       revalidatePath(`/cars/${car.slug}`)
+       revalidatePath('/cars')
+       return NextResponse.json(car)
    } catch (error) {
       console.error('[CARS_PATCH]', error)
       return new NextResponse('Internal error', { status: 500 })
