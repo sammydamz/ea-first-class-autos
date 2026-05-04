@@ -1,4 +1,5 @@
 import prisma from '@/lib/prisma'
+import { TypedHero } from '@/components/native/TypedHero'
 
 export default async function AboutPage() {
    const siteConfig = await prisma.siteConfig.findUnique({
@@ -11,12 +12,7 @@ export default async function AboutPage() {
             <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-4">
                About Us
             </p>
-            <h1 className="text-display font-bold max-w-4xl">
-               Quality you can trust.{' '}
-               <span className="text-muted-foreground">
-                  Service you can feel.
-               </span>
-            </h1>
+             <TypedHero />
             <p className="mt-8 text-base sm:text-lg text-muted-foreground max-w-2xl leading-relaxed">
                Ghana's trusted destination for premium pre-owned vehicles, delivering confidence with every purchase since day one.
             </p>
