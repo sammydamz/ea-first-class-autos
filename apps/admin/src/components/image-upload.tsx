@@ -25,7 +25,7 @@ export function ImageUpload({ images, onChange }: ImageUploadProps) {
       const compressed = await Promise.all(acceptedFiles.map(compressImage))
       const res = await startUpload(compressed)
       if (res) {
-         const urls = res.map((f) => f.url)
+         const urls = res.map((f) => f.ufsUrl)
          onChange([...images, ...urls])
       }
    }
