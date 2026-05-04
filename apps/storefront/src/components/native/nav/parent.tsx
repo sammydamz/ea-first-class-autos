@@ -11,7 +11,7 @@ export default function Header() {
                 <span className="text-[11px] font-bold uppercase tracking-[0.12em] text-white">
                   Ghana's Trusted Auto Dealer
                </span>
-               <span className="text-[11px] font-bold uppercase tracking-[0.12em] text-white/40 hidden sm:block">
+                <span className="text-[11px] font-bold uppercase tracking-[0.12em] text-white hidden sm:block">
                   Quality &bull; Trust &bull; Value
                </span>
             </div>
