@@ -38,13 +38,17 @@ export function MobileNav() {
                <SheetDescription className="sr-only">Site navigation menu</SheetDescription>
 
                <div className="flex flex-col h-full">
-                  <div className="bg-black px-6 py-3 flex items-center justify-between">
-                     <Link href="/" onClick={() => setOpen(false)} className="inline-block">
-                        <span className="text-[11px] font-bold uppercase tracking-[0.12em] text-white">
-                           EA First Class Autos
-                        </span>
-                     </Link>
-                  </div>
+                   <div className="bg-black px-6 py-3 flex items-center">
+                      <Link href="/" onClick={() => setOpen(false)} className="inline-block">
+                         <Image
+                            src="/ea.jpg"
+                            alt={Config.name}
+                            width={140}
+                            height={40}
+                            className="h-10 w-auto object-contain"
+                         />
+                      </Link>
+                   </div>
 
                   <div className="h-px bg-black" />
 

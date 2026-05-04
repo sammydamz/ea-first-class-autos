@@ -4,11 +4,11 @@ import { Facebook, Instagram, Send, MessageCircle, Music2 } from 'lucide-react'
 import Link from 'next/link'
 
 const socialLinks = [
-   { label: 'Facebook', href: '#', icon: Facebook },
-   { label: 'TikTok', href: '#', icon: Music2 },
-   { label: 'Instagram', href: '#', icon: Instagram },
-   { label: 'Telegram', href: '#', icon: Send },
-   { label: 'WhatsApp', href: '#', icon: MessageCircle },
+   { label: 'Instagram', href: 'https://www.instagram.com/ea.firstclassautos?utm_source=qr', icon: Instagram },
+   { label: 'Facebook', href: 'https://web.facebook.com/andronicus.annan', icon: Facebook },
+   { label: 'TikTok', href: 'https://www.tiktok.com/@ea.firstclassautos?_r=1&_t=ZS-95y9dRwFs4m', icon: Music2 },
+   { label: 'WhatsApp', href: 'https://whatsapp.com/channel/0029Vb7Vz6tLSmbdanhstD2v', icon: MessageCircle },
+   { label: 'Telegram', href: 'https://t.me/eafirstclassautos', icon: Send },
 ]
 
 export default function Footer() {

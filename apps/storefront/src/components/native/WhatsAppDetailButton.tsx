@@ -24,7 +24,7 @@ export function WhatsAppDetailButton({
       target="_blank"
       rel="noopener noreferrer"
       onClick={handleClick}
-      className="flex justify-center"
+       className="flex"
     >
       <Button className="w-auto min-h-[44px] gap-2">
         <img
