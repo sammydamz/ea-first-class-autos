@@ -157,24 +157,25 @@ function CarDetails({
 
    return (
       <div className="space-y-6">
-         <div>
-             <div className="flex gap-2 flex-wrap mb-2">
-                <Badge variant="outline">{car.brand.title}</Badge>
-                <Badge variant="secondary">{car.condition}</Badge>
-                {car.year && <Badge variant="secondary">{car.year}</Badge>}
-                {car.isNegotiable && (
-                   <Badge className="bg-green-600 text-white hover:bg-green-700">Negotiable</Badge>
-                )}
-             </div>
+          <div>
+              <div className="flex gap-2 flex-wrap mb-2">
+                 <Badge variant="outline">{car.brand.title}</Badge>
+                 <Badge variant="secondary">{car.condition}</Badge>
+                 {car.year && <Badge variant="secondary">{car.year}</Badge>}
+                 {car.isNegotiable && (
+                    <Badge className="bg-green-600 text-white hover:bg-green-700">Negotiable</Badge>
+                 )}
+              </div>
               <h1 className="text-subheading font-bold">{car.title}</h1>
-              <p className="text-body-lg font-semibold text-primary mt-2">
-                {formatPrice(car.price)}
-             </p>
-         </div>
-
-          {whatsappUrl && (
-               <WhatsAppDetailButton carId={car.id} href={whatsappUrl} />
-          )}
+              <div className="mt-2 space-y-4">
+                 <p className="text-body-lg font-semibold text-primary">
+                    {formatPrice(car.price)}
+                 </p>
+                 {whatsappUrl && (
+                    <WhatsAppDetailButton carId={car.id} href={whatsappUrl} />
+                 )}
+              </div>
+          </div>
 
          {hasSpecs && (
             <>
