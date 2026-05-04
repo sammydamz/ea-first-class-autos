@@ -80,17 +80,11 @@ export default async function Index(props: {
          {/* Cars Section */}
          <section className="py-24">
              <div className="max-w-7xl mx-auto">
-               <div className="text-center mb-16">
-                  <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-4">
-                     Our Collection
-                  </p>
+                <div className="text-center mb-16">
                    <h2 className="text-heading font-bold">
-                      Browse Our Selection
+                      Browse Our Collection
                    </h2>
-                   <p className="mt-4 text-subtitle text-muted-foreground max-w-2xl mx-auto">
-                     Every vehicle handpicked for quality, reliability, and value.
-                  </p>
-               </div>
+                </div>
                <HomepageFilter brands={brands} />
                {isVariableValid(cars) && cars.length > 0 ? (
                   <CarGrid cars={cars} />
