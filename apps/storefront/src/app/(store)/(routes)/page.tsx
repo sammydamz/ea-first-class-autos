@@ -57,7 +57,7 @@ export default async function Index(props: {
            <section className="md:hidden relative h-[50vh] w-screen -mx-[clamp(0.75rem,3vw,2rem)] overflow-hidden">
                <Image
                   src="https://jf8vtp06y9.ufs.sh/f/EXKUfm9UzRWTiYQLJAcIe9lv7BfFdjYhW8gVyswQGXJ1ME6A"
-                  alt="EA First Class Autos"
+                  alt="E.A. First Class Autos"
                   fill
                   sizes="100vw"
                   className="object-cover"
@@ -68,7 +68,7 @@ export default async function Index(props: {
             <section className="hidden md:block relative h-[50vh] sm:h-[60vh] md:h-[75vh] w-screen -mx-[clamp(0.75rem,3vw,2rem)] md:-mx-[4rem] lg:-mx-[6rem] xl:-mx-[8rem] 2xl:-mx-[12rem] overflow-hidden">
                <Image
                   src="https://jf8vtp06y9.ufs.sh/f/EXKUfm9UzRWTyMHTIHGhuSUdMZINDJCEPso9gznXBQHm4OGA"
-                  alt="EA First Class Autos"
+                  alt="E.A. First Class Autos"
                   fill
                   sizes="100vw"
                   className="object-cover"

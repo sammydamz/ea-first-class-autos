@@ -44,13 +44,13 @@ async function main() {
     where: { id: 'default' },
     update: {
       defaultWhatsApp: '+233501234567',
-      businessName: 'EA First Class Autos',
+      businessName: 'E.A. First Class Autos',
       businessEmail: 'info@eafirstclassautos.com',
       businessAddress: 'Accra, Ghana',
     },
     create: {
       id: 'default',
-      businessName: 'EA First Class Autos',
+      businessName: 'E.A. First Class Autos',
       defaultWhatsApp: '+233501234567',
       businessEmail: 'info@eafirstclassautos.com',
       businessAddress: 'Accra, Ghana',

@@ -1,5 +1,5 @@
 const config = {
-   name: 'EA First Class Autos',
+   name: 'E.A. First Class Autos',
    handle: '@eafirstclassautos',
    url: 'https://eafirstclassautos.com',
    ogImage: '',

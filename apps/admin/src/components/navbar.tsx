@@ -11,7 +11,7 @@ export default async function Navbar() {
          <div className="bg-primary text-primary-foreground">
             <div className="flex justify-between items-center h-9 px-6 md:px-12 lg:px-16 xl:px-24">
                <span className="text-[11px] font-bold uppercase tracking-wider">
-                  EA First Class Autos
+                  E.A. First Class Autos
                </span>
                <div className="flex items-center gap-2">
                   <ThemeToggle />
@@ -25,7 +25,7 @@ export default async function Navbar() {
                   <Link href="/" className="flex items-center">
                      <Image
                         src="/ea.jpg"
-                        alt="EA First Class Autos"
+                        alt="E.A. First Class Autos"
                         width={46}
                         height={40}
                         className="h-8 w-auto object-contain"

@@ -8,7 +8,7 @@ import './globals.css'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
-   title: 'EA First Class Autos',
+   title: 'E.A. First Class Autos',
    description: 'Premium vehicles at competitive prices. Browse our selection of quality cars.',
    keywords: ['Cars', 'Autos', 'Vehicles', 'Car Dealership'],
 }

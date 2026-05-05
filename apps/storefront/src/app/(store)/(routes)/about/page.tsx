@@ -25,7 +25,7 @@ export default async function AboutPage() {
                        Our Story
                     </h2>
                   <p className="text-base text-muted-foreground leading-relaxed">
-                     EA First Class Autos was founded on a simple belief: buying a used car should feel just as exciting as buying a new one. We handpick every vehicle in our inventory, ensuring each one meets our rigorous standards for quality, reliability, and value.
+                     E.A. First Class Autos was founded on a simple belief: buying a used car should feel just as exciting as buying a new one. We handpick every vehicle in our inventory, ensuring each one meets our rigorous standards for quality, reliability, and value.
                   </p>
                </div>
                <div>

@@ -8,8 +8,8 @@ import './globals.css'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
-   title: 'EA First Class Autos — Admin',
-   description: 'Admin dashboard for EA First Class Autos inventory management',
+   title: 'E.A. First Class Autos — Admin',
+   description: 'Admin dashboard for E.A. First Class Autos inventory management',
    icons: {
       icon: '/icon.jpg',
    },

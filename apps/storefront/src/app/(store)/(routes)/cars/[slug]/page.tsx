@@ -33,7 +33,7 @@ export async function generateMetadata(
 
    if (!car) return {}
 
-   const title = `${car.title} - ${car.year || ''} ${car.brand.title} | EA First Class Autos`
+   const title = `${car.title} - ${car.year || ''} ${car.brand.title} | E.A. First Class Autos`
    const description = car.description
       ? car.description.slice(0, 160)
       : `${car.title} - ${car.condition} vehicle priced at GH₵${car.price.toLocaleString()}. Contact us on WhatsApp for more information.`

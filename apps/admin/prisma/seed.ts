@@ -45,7 +45,7 @@ async function main() {
     update: {},
     create: {
       id: 'default',
-      businessName: 'EA First Class Autos',
+      businessName: 'E.A. First Class Autos',
     },
   })
 
