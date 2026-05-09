@@ -402,11 +402,20 @@ Form fields:
 
 ---
 
+### 5.3 Delivery Fee
+
+- Delivery fee is **NOT calculated at checkout**
+- Customer places order, payment is collected (Paystack or COD)
+- After order, you **call customer** to inform delivery fee and arrange delivery
+- This keeps things flexible for your operation
+
+---
+
 ## 15. Open Questions
 
-- [ ] Paystack account setup (test vs live mode)?
-- [ ] Delivery fee structure (flat fee, zone-based, free over X)?
-- [ ] Product images source — who provides?
+- [x] Paystack account setup — **Live mode**
+- [x] Delivery fee structure — **Handled manually via phone call**
+- [x] Product images source — **Admin uploads via UploadThing**
 - [ ] Social media integration (auto-post new products)?
 - [ ] Review/rating system for products?
 - [ ] Newsletter signup?
