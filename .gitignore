@@ -44,3 +44,6 @@ graphify-out/
 .claude/
 .playwright/
 .qwen/
+
+# worktrees
+.worktrees/
