@@ -3,18 +3,18 @@
 import { useState } from 'react'
 import { UploadButton } from '@/components/utils/upload-button'
 
-interface ImageUploadProps {
+interface CategoryImageUploadProps {
    images: string[]
    onChange: (value: string[]) => void
    disabled?: boolean
 }
 
-export function ImageUpload({ images, onChange, disabled }: ImageUploadProps) {
+export function CategoryImageUpload({ images, onChange, disabled }: CategoryImageUploadProps) {
    return (
       <div className="space-y-4">
          <div className="flex flex-wrap gap-4">
             {images.map((url, index) => (
-               <div key={index} className="relative w-24 h-24">
+               <div key={index} className="relative w-32 h-32">
                   <img
                      src={url}
                      alt={`Image ${index + 1}`}
@@ -31,7 +31,7 @@ export function ImageUpload({ images, onChange, disabled }: ImageUploadProps) {
             ))}
          </div>
          <UploadButton
-            endpoint="carImage"
+            endpoint="categoryImage"
             onClientUploadComplete={(res) => {
                const urls = res.map((r) => r.url)
                onChange([...images, ...urls])

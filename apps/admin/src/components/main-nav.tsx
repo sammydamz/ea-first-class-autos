@@ -22,6 +22,16 @@ export function MainNav({
          active: pathname.includes(`/brands`),
       },
       {
+         href: `/categories`,
+         label: 'Categories',
+         active: pathname.includes(`/categories`),
+      },
+      {
+         href: `/suppliers`,
+         label: 'Suppliers',
+         active: pathname.includes(`/suppliers`),
+      },
+      {
          href: `/banners`,
          label: 'Banners',
          active: pathname.includes(`/banners`),

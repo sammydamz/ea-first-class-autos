@@ -8,6 +8,11 @@ export const uploadRouter = {
          console.log('Upload complete:', file.ufsUrl)
          return { url: file.ufsUrl }
       }),
+   categoryImage: f({ image: { maxFileSize: '4MB', maxFileCount: 1 } }, { awaitServerData: false })
+      .onUploadComplete(({ file }) => {
+         console.log('Upload complete:', file.ufsUrl)
+         return { url: file.ufsUrl }
+      }),
 } satisfies FileRouter
 
 export type UploadRouter = typeof uploadRouter
